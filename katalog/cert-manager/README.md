@@ -1,4 +1,4 @@
-# cert-manager Katalog
+# cert-manager
 
 cert-manager is an automation tool for management and issuence of TLS certificates from various issuing resource in a Kubernetes native way. It ensures that certificates are valid and attempts to renew them before expiry. This package deploys cert-manager to be used with [Let's Encrypt](https://letsencrypt.org/) Certificate Authority
 
@@ -22,8 +22,7 @@ cert-manager is an automation tool for management and issuence of TLS certificat
 Fury distribution cert-manager is deployed with following configuration:
 
 - Default issuer kind is ClusterIssuer
-- Default issuer is letsenctypr
-
+- Default issuer is letsencrypt
 
 ## Deployment
 

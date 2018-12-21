@@ -1,4 +1,4 @@
-# Nginx Ingress Controller for GKE Katalog
+# Nginx Ingress Controller for GKE
 
 Ingress Nginx is an Ingress Controller for [NGINX](https://nginx.org) webserver and reverse proxy, it manages Nginx in a Kubernetes native manner. This package deploys Ingress Controller for GKE.
 
@@ -6,8 +6,6 @@ Ingress Nginx is an Ingress Controller for [NGINX](https://nginx.org) webserver 
 
 - Kubernetes >= `1.10.0`
 - Kustomize >= `v1`
-- [nginx](http://github.com/sighup-io/fury-ingress/nginx)
-
 
 ## Image repository and tag
 

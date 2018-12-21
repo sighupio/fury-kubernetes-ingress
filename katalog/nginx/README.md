@@ -1,4 +1,4 @@
-# Ingress Nginx Katalog
+# Ingress Nginx
 
 Ingress Nginx is an Ingress Controller for [NGINX](https://nginx.org) webserver and reverse proxy, it manages Nginx in a Kubernetes native manner. This package deploys Ingress Controller for clusters created with kubeadm.
 
