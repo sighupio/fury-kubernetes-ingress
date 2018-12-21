@@ -1,0 +1,13 @@
+namespace: ingress-nginx
+
+resources:
+  - configs.yml
+  - default-backend.yml
+  - rbac.yml
+  - deployment.yml
+  - sm.yml
+  - rules.yml
+
+imageTags:
+  - name: quay.io/kubernetes-ingress-controller/nginx-ingress-controller
+    newTag: "0.19.0"

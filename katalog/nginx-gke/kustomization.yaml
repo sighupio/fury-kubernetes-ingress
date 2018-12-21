@@ -1,0 +1,7 @@
+namespace: ingress-nginx
+
+bases:
+  - ../nginx
+
+patches:
+  - loadbalancer.yml

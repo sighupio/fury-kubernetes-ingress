@@ -1,0 +1,91 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    prometheus: k8s
+    role: alert-rules
+  name: ingress-nginx-k8s-rules
+spec:
+  groups:
+  - name: ingress-nginx.rules
+    rules:
+    - alert: NginxIngressDown
+      annotations:
+        message: 'NGINX Ingress Controller has disapperead from Prometheus
+          target discovery.'
+        doc: "This alert fires if Promethes target discovery was not able to
+          reach ingress-nginx-metrics in the last 15 minutes."
+      expr: |
+        absent(up{job="ingress-nginx-metrics"} == 1)
+      for: 15m
+      labels:
+        severity: critical
+    - alert: NginxIngressFailureRate
+      annotations:
+        message: 'NGINX Ingress {{ $labels.ingress }} failure rate is {{ printf
+          "%.2f" $value }}%.'
+        doc: "This alert fires if the failure rate (the rate of 5xx reponses)
+          measured on a time window of 2 minutes was higher than 10% in the last
+          10 minutes."
+      expr: |
+        (sum by (ingress) (rate(nginx_ingress_controller_requests{ingress!="", status=~"5[0-9][0-9]"}[2m]))
+          /
+        sum by (ingress) (rate(nginx_ingress_controller_requests{ingress!=""}[2m]))) * 100 > 10
+      for: 10m
+      labels:
+        severity: critical
+    - alert: NginxIngressFailedReload
+      annotations:
+        message: "Reloading NGINX Ingress' configuration has failed for {{
+          $labels.namespace }}/{{ $labels.pod }}."
+        doc: "This alert fires if the ingress' configuration reload failed in
+          the last 10 minutes."
+      expr: |
+        nginx_ingress_controller_config_last_reload_successful{job="ingress-nginx-metrics"} == 0
+      for: 10m
+      labels:
+        severity: warning
+    - alert: NginxIngressLatencyTooHigh
+      annotations:
+        message: 'NGINX Ingress {{ $labels.ingress }} 50th percentile response
+          latency too high, current value is {{ $value }}s.'
+        doc: "This alert fires if the ingress 99th percentile latency was more
+          than 5 seconds in the last 10 minutes."
+      expr: |
+        (histogram_quantile(0.50, sum(rate(nginx_ingress_controller_request_duration_seconds_bucket{ingress!=""}[2m])) by (le, ingress))) > 5
+      for: 10m
+      labels:
+        severity: warning
+    - alert: NginxIngressLatencyTooHigh
+      annotations:
+        message: 'NGINX Ingress {{ $labels.ingress }} 99th percentile response
+          latency too high, current value is {{ $value }}s.'
+        doc: "This alert fires if the ingress 99th percentile latency was more
+          than 10 seconds in the last 10 minutes."
+      expr: |
+        (histogram_quantile(0.99, sum(rate(nginx_ingress_controller_request_duration_seconds_bucket{ingress!=""}[2m])) by (le, ingress))) > 10
+      for: 10m
+      labels:
+        severity: critical
+    - alert: NginxIngressCertificateExpiration
+      annotations:
+        message: 'NGINX Ingress certificate for host {{ $labels.host }} is
+          expiring in less than 7 days.'
+        doc: "This alert fires if the certificate for a given host is expiring
+          in less than 7 days."
+      expr: |
+        (avg by (host)
+          (nginx_ingress_controller_ssl_expire_time_seconds{job="ingress-nginx-metrics"})) < 604800
+      labels:
+        severity: warning
+    - alert: NginxIngressCertificateExpiration
+      annotations:
+        message: 'NGINX Ingress certificate for host {{ $labels.host }} is
+          expiring in less than 1 days.'
+        doc: "This alert fires if the certificate for a given host is expiring
+          in less than 1 days."
+      expr: |
+        (avg by (host)
+          (nginx_ingress_controller_ssl_expire_time_seconds{job="ingress-nginx-metrics"})) < 86400
+      labels:
+        severity: critical

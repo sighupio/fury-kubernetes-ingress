@@ -1,0 +1,10 @@
+bases:
+- vendor/bases/ingress/nginx
+
+patchesJson6902:
+  - target:
+      group: apps
+      version: v1
+      kind: DaemonSet
+      name: nginx-ingress-controller
+    path: ingress-nginx.yml

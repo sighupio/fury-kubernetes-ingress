@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: default-internal
+  annotations:
+    kubernetes.io/ingress.class: internal
+spec:
+  backend:
+    serviceName: default-http-backend
+    servicePort: http
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: default-external
+  annotations:
+    kubernetes.io/ingress.class: external
+spec:
+  backend:
+    serviceName: default-http-backend
+    servicePort: http

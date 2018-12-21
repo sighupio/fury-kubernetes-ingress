@@ -1,2 +1,1 @@
-# fury-kubernetes-ingress
-Fury Kubernetes Ingress Controller building blocks
+# Fury Kubernetes Ingress

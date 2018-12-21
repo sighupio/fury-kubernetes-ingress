@@ -1,0 +1,7 @@
+namespace: ingress-nginx
+
+resources:
+- deploy.yml
+- rbac.yml
+- crd.yml
+- issuer.yml

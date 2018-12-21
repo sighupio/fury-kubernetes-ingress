@@ -1,0 +1,5 @@
+bases:
+  - vendor/bases/ingress/nginx
+
+patches:
+  - nginx-config.yml

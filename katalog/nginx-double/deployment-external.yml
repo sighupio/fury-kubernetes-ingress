@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nginx-ingress-external
+spec:
+  selector:
+    matchLabels:
+      app: ingress
+      type: external
+  template:
+    metadata:
+      labels:
+        app: ingress
+        type: external
+    spec:
+      serviceAccountName: nginx-ingress-serviceaccount
+      containers:
+        - name: nginx-ingress-controller
+          image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.20.0
+          args:
+            - /nginx-ingress-controller
+            - --configmap=$(POD_NAMESPACE)/nginx-external
+            - --annotations-prefix=nginx.ingress.kubernetes.io
+            - --ingress-class=external
+          securityContext:
+            capabilities:
+                drop:
+                - ALL
+                add:
+                - NET_BIND_SERVICE
+            # www-data -> 33
+            runAsUser: 33
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          ports:
+          - name: http
+            containerPort: 80
+          - name: https
+            containerPort: 443
+          - name: metrics
+            containerPort: 10254
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 10254
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 10254
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          securityContext:
+            runAsNonRoot: false
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: ingress-external
+  labels:
+    app: ingress
+    type: external
+spec:
+  externalTrafficPolicy: Local
+  type: NodePort
+  selector:
+    app: ingress
+    type: external
+  ports:
+  - name: http
+    port: 80
+    nodePort: 31080
+    targetPort: http
+  - name: https
+    port: 443
+    nodePort: 31443
+    targetPort: https
+
