@@ -1,0 +1,42 @@
+---
+kind: pipeline
+name: test
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+  - name: examples
+    image: sighup/furyctl-bats:v0.1.0
+    pull: always
+    depends_on: [clone]
+    commands:
+      - git config --global url."https://github.com/".insteadOf ssh://git@github.com
+      - bats examples/tests.bats
+
+  - name: integration-test
+    image: sighup/kind:v1.12.3-bats
+    pull: always
+    depends_on: [ clone ]
+    environment:
+      CLUSTER_HOST: docker
+      TESTS: katalog/tests/tests.bats
+    volumes:
+      - name: dockersock
+        path: /var/run
+    when:
+      event:
+      - push
+
+services:
+- name: docker
+  image: docker:dind
+  privileged: true
+  volumes:
+  - name: dockersock
+    path: /var/run
+
+volumes:
+- name: dockersock
+  temp: {}
