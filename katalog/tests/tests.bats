@@ -2,7 +2,7 @@
 
 apply (){
   kustomize build $1 >&2
-  kustomize build $1 | kubectl apply -f - 2>&3
+  kustomize build $1 | kubectl apply -f -
 }
 
 @test "applying monitoring" {
