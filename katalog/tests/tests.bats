@@ -5,12 +5,12 @@ apply (){
   kustomize build $1 | kubectl apply -f - 2>&3
 }
 
-@test "testing cert-manager apply" {
-  apply katalog/cert-manager
-}
-
 @test "testing nginx apply" {
   apply katalog/nginx
+}
+
+@test "testing cert-manager apply" {
+  apply katalog/cert-manager
 }
 
 @test "wait for apply to settle and dump state to dump.json" {
