@@ -1,5 +1,5 @@
 bases:
-- vendor/bases/ingress/nginx
+- vendor/katalog/ingress/nginx
 
 patchesJson6902:
   - target:
