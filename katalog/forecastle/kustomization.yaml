@@ -1,0 +1,10 @@
+namespace: ingress-nginx
+
+resources:
+- deploy.yml
+- rbac.yml
+
+configMapGenerator:
+- name: forecastle-config
+  files:
+  - config.yaml

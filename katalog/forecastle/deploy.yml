@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forecastle
+  labels:
+    app: forecastle
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: forecastle
+  template:
+    metadata:
+      labels:
+        app: forecastle
+    spec:
+      serviceAccountName: forecastle
+      containers:
+        - name: forecastle
+          image: 'stakater/forecastle:v1.0.22'
+          env:
+          - name: KUBERNETES_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          ports:
+          - name: http
+            protocol: TCP
+            containerPort: 3000
+          volumeMounts:
+          - name: forecastle-config
+            mountPath: /etc/forecastle
+      volumes:
+      - name: forecastle-config
+        configMap:
+          name: forecastle-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: forecastle
+  labels:
+    app: forecastle
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: http
+  selector:
+    app: forecastle
