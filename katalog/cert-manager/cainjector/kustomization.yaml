@@ -1,0 +1,9 @@
+namespace: cert-manager
+
+commonLabels:
+  app: cainjector
+  app.kubernetes.io/name: cainjector
+
+resources:
+- deploy.yml
+- rbac.yml

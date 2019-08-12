@@ -1,0 +1,13 @@
+namespace: cert-manager
+
+commonLabels:
+  app: cert-manager
+  app.kubernetes.io/name: cert-manager
+
+resources:
+- crd.yml
+- deploy.yml
+- issuer.yml
+- ns.yml
+- rbac.yml
+- sm.yml
