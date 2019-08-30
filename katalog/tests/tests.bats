@@ -15,7 +15,7 @@ apply (){
 }
 
 @test "testing cert-manager apply" {
-  apply katalog/cert-manager
+  apply katalog/cert-manager || apply katalog/cert-manager
 }
 
 @test "wait for apply to settle and dump state to dump.json" {
