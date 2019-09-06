@@ -6,6 +6,5 @@ resources:
   - rbac.yml
   - deployment-internal.yml
   - deployment-external.yml
-  - default-ingress.yml
   - sm.yml
   - rules.yml
