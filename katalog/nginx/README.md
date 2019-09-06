@@ -11,7 +11,7 @@ Ingress Nginx is an Ingress Controller for [NGINX](https://nginx.org) webserver 
 
 ## Image repository and tag
 
-* Ingress Nginx image: `quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.19.0`
+* Ingress Nginx image: `quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.25.1`
 * Ingress Nginx repo: https://github.com/kubernetes/ingress-nginx
 
 

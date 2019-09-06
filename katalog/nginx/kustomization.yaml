@@ -2,7 +2,6 @@ namespace: ingress-nginx
 
 resources:
   - configs.yml
-  - default-backend.yml
   - rbac.yml
   - deployment.yml
   - sm.yml
