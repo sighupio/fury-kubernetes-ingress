@@ -9,7 +9,3 @@ resources:
   - default-ingress.yml
   - sm.yml
   - rules.yml
-
-imageTags:
-  - name: quay.io/kubernetes-ingress-controller/nginx-ingress-controller
-    newTag: "0.25.1"
