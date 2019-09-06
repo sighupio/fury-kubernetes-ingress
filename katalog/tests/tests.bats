@@ -26,7 +26,7 @@ wait_for_settlement (){
 }
 
 @test "testing cert-manager apply" {
-  apply katalog/cert-manager || wait_for_settlement 12
+  apply katalog/cert-manager || wait_for_settlement 24
   apply katalog/cert-manager
 }
 
