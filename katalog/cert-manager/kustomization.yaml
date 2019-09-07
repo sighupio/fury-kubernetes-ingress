@@ -1,7 +1,10 @@
-namespace: ingress-nginx
+bases:
+- cainjector
+- cert-manager-controller
+- webhook
 
-resources:
-- deploy.yml
-- rbac.yml
-- crd.yml
-- issuer.yml
+commonLabels:
+  app.kubernetes.io/version: 0.9.0
+  app.kubernetes.io/component: cert-manager
+  app.kubernetes.io/part-of: fury-kubernetes-ingress
+  app.kubernetes.io/managed-by: kustomize
