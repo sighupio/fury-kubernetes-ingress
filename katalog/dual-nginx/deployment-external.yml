@@ -20,6 +20,7 @@ spec:
           args:
             - /nginx-ingress-controller
             - --configmap=$(POD_NAMESPACE)/nginx-external
+            - --publish-service=$(POD_NAMESPACE)/ingress-external
             - --annotations-prefix=nginx.ingress.kubernetes.io
             - --ingress-class=external
           securityContext:
