@@ -13,6 +13,6 @@ from various issuing sources.. Version: **v0.9.0**
 panel where you can see your running applications and access them
 on Kubernetes. Version: **1.0.22**.
 - [nginx](katalog/nginx): The NGINX Ingress Controller for Kubernetes
-provides delivery services for Kubernetes applications. Version: **0.25.1**
+provides delivery services for Kubernetes applications. Version: **0.26.1**
 - [dual-nginx](katalog/dual-nginx): It deploys two identical nginx ingress controllers
-but with two different scopes: public/external and private/internal. Version: **0.25.1**
+but with two different scopes: public/external and private/internal. Version: **0.26.1**
