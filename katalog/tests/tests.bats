@@ -30,6 +30,10 @@ wait_for_settlement (){
   apply katalog/cert-manager
 }
 
+@test "testing forecastle apply" {
+  apply katalog/forecastle
+}
+
 @test "wait for apply to settle and dump state to dump.json" {
   wait_for_settlement 24
 }
