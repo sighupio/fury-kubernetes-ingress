@@ -16,3 +16,15 @@ on Kubernetes. Version: **1.0.34**.
 provides delivery services for Kubernetes applications. Version: **0.26.1**
 - [dual-nginx](katalog/dual-nginx): It deploys two identical nginx ingress controllers
 but with two different scopes: public/external and private/internal. Version: **0.26.1**
+
+
+## Compatibility
+
+| Module Version / Kubernetes Version | 1.14.X             | 1.15.X             | 1.16.X             |
+|-------------------------------------|:------------------:|:------------------:|:------------------:|
+| v1.1.0                              |                    |                    |                    |
+| v1.2.0                              |                    |                    |                    |
+
+- :white_check_mark: Compatible
+- :warning: Has issues
+- :x: Incompatible
