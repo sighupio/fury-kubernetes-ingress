@@ -23,7 +23,7 @@ but with two different scopes: public/external and private/internal. Version: **
 | Module Version / Kubernetes Version | 1.14.X             | 1.15.X             | 1.16.X             |
 |-------------------------------------|:------------------:|:------------------:|:------------------:|
 | v1.1.0                              |                    |                    |                    |
-| v1.2.0                              |                    |                    |                    |
+| v1.2.0                              |                    | :white_check_mark: |                    |
 
 - :white_check_mark: Compatible
 - :warning: Has issues
