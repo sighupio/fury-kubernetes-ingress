@@ -17,8 +17,8 @@ wait_for_settlement (){
 }
 
 @test "applying monitoring" {
-  kubectl apply -f https://raw.githubusercontent.com/coreos/prometheus-operator/master/example/prometheus-operator-crd/servicemonitor.crd.yaml
-  kubectl apply -f https://raw.githubusercontent.com/coreos/prometheus-operator/master/example/prometheus-operator-crd/prometheusrule.crd.yaml
+  kubectl apply -f https://raw.githubusercontent.com/sighupio/fury-kubernetes-monitoring/master/katalog/prometheus-operator/crd-servicemonitor.yml
+  kubectl apply -f https://raw.githubusercontent.com/sighupio/fury-kubernetes-monitoring/master/katalog/prometheus-operator/crd-rule.yml
 }
 
 @test "testing nginx apply" {
