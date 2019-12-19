@@ -21,8 +21,8 @@ wait_for_settlement (){
   kubectl apply -f https://raw.githubusercontent.com/sighupio/fury-kubernetes-monitoring/master/katalog/prometheus-operator/crd-rule.yml
 }
 
-@test "testing nginx apply" {
-  apply katalog/nginx
+@test "testing dual-nginx apply" {
+  apply katalog/dual-nginx
 }
 
 @test "testing cert-manager apply" {
@@ -35,5 +35,5 @@ wait_for_settlement (){
 }
 
 @test "wait for apply to settle and dump state to dump.json" {
-  wait_for_settlement 24
+  wait_for_settlement 36
 }
