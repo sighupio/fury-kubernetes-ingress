@@ -1,0 +1,7 @@
+namespace: ingress-nginx
+
+commonLabels:
+  app: nginx-ldap-auth
+
+resources:
+  - nginx-ldap-auth.yaml
