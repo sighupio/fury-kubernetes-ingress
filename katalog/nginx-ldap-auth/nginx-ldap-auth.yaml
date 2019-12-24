@@ -18,9 +18,25 @@ spec:
   replicas: 1
   template:
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 3000
+        fsGroup: 2000
+      serviceAccountName: nginx-ldap-auth
       containers:
       - image: docker.io/tpimenta/nginx-ldap-auth:v1.0.6
         name: nginx-ldap-auth
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          runAsNonRoot: true
+          runAsGroup: 3000
+          runAsUser: 1000
+          capabilities:
+            drop:
+              - "all"
         command:
         - "/usr/local/bin/nginx-ldap-auth"
         - "--config"
@@ -31,6 +47,12 @@ spec:
         volumeMounts:
         - name: config
           mountPath: /etc/nginx-ldap-auth
+        resources:
+          requests:
+            cpu: 1m
+            memory: 5Mi
+          limits:
+            memory: 100Mi
       volumes:
       - name: config
         secret:
