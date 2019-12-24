@@ -15,8 +15,10 @@ steps:
       - git config --global url."https://github.com/".insteadOf ssh://git@github.com
       - bats examples/tests.bats
     when:
-      event:
-      - push
+      ref:
+        include:
+          - refs/heads/hotfix-*
+          - refs/tags/**
 ---
 kind: pipeline
 name: e2e-kubernetes-1.16

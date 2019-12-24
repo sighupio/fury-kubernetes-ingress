@@ -1,6 +1,6 @@
 # Nginx LDAP Auth
 
-[Nginx LDAP Auth](https://github.com/tiagoapimenta/nginx-ldap-auth/blob/v1.0.6/README.md) Provide ingress
+[Nginx LDAP Auth](https://github.com/tiagoapimenta/nginx-ldap-auth/blob/v1.0.6/README.md) provides ingress
 authentication over LDAP for Kubernetes.
 
 
@@ -61,7 +61,7 @@ user:
 To know all available configuration options
 [go to the upstream project at github](https://github.com/tiagoapimenta/nginx-ldap-auth/tree/v1.0.6).
 
-More configuration examples under [tests/nginx-ldap-auth](../../katalog/tests/nginx-ldap-auth) including 
+More configuration examples under [tests/nginx-ldap-auth](../../katalog/tests/nginx-ldap-auth) including
 [one filtering users by LDAP groups](../../katalog/tests/nginx-ldap-auth/nginx-ldap-auth-config-groups.yaml):
 
 ```yaml
@@ -84,6 +84,7 @@ group:
   filter: "(member={0})"
 ```
 
+
 ## Deployment
 
 You can deploy Nginx LDAP Auth by running following command in the root of the project:
@@ -93,6 +94,7 @@ $ kustomize build katalog/nginx-ldap-auth/config/  | kubectl apply -f -
 $ kustomize build katalog/nginx-ldap-auth  | kubectl apply -f -
 ```
 
+
 ### Usage
 
 Once deployed, any ingress definition can be configured to be protected by basic-auth against LDAP:
@@ -101,9 +103,10 @@ Once deployed, any ingress definition can be configured to be protected by basic
 kubectl annotate ingress YOUR_INGRESS "nginx.ingress.kubernetes.io/auth-url=http://nginx-ldap-auth.ingress-nginx.svc.cluster.local" --overwrite
 ```
 
-More information related with nginx ingress defintion authentication can be found at the nginx ingress
-[official documentation](https://kubernetes.github.io/ingress-nginx/examples/auth/external-auth/)
+More information related to nginx ingress defintion authentication can be found at the nginx ingress
+[official documentation site](https://kubernetes.github.io/ingress-nginx/examples/auth/external-auth/)
 
 ## License
 
-For license details please see [LICENSE](../../LICENSE) 
+
+For license details please see [LICENSE](../../LICENSE)

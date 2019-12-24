@@ -1,6 +1,6 @@
 # Fury Kubernetes Ingress
 
-This repo contains Ingress Controller and TLS certificate management components you need to manage external access to 
+This repo contains Ingress Controller and TLS certificate management components you need to manage external access to
 your services in your cluster.
 
 ## Ingress Packages
@@ -17,8 +17,8 @@ on Kubernetes. Version: **1.0.34**.
 provides delivery services for Kubernetes applications. Version: **0.26.1**
 - [dual-nginx](katalog/dual-nginx): It deploys two identical nginx ingress controllers
 but with two different scopes: public/external and private/internal. Version: **0.26.1**
-- [nginx-ldap-auth](katalog/nginx-ldap-auth): . Use this in order to provide a ingress authentication over LDAP for 
-KubernetesVersion: **1.0.6**
+- [nginx-ldap-auth](katalog/nginx-ldap-auth): . Use this in order to provide a ingress authentication over LDAP for
+Kubernetes. Version: **1.0.6**
 
 
 ## Compatibility
