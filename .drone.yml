@@ -48,7 +48,6 @@ steps:
     when:
       ref:
         include:
-          - refs/heads/feature/definition-secured-by-ldap
           - refs/heads/hotfix-*
           - refs/tags/**
 
@@ -68,7 +67,6 @@ steps:
     when:
       ref:
         include:
-          - refs/heads/feature/definition-secured-by-ldap
           - refs/heads/hotfix-*
           - refs/tags/**
 
@@ -127,7 +125,6 @@ steps:
     when:
       ref:
         include:
-          - refs/heads/feature/definition-secured-by-ldap
           - refs/heads/hotfix-*
           - refs/tags/**
 
@@ -147,7 +144,6 @@ steps:
     when:
       ref:
         include:
-          - refs/heads/feature/definition-secured-by-ldap
           - refs/heads/hotfix-*
           - refs/tags/**
 
@@ -206,7 +202,6 @@ steps:
     when:
       ref:
         include:
-          - refs/heads/feature/definition-secured-by-ldap
           - refs/heads/hotfix-*
           - refs/tags/**
 
@@ -226,7 +221,6 @@ steps:
     when:
       ref:
         include:
-          - refs/heads/feature/definition-secured-by-ldap
           - refs/heads/hotfix-*
           - refs/tags/**
 
