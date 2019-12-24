@@ -1,5 +1,24 @@
 ---
 kind: pipeline
+name: render-examples
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+  - name: examples
+    image: quay.io/sighup/furyctl-bats:v0.1.0_1.0.11
+    pull: always
+    depends_on: [ clone ]
+    commands:
+      - git config --global url."https://github.com/".insteadOf ssh://git@github.com
+      - bats examples/tests.bats
+    when:
+      event:
+      - push
+---
+kind: pipeline
 name: e2e-kubernetes-1.16
 
 platform:
