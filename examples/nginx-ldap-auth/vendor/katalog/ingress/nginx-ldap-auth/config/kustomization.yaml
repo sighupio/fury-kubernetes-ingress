@@ -1,0 +1,9 @@
+namespace: ingress-nginx
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+secretGenerator:
+  - name: nginx-ldap-auth
+    files:
+      - "config.yaml=sample.config.yaml"
