@@ -3,10 +3,16 @@ namespace: ingress-nginx
 bases:
   - vendor/katalog/ingress/nginx-ldap-auth
 
+resources:
+  - resources/example.ingress.yaml
+
+patches:
+  - patches/example.ingress.patch.yaml
+
 generatorOptions:
   disableNameSuffixHash: true
 
 secretGenerator:
   - name: nginx-ldap-auth
     files:
-      - "config.yaml=my-ldap.config.yaml"
+      - "config.yaml=config/my-ldap.config.yaml"
