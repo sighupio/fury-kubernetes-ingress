@@ -298,6 +298,48 @@ load ./helper
     [ "$status" -eq 0 ]
 }
 
+@test "Groups. Deploy ldap-protected registry" {
+    info
+    test(){
+        kubectl apply -f katalog/tests/nginx-ldap-auth/ldap-registry.yaml -n demo-ldap
+    }
+    run test
+    [ "$status" -eq 0 ]
+}
+
+@test "Groups. Wait for ldap-protected registry" {
+    info
+    test(){
+        status=$(kubectl get pods -n demo-ldap -l run=registry -o jsonpath="{.items[*].status.phase}")
+        if [ "${status}" != "Running" ]; then return 1; fi
+    }
+    loop_it test 30 2
+    status=${loop_it_result}
+    [ "$status" -eq 0 ]
+}
+
+@test "Groups. Test auth registry protected" {
+    info
+    test(){
+        http_code=$(curl -u jacopo:admin -H "Host: registry.local" "http://${INSTANCE_IP}:${CLUSTER_NAME}80/v2/" -s -o /dev/null -w "%{http_code}")
+        if [ "${http_code}" -ne "200" ]; then return 1; fi
+    }
+    loop_it test 30 2
+    status=${loop_it_result}
+    [ "$status" -eq 0 ]
+}
+
+@test "Groups. Test auth (no authorized) registry protected" {
+    info
+    test(){
+        http_code=$(curl -u angel:angel -H "Host: registry.local" "http://${INSTANCE_IP}:${CLUSTER_NAME}80/v2/" -s -o /dev/null -w "%{http_code}")
+        if [ "${http_code}" -ne "401" ]; then return 1; fi
+    }
+    loop_it test 30 2
+    status=${loop_it_result}
+    [ "$status" -eq 0 ]
+}
+
 @test "Rollback httpbin demo project" {
     info
     destroy_demo(){
