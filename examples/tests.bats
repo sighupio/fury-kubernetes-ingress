@@ -10,3 +10,9 @@
   kustomize build
   rm -rf vendor
 }
+@test "testing kustomize build nginx-ldap-auth" {
+  cd examples/nginx-ldap-auth
+  furyctl install
+  kustomize build
+  rm -rf vendor
+}
