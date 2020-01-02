@@ -97,7 +97,7 @@ $ kustomize build katalog/nginx-ldap-auth  | kubectl apply -f -
 
 ### Usage
 
-Once deployed, any ingress definition can be configured to be protected by basic-auth against LDAP:
+Once deployed, any ingress definition can be configured to be protected by HTTP basic access authentication against LDAP:
 
 ```bash
 kubectl annotate ingress YOUR_INGRESS "nginx.ingress.kubernetes.io/auth-url=http://nginx-ldap-auth.ingress-nginx.svc.cluster.local" --overwrite

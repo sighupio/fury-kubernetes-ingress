@@ -1,7 +1,7 @@
 # Simple NGINX LDAP Auth
 
 This example show how to deploy the NGINX LDAP auth package with the required configuration kubernetes secret.
-It also patches an example ingress definition to be protected against this package.
+It also patches an example ingress definition to be protected with this package.
 
 1. Run furyctl to get packages: `$ furyctl install --dev`
 

@@ -1,10 +1,34 @@
+# web:  Advertised address (format: <ip|interface>[:port])
 web: 0.0.0.0:5555
+# path: API base path
 path: /
+# servers:  The actual version choose a random server, in future version it is intended to have a pool of
+#           them, that is why it is a list, not a single one, but you can fill only one if you wish.
+#           The prefix tell the program which protocol to use, if ldaps:// it will try LDAP over SSL,
+#           if ldap:// it will try plain LDAP with STARTTLS, case no prefix is given it will try to guess based on port,
+#           636 for SSL and 389 for plain.
 servers:
   - ldap://ldap-server
+# auth: Use the Distinguished Name bindDN to bind to the LDAP directory.
+#       Use bindPW as the password for simple authentication.
 auth:
   bindDN: cn=admin,dc=sighup,dc=io
   bindPW: HatFriday
+# user: LDAP Query to look for users in LDAP.
+#       ldapsearch -b ${user.baseDN} ${user.filter}
 user:
   baseDN: ou=group-a,ou=system,dc=sighup,dc=io
   filter: "(cn={0})"
+# requiredGroups:   if requiredGroups list is omited or empty all LDAP users will be allowed regardless the group,
+#                   if not empty all groups will be required, the next version will have more flexible configuration.
+# requiredGroups:
+#   - amministrazione
+#   - engineering
+# group:  LDAP Query to look for groups in LDAP.
+#         groupAttr is the name of the group.
+#         filter is used to look for the user membership
+#         ldapsearch -b ${group.baseDN} ${group.filter}
+# group:
+#   baseDN: ou=groups,dc=sighup,dc=io
+#   groupAttr: cn
+#   filter: "(member={0})"
