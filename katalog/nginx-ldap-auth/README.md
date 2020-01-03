@@ -106,7 +106,13 @@ kubectl annotate ingress YOUR_INGRESS "nginx.ingress.kubernetes.io/auth-url=http
 More information related to nginx ingress defintion authentication can be found at the nginx ingress
 [official documentation site](https://kubernetes.github.io/ingress-nginx/examples/auth/external-auth/)
 
-## License
 
+## Important note
+
+Be aware this authentication method is transmitted in every request by your browser in plain text, so you should
+be using https.
+
+
+## License
 
 For license details please see [LICENSE](../../LICENSE)
