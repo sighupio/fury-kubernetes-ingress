@@ -12,6 +12,8 @@ spec:
         app: ingress-nginx
     spec:
       serviceAccountName: nginx-ingress-serviceaccount
+      securityContext:
+        fsGroup: 33
       containers:
         - name: nginx-ingress-controller
           image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.26.1
@@ -30,6 +32,7 @@ spec:
                 - NET_BIND_SERVICE
             runAsUser: 33
             runAsNonRoot: true
+            runAsGroup: 33
           env:
             - name: POD_NAME
               valueFrom:
