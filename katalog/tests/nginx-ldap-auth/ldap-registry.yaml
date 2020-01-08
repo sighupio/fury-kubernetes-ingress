@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: registry
   annotations:
+    kubernetes.io/ingress.class: "external"
     nginx.ingress.kubernetes.io/auth-url: http://nginx-ldap-auth.ingress-nginx.svc.cluster.local
 spec:
   rules:

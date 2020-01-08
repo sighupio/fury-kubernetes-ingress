@@ -16,7 +16,7 @@ load ./helper
 @test "Wait for ingress controller" {
     info
     test(){
-        status=$(kubectl get pods -n ingress-nginx -l app=ingress-nginx -o jsonpath="{.items[*].status.phase}")
+        status=$(kubectl get pods -n ingress-nginx -l app=ingress,type=external -o jsonpath="{.items[*].status.phase}")
         if [ "${status}" != "Running" ]; then return 1; fi
     }
     loop_it test 30 2
