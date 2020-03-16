@@ -6,3 +6,5 @@ namespace: ingress-nginx
 
 resources:
   - deployment.yml
+  - cm.yml
+  - service.yml

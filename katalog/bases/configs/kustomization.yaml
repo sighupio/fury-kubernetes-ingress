@@ -5,7 +5,6 @@ kind: Kustomization
 namespace: ingress-nginx
 
 resources:
-  - cm.yml
   - ns.yml
   - rbac.yml
   - sm.yml
