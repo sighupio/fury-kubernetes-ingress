@@ -1,0 +1,17 @@
+- op: "add"
+  path: "/spec/selector/matchLabels"
+  value:
+    type: external
+
+- op: "add"
+  path: "/spec/template/metadata/labels"
+  value:
+    type: external
+
+- op: "replace"
+  path: "/spec/template/spec/containers/0/args/2"
+  value: "--publish-service=$(POD_NAMESPACE)/ingress-nginx-external"
+
+- op: "add"
+  path: "/spec/template/spec/containers/0/args/-"
+  value: "--ingress-class=external"

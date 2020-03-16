@@ -1,0 +1,17 @@
+- op: "add"
+  path: "/spec/selector/matchLabels"
+  value:
+    type: internal
+
+- op: "add"
+  path: "/spec/template/metadata/labels"
+  value:
+    type: internal
+
+- op: "replace"
+  path: "/spec/template/spec/containers/0/args/2"
+  value: "--publish-service=$(POD_NAMESPACE)/ingress-nginx-internal"
+
+- op: "add"
+  path: "/spec/template/spec/containers/0/args/-"
+  value: "--ingress-class=internal"

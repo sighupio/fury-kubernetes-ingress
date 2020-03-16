@@ -5,3 +5,17 @@ bases:
   - ../../bases/controller
 
 nameSuffix: "-external"
+
+patchesJson6902:
+  - target:
+      group: apps
+      version: v1
+      kind: DaemonSet
+      name: nginx-ingress-controller
+    path: patch/daemonset.yml
+  - target:
+      group: ""
+      version: v1
+      kind: Service
+      name: ingress-nginx
+    path: patch/service.yml

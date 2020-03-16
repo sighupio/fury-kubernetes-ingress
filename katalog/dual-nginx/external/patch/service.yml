@@ -1,0 +1,17 @@
+- op: "replace"
+  path: "/spec/ports/0/nodePort"
+  value: 31080
+
+- op: "replace"
+  path: "/spec/ports/1/nodePort"
+  value: 31443
+
+- op: "add"
+  path: "/metadata/labels"
+  value:
+    type: external
+
+- op: "add"
+  path: "/spec/selector"
+  value:
+    type: external
