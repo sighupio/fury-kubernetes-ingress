@@ -1,17 +1,15 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: nginx-ingress-internal
+  name: nginx-ingress-controller
 spec:
   selector:
     matchLabels:
-      app: ingress
-      type: internal
+      app: ingress-nginx
   template:
     metadata:
       labels:
-        app: ingress
-        type: internal
+        app: ingress-nginx
     spec:
       serviceAccountName: nginx-ingress-serviceaccount
       securityContext:
@@ -21,17 +19,16 @@ spec:
           image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.26.1
           args:
             - /nginx-ingress-controller
-            - --configmap=$(POD_NAMESPACE)/nginx-internal
-            - --publish-service=$(POD_NAMESPACE)/ingress-internal
+            - --configmap=$(POD_NAMESPACE)/nginx-configuration
+            - --publish-service=$(POD_NAMESPACE)/ingress-nginx
             - --annotations-prefix=nginx.ingress.kubernetes.io
-            - --ingress-class=internal
             - --http-port=8080
             - --https-port=8443
           securityContext:
             capabilities:
-                drop:
+              drop:
                 - ALL
-                add:
+              add:
                 - NET_BIND_SERVICE
             runAsUser: 33
             runAsNonRoot: true
@@ -46,12 +43,12 @@ spec:
                 fieldRef:
                   fieldPath: metadata.namespace
           ports:
-          - name: http
-            containerPort: 8080
-          - name: https
-            containerPort: 8443
-          - name: metrics
-            containerPort: 10254
+            - name: http
+              containerPort: 8080
+            - name: https
+              containerPort: 8443
+            - name: metrics
+              containerPort: 10254
           livenessProbe:
             failureThreshold: 3
             httpGet:
@@ -75,22 +72,20 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: ingress-internal
+  name: ingress-nginx
   labels:
-    app: ingress
-    type: internal
+    app: ingress-nginx
 spec:
   externalTrafficPolicy: Local
   type: NodePort
   selector:
-    app: ingress
-    type: internal
+    app: ingress-nginx
   ports:
-  - name: http
-    port: 80
-    nodePort: 32080
-    targetPort: http
-  - name: https
-    port: 443
-    nodePort: 32443
-    targetPort: https
+    - name: http
+      port: 80
+      nodePort: 31080
+      targetPort: http
+    - name: https
+      port: 443
+      nodePort: 31443
+      targetPort: https

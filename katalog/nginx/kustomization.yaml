@@ -1,8 +1,0 @@
-namespace: ingress-nginx
-
-resources:
-  - configs.yml
-  - rbac.yml
-  - deployment.yml
-  - sm.yml
-  - rules.yml

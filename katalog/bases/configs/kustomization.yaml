@@ -1,0 +1,12 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: ingress-nginx
+
+resources:
+  - cm.yml
+  - ns.yml
+  - rbac.yml
+  - sm.yml
+  - rules.yml
