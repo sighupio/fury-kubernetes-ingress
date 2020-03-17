@@ -5,3 +5,11 @@ bases:
   - internal
   - external
   - ../bases/configs
+
+patchesJson6902:
+  - target:
+      group: rbac.authorization.k8s.io
+      version: v1beta1
+      kind: Role
+      name: nginx-ingress-role
+    path: patch/rbac.yml
