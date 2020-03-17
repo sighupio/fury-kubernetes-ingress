@@ -4,7 +4,7 @@ kind: Kustomization
 bases:
   - internal
   - external
-  - ../bases/configs
+  - ../nginx/bases/configs
 
 patchesJson6902:
   - target:
