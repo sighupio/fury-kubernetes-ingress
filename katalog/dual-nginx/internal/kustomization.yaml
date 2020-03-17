@@ -19,3 +19,9 @@ patchesJson6902:
       kind: Service
       name: ingress-nginx
     path: patch/service.yml
+  - target:
+      group: ""
+      version: v1
+      kind: ConfigMap
+      name: nginx-configuration
+    path: patch/cm.yml
