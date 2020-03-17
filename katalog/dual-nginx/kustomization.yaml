@@ -13,3 +13,9 @@ patchesJson6902:
       kind: Role
       name: nginx-ingress-role
     path: patch/rbac.yml
+  - target:
+      group: ""
+      version: v1
+      kind: Service
+      name: ingress-nginx-metrics
+    path: patch/sm-service.yml

@@ -1,11 +1,13 @@
 - op: "add"
   path: "/spec/selector/matchLabels"
   value:
+    app: ingress
     type: external
 
 - op: "add"
   path: "/spec/template/metadata/labels"
   value:
+    app: ingress
     type: external
 
 - op: "replace"

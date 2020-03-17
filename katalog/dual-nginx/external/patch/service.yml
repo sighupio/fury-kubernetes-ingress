@@ -9,9 +9,11 @@
 - op: "add"
   path: "/metadata/labels"
   value:
+    app: ingress
     type: external
 
 - op: "add"
   path: "/spec/selector"
   value:
+    app: ingress
     type: external
