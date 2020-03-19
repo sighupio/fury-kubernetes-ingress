@@ -1,15 +1,3 @@
-- op: "add"
-  path: "/spec/selector/matchLabels"
-  value:
-    app: ingress
-    type: external
-
-- op: "add"
-  path: "/spec/template/metadata/labels"
-  value:
-    app: ingress
-    type: external
-
 - op: "replace"
   path: "/spec/template/spec/containers/0/args/1"
   value: "--configmap=$(POD_NAMESPACE)/nginx-configuration-external"

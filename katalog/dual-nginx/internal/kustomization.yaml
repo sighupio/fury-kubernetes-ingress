@@ -6,6 +6,10 @@ bases:
 
 nameSuffix: "-internal"
 
+commonLabels:
+  app: ingress
+  type: internal
+
 patchesJson6902:
   - target:
       group: apps

@@ -5,15 +5,3 @@
 - op: "replace"
   path: "/spec/ports/1/nodePort"
   value: 32443
-
-- op: "add"
-  path: "/metadata/labels"
-  value:
-    app: ingress
-    type: internal
-
-- op: "add"
-  path: "/spec/selector"
-  value:
-    app: ingress
-    type: internal
