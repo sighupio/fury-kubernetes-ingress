@@ -2,7 +2,7 @@
 
 Ingress Nginx is an Ingress Controller for [NGINX](https://nginx.org) webserver and reverse proxy, it manages Nginx in 
 a Kubernetes native manner. This package deploys 2 Nginx Controllers, one `external` to serve public traffic, 
-one `internal` to serve internal traffic, for clusters created with kubeadm.
+one `internal` to serve internal traffic.
 
 ## Requirements
 
