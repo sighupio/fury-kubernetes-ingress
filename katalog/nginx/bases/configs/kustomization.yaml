@@ -5,10 +5,7 @@ kind: Kustomization
 namespace: ingress-nginx
 
 resources:
-  - deploy.yml
+  - ns.yml
   - rbac.yml
-
-configMapGenerator:
-  - name: forecastle-config
-    files:
-      - config.yaml
+  - sm.yml
+  - rules.yml

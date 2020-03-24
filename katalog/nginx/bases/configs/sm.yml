@@ -6,12 +6,12 @@ metadata:
   name: ingress-nginx
 spec:
   endpoints:
-  - interval: 10s
-    port: metrics
-    scheme: http
+    - interval: 10s
+      port: metrics
+      scheme: http
   jobLabel: k8s-app
   namespaceSelector:
-      matchNames:
+    matchNames:
       - ingress-nginx
   selector:
     matchLabels:
@@ -25,8 +25,8 @@ metadata:
     app: ingress-nginx
 spec:
   selector:
-    app: ingress
+    app: ingress-nginx
   ports:
-  - name: metrics
-    port: 10254
-    targetPort: metrics
+    - name: metrics
+      port: 10254
+      targetPort: metrics

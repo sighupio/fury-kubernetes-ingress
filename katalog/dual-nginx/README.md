@@ -1,27 +1,26 @@
-
 # Ingress Dual Nginx
 
-Ingress Nginx is an Ingress Controller for [NGINX](https://nginx.org) webserver and reverse proxy, it manages Nginx in a Kubernetes native manner. This package deploys 2 Nginx Controllers, one `external` to serve public traffic, one `internal` to serve internal traffic, for clusters created with kubeadm.
+Ingress Nginx is an Ingress Controller for [NGINX](https://nginx.org) webserver and reverse proxy, it manages Nginx in 
+a Kubernetes native manner. This package deploys 2 Nginx Controllers, one `external` to serve public traffic, 
+one `internal` to serve internal traffic.
 
 ## Requirements
 
-- Kubernetes >= `1.10.0`
-- Kustomize >= `v1`
+- Kubernetes >= `1.14.0`
+- Kustomize >= `v3`
 
 ## Image repository and tag
 
 * Nginx IC image: `quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.26.1`
 * Nginx IC repo: https://github.com/kubernetes/ingress-nginx
 
-
 ## Configuration
 
-Fury distribution Ingress Nginx Double is deployed with following configuration (for both of the Ingress Controllers):
+Fury distribution Ingress Nginx Double is deployed with following configuration *(for both of the Ingress Controllers)*:
 
 - Maximum allowed size of the client request body: `10m`
 - HTTP status code used in redirects: `301`
 - Metrics are scraped by Prometheus every `10s`
-
 
 ## Deployment
 
@@ -32,7 +31,8 @@ You can deploy Nginx Double by running following command in the root of the proj
 
 ## Alerts
 
-Followings Prometheus [alerts](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/) are already defined for this package. 
+Followings Prometheus [alerts](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/) are already
+defined for this package. 
  
 ### ingress-nginx.rules  
 | Parameter | Description | Severity | Interval | 
@@ -48,4 +48,4 @@ Followings Prometheus [alerts](https://prometheus.io/docs/prometheus/latest/conf
 
 ## License
 
-For license details please see [LICENSE](https://sighup.io/fury/license) 
+For license details please see [LICENSE](../../LICENSE) 

@@ -5,8 +5,8 @@ Ingress Nginx is an Ingress Controller for [NGINX](https://nginx.org) webserver 
 
 ## Requirements
 
-- Kubernetes >= `1.10.0`
-- Kustomize >= `v1`
+- Kubernetes >= `1.14.0`
+- Kustomize >= `v3`
 
 
 ## Image repository and tag

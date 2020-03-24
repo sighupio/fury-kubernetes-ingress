@@ -1,0 +1,11 @@
+- op: "replace"
+  path: "/spec/template/spec/containers/0/args/1"
+  value: "--configmap=$(POD_NAMESPACE)/nginx-configuration-internal"
+
+- op: "replace"
+  path: "/spec/template/spec/containers/0/args/2"
+  value: "--publish-service=$(POD_NAMESPACE)/ingress-nginx-internal"
+
+- op: "add"
+  path: "/spec/template/spec/containers/0/args/-"
+  value: "--ingress-class=internal"

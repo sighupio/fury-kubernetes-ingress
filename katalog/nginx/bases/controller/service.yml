@@ -1,0 +1,21 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: ingress-nginx
+  labels:
+    app: ingress-nginx
+spec:
+  externalTrafficPolicy: Local
+  type: NodePort
+  selector:
+    app: ingress-nginx
+  ports:
+    - name: http
+      port: 80
+      nodePort: 31080
+      targetPort: http
+    - name: https
+      port: 443
+      nodePort: 31443
+      targetPort: https
