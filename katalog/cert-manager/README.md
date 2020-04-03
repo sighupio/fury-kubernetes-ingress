@@ -34,18 +34,18 @@ So before proceed to the build and apply, you should provide a patchesJson6902 l
 
 ```yml
 patchesJson6902:
-  - target:
-      group: certmanager.k8s.io
-      version: v1alpha1
-      kind: ClusterIssuer
-      name: letsencrypt-staging
-    path: patches/dual-nginx.yml
-  - target:
-      group: certmanager.k8s.io
-      version: v1alpha1
-      kind: ClusterIssuer
-      name: letsencrypt-prod
-    path: patches/dual-nginx.yml
+    - target:
+          group: certmanager.k8s.io
+          version: v1alpha1
+          kind: ClusterIssuer
+          name: letsencrypt-staging
+      path: patches/dual-nginx.yml
+    - target:
+          group: certmanager.k8s.io
+          version: v1alpha1
+          kind: ClusterIssuer
+          name: letsencrypt-prod
+      path: patches/dual-nginx.yml
 ```
 
 and under the `patches/dual-nginx.yml`:
@@ -54,7 +54,7 @@ and under the `patches/dual-nginx.yml`:
 ---
 - op: "replace"
   path: "/spec/acme/solvers/0/http01/ingress/class"
-  value: "dual-nginx"
+  value: "external"
 ```
 
 this is only needed when you'll use the the `dual-nginx` because the default is the `nginx` single node
