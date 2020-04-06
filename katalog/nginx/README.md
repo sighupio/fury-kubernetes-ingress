@@ -11,7 +11,7 @@ Ingress Nginx is an Ingress Controller for [NGINX](https://nginx.org) webserver 
 
 ## Image repository and tag
 
-* Ingress Nginx image: `quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.26.1`
+* Ingress Nginx image: `quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.30.0`
 * Ingress Nginx repo: https://github.com/kubernetes/ingress-nginx
 
 
@@ -33,10 +33,10 @@ You can deploy Nginx by running following command in the root of the project:
 
 ## Alerts
 
-Followings Prometheus [alerts](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/) are already defined for this package. 
- 
-### ingress-nginx.rules  
-| Parameter | Description | Severity | Interval | 
+Followings Prometheus [alerts](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/) are already defined for this package.
+
+### ingress-nginx.rules
+| Parameter | Description | Severity | Interval |
 |------|-------------|----------|:-----:|
 | NginxIngressDown | This alert fires if Promethes target discovery was not able to reach ingress-nginx-metrics in the last 15 minutes. | critical | 15m |
 | NginxIngressFailureRate | This alert fires if the failure rate (the rate of 5xx reponses) measured on a time window of 2 minutes was higher than 10% in the last 10 minutes. | critical | 10m |
@@ -49,4 +49,4 @@ Followings Prometheus [alerts](https://prometheus.io/docs/prometheus/latest/conf
 
 ## License
 
-For license details please see [LICENSE](https://sighup.io/fury/license) 
+For license details please see [LICENSE](https://sighup.io/fury/license)

@@ -14,9 +14,9 @@ from various issuing sources.. Version: **v0.9.0**
 panel where you can see your running applications and access them
 on Kubernetes. Version: **1.0.34**.
 - [nginx](katalog/nginx): The NGINX Ingress Controller for Kubernetes
-provides delivery services for Kubernetes applications. Version: **0.26.1**
+provides delivery services for Kubernetes applications. Version: **0.30.0**
 - [dual-nginx](katalog/dual-nginx): It deploys two identical nginx ingress controllers
-but with two different scopes: public/external and private/internal. Version: **0.26.1**
+but with two different scopes: public/external and private/internal. Version: **0.30.0**
 - [nginx-ldap-auth](katalog/nginx-ldap-auth): Use this in order to provide a ingress authentication over LDAP for
 Kubernetes. Version: **1.0.6**
 
