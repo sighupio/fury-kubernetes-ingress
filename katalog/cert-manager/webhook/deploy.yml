@@ -15,13 +15,23 @@ spec:
       serviceAccountName: cert-manager-webhook
       containers:
       - name: webhook
-        image: "quay.io/jetstack/cert-manager-webhook:v0.9.0"
+        image: "quay.io/jetstack/cert-manager-webhook:v0.14.1"
         imagePullPolicy: Always
         args:
         - --v=2
         - --secure-port=6443
         - --tls-cert-file=/certs/tls.crt
         - --tls-private-key-file=/certs/tls.key
+        livenessProbe:
+          httpGet:
+            path: /livez
+            port: 6080
+            scheme: HTTP
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 6080
+            scheme: HTTP
         env:
         - name: POD_NAMESPACE
           valueFrom:
@@ -40,7 +50,7 @@ spec:
       volumes:
       - name: certs
         secret:
-          secretName: cert-manager-webhook-webhook-tls
+          secretName: cert-manager-webhook-tls
 ---
 apiVersion: v1
 kind: Service

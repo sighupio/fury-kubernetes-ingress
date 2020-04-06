@@ -18,12 +18,16 @@ spec:
       serviceAccountName: cert-manager
       containers:
       - name: cert-manager
-        image: "quay.io/jetstack/cert-manager-controller:v0.9.0"
+        image: "quay.io/jetstack/cert-manager-controller:v0.14.1"
         imagePullPolicy: IfNotPresent
         args:
         - --v=2
         - --cluster-resource-namespace=$(POD_NAMESPACE)
         - --leader-election-namespace=$(POD_NAMESPACE)
+        - --webhook-namespace=$(POD_NAMESPACE)
+        - --webhook-ca-secret=cert-manager-webhook-ca
+        - --webhook-serving-secret=cert-manager-webhook-tls
+        - --webhook-dns-names=cert-manager-webhook,cert-manager-webhook.$(POD_NAMESPACE),cert-manager-webhook.$(POD_NAMESPACE).svc
         - --default-issuer-kind=ClusterIssuer
         - --default-issuer-name=letsencrypt-prod
         ports:
