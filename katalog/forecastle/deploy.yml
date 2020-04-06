@@ -17,7 +17,7 @@ spec:
       serviceAccountName: forecastle
       containers:
         - name: forecastle
-          image: stakater/forecastle:v1.0.34
+          image: stakater/forecastle
           env:
           - name: KUBERNETES_NAMESPACE
             valueFrom:
