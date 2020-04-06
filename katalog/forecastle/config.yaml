@@ -1,1 +1,3 @@
-namespaces: null
+namespaceSelector:
+  any: true
+crdEnabled: false
