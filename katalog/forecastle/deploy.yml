@@ -31,6 +31,16 @@ spec:
             httpGet:
               path: /
               port: http
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            privileged: false
+            runAsNonRoot: true
+            runAsGroup: 3000
+            runAsUser: 1000
+            capabilities:
+              drop:
+              - ALL
           ports:
           - name: http
             protocol: TCP
