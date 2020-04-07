@@ -1,7 +1,7 @@
 # Ingress Dual Nginx
 
-Ingress Nginx is an Ingress Controller for [NGINX](https://nginx.org) webserver and reverse proxy, it manages Nginx in 
-a Kubernetes native manner. This package deploys 2 Nginx Controllers, one `external` to serve public traffic, 
+Ingress Nginx is an Ingress Controller for [NGINX](https://nginx.org) webserver and reverse proxy, it manages Nginx in
+a Kubernetes native manner. This package deploys 2 Nginx Controllers, one `external` to serve public traffic,
 one `internal` to serve internal traffic.
 
 ## Requirements
@@ -11,7 +11,7 @@ one `internal` to serve internal traffic.
 
 ## Image repository and tag
 
-* Nginx IC image: `quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.26.1`
+* Nginx IC image: `quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.30.0`
 * Nginx IC repo: https://github.com/kubernetes/ingress-nginx
 
 ## Configuration
@@ -32,10 +32,10 @@ You can deploy Nginx Double by running following command in the root of the proj
 ## Alerts
 
 Followings Prometheus [alerts](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/) are already
-defined for this package. 
- 
-### ingress-nginx.rules  
-| Parameter | Description | Severity | Interval | 
+defined for this package.
+
+### ingress-nginx.rules
+| Parameter | Description | Severity | Interval |
 |------|-------------|----------|:-----:|
 | NginxIngressDown | This alert fires if Promethes target discovery was not able to reach ingress-nginx-metrics in the last 15 minutes. | critical | 15m |
 | NginxIngressFailureRate | This alert fires if the failure rate (the rate of 5xx reponses) measured on a time window of 2 minutes was higher than 10% in the last 10 minutes. | critical | 10m |
@@ -48,4 +48,4 @@ defined for this package.
 
 ## License
 
-For license details please see [LICENSE](../../LICENSE) 
+For license details please see [LICENSE](../../LICENSE)
