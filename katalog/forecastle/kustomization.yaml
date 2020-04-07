@@ -8,6 +8,10 @@ resources:
   - deploy.yml
   - rbac.yml
 
+images:
+  - name: stakater/forecastle
+    newTag: v1.0.42
+
 configMapGenerator:
   - name: forecastle-config
     files:

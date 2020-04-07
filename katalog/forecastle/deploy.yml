@@ -17,7 +17,7 @@ spec:
       serviceAccountName: forecastle
       containers:
         - name: forecastle
-          image: stakater/forecastle:v1.0.34
+          image: stakater/forecastle
           env:
           - name: KUBERNETES_NAMESPACE
             valueFrom:
@@ -31,6 +31,16 @@ spec:
             httpGet:
               path: /
               port: http
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            privileged: false
+            runAsNonRoot: true
+            runAsGroup: 3000
+            runAsUser: 1000
+            capabilities:
+              drop:
+              - ALL
           ports:
           - name: http
             protocol: TCP
