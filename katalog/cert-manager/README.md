@@ -1,6 +1,6 @@
 # cert-manager
 
-cert-manager is an automation tool for management and issuence of TLS
+cert-manager is an automation tool for management and issuance of TLS
 certificates from various issuing resource in a Kubernetes native way. It
 ensures that certificates are valid and attempts to renew them before expiry.
 
@@ -11,17 +11,17 @@ Encrypt](https://letsencrypt.org/) Certificate Authority.
 
 -   Kubernetes >= `1.10.0`
 -   Kustomize >= `v1`
--   [nginx-ingress]()
+-   [nginx-ingress](../nginx)
 
 ## Image repository and tag
 
--   Cert Manager image: `quay.io/jetstack/cert-manager-controller:v0.9.0`
+-   Cert Manager image: `quay.io/jetstack/cert-manager-controller:v0.14.1`
 -   Cert Manager repo: https://github.com/jetstack/cert-manager
--   Cert Manager documentation: https://docs.cert-manager.io/en/release-0.9/index.html
+-   Cert Manager documentation: https://cert-manager.io/docs/
 
 ## Configuration
 
-Fury distribution cert-manager is deployed with following configuration:
+Fury distribution cert-manager is deployed with the following configuration:
 
 -   Default issuer kind is ClusterIssuer
 -   Default issuer is letsencrypt
@@ -63,10 +63,8 @@ Once do that, you just need to hit:
 
 ```shell
 $ kustomize build | kubectl apply -f -
-
-
 ```
 
 ## License
 
-For license details please see [LICENSE](https://sighup.io/fury/license).
+For license details please see [LICENSE](../../LICENSE).
