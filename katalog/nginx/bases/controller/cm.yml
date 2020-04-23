@@ -8,3 +8,4 @@ metadata:
 data:
   proxy-body-size: 10m
   http-redirect-code: "301"
+  enable-access-log-for-default-backend: "true"
