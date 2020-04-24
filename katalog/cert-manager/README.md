@@ -35,14 +35,14 @@ So before proceed to the build and apply, you should provide a patchesJson6902 l
 ```yml
 patchesJson6902:
     - target:
-          group: certmanager.k8s.io
-          version: v1alpha1
+          group: cert-manager.io
+          version: v1alpha2
           kind: ClusterIssuer
           name: letsencrypt-staging
       path: patches/dual-nginx.yml
     - target:
-          group: certmanager.k8s.io
-          version: v1alpha1
+          group: cert-manager.io
+          version: v1alpha2
           kind: ClusterIssuer
           name: letsencrypt-prod
       path: patches/dual-nginx.yml
