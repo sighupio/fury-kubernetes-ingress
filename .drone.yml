@@ -96,7 +96,6 @@ steps:
 
   - name: destroy
     image: quay.io/sighup/e2e-testing-drone-plugin:v0.4.3
-    pull: always
     depends_on: [ e2e ]
     settings:
       action: destroy
@@ -183,7 +182,6 @@ steps:
 
   - name: destroy
     image: quay.io/sighup/e2e-testing-drone-plugin:v0.4.3
-    pull: always
     depends_on: [ e2e ]
     settings:
       action: destroy
@@ -270,7 +268,6 @@ steps:
 
   - name: destroy
     image: quay.io/sighup/e2e-testing-drone-plugin:v0.4.3
-    pull: always
     depends_on: [ e2e ]
     settings:
       action: destroy
