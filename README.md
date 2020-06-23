@@ -23,15 +23,16 @@ Kubernetes. Version: **1.0.6**
 
 ## Compatibility
 
-| Module Version / Kubernetes Version | 1.14.X             | 1.15.X             | 1.16.X             |
-|-------------------------------------|:------------------:|:------------------:|:------------------:|
-| v1.1.0                              |                    |                    |                    |
-| v1.2.0                              | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| v1.3.0                              | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| v1.4.0                              | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| v1.5.0                              | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| v1.6.0                              | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| v1.6.1                              | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Module Version / Kubernetes Version | 1.14.X             | 1.15.X             | 1.16.X             | 1.17.X             | 1.18.X             |
+|-------------------------------------|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|
+| v1.1.0                              |                    |                    |                    |                    |                    |
+| v1.2.0                              | :white_check_mark: | :white_check_mark: | :white_check_mark: |                    |                    |
+| v1.3.0                              | :white_check_mark: | :white_check_mark: | :white_check_mark: |                    |                    |
+| v1.4.0                              | :white_check_mark: | :white_check_mark: | :white_check_mark: |                    |                    |
+| v1.5.0                              | :white_check_mark: | :white_check_mark: | :white_check_mark: |                    |                    |
+| v1.6.0                              | :white_check_mark: | :white_check_mark: | :white_check_mark: |                    |                    |
+| v1.6.1                              | :white_check_mark: | :white_check_mark: | :white_check_mark: |                    |                    |
+| v1.7.0                              |                    |                    | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
 - :white_check_mark: Compatible
 - :warning: Has issues
