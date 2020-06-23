@@ -31,6 +31,7 @@ wait_for_settlement (){
 
 @test "testing cert-manager apply" {
   info
+  kubectl apply -f katalog/cert-manager/cert-manager-controller/crd.yml
   apply katalog/cert-manager || wait_for_settlement 24
   apply katalog/cert-manager
 }
