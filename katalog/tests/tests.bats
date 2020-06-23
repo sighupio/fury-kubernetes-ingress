@@ -27,19 +27,32 @@ wait_for_settlement (){
 
 @test "testing dual-nginx apply" {
   info
-  apply katalog/dual-nginx
+  install() {
+      apply katalog/dual-nginx
+  }
+  loop_it install 30 5
+  status=${loop_it_result}
+  [ "$status" -eq 0 ]
 }
 
 @test "testing cert-manager apply" {
   info
-  kubectl apply -f katalog/cert-manager/cert-manager-controller/crd.yml
-  apply katalog/cert-manager || wait_for_settlement 24
-  apply katalog/cert-manager
+    install() {
+      apply katalog/cert-manager
+  }
+  loop_it install 30 5
+  status=${loop_it_result}
+  [ "$status" -eq 0 ]
 }
 
 @test "testing forecastle apply" {
-  info
-  apply katalog/forecastle
+    info
+    install() {
+      apply katalog/forecastle
+  }
+  loop_it install 30 5
+  status=${loop_it_result}
+  [ "$status" -eq 0 ]
 }
 
 @test "wait for apply to settle and dump state to dump.json" {
