@@ -1,4 +1,5 @@
 #!/usr/bin/env bats
+# shellcheck disable=SC2154 
 
 load ./helper
 
@@ -187,7 +188,7 @@ load ./helper
     info
     setup_ldap(){
         kubectl create configmap ldap-ldif --from-file=sighup.io.ldif=katalog/tests/nginx-ldap-auth/sighup.io-groups.ldif  -n demo-ldap --dry-run -o yaml |kubectl apply -f -
-        kubectl patch deployment ldap-server -n demo-ldap -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
+        kubectl rollout restart deploy/ldap-server -n demo-ldap
     }
     run setup_ldap
     [ "$status" -eq 0 ]
@@ -197,7 +198,7 @@ load ./helper
     info
     setup_nginx_ldap_auth() {
         kubectl create secret generic nginx-ldap-auth --from-file=config.yaml=katalog/tests/nginx-ldap-auth/nginx-ldap-auth-config-groups.yaml -n ingress-nginx --dry-run -o yaml |kubectl apply -f -
-        kubectl patch deployment nginx-ldap-auth -n ingress-nginx -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
+        kubectl rollout restart deploy/nginx-ldap-auth  -n ingress-nginx
     }
     run setup_nginx_ldap_auth
     [ "$status" -eq 0 ]
