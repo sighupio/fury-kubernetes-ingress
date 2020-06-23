@@ -9,7 +9,7 @@ to show all the applications running on Kubernetes exposed through an Ingress.
 
 ## Image repository and tag
 - Forecastle image: `docker.io/stakater/forecastle:v1.0.42`
-- Forecastl repo: https://github.com/stakater/Forecastle
+- Forecastl repo: [https://github.com/stakater/Forecastle](https://github.com/stakater/Forecastle)
 
 ## Configuration
 Forecastle is deployed with the following configuration:

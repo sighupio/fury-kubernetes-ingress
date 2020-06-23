@@ -9,22 +9,22 @@ Encrypt](https://letsencrypt.org/) Certificate Authority.
 
 ## Requirements
 
--   Kubernetes >= `1.10.0`
--   Kustomize >= `v1`
--   [nginx-ingress](../nginx)
+- Kubernetes >= `1.10.0`
+- Kustomize >= `v1`
+- [nginx-ingress](../nginx)
 
 ## Image repository and tag
 
--   Cert Manager image: `quay.io/jetstack/cert-manager-controller:v0.14.1`
--   Cert Manager repo: https://github.com/jetstack/cert-manager
--   Cert Manager documentation: https://cert-manager.io/docs/
+- Cert Manager image: `quay.io/jetstack/cert-manager-controller:v0.14.1`
+- Cert Manager repo: [https://github.com/jetstack/cert-manager](https://github.com/jetstack/cert-manager)
+- Cert Manager documentation: [https://cert-manager.io/docs/](https://cert-manager.io/docs/)
 
 ## Configuration
 
 Fury distribution cert-manager is deployed with the following configuration:
 
--   Default issuer kind is ClusterIssuer
--   Default issuer is letsencrypt
+- Default issuer kind is ClusterIssuer
+- Default issuer is letsencrypt
 
 ## Deployment
 
@@ -63,6 +63,7 @@ Once do that, you just need to hit:
 
 ```shell
 $ kustomize build | kubectl apply -f -
+# omitted output
 ```
 
 ## License

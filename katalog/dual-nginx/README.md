@@ -12,7 +12,7 @@ one `internal` to serve internal traffic.
 ## Image repository and tag
 
 * Nginx IC image: `quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.30.0`
-* Nginx IC repo: https://github.com/kubernetes/ingress-nginx
+* Nginx IC repo: [https://github.com/kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
 
 ## Configuration
 
