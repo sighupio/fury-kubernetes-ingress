@@ -91,7 +91,9 @@ You can deploy Nginx LDAP Auth by running following command in the root of the p
 
 ```bash
 $ kustomize build katalog/nginx-ldap-auth/config/  | kubectl apply -f -
+# omitted output
 $ kustomize build katalog/nginx-ldap-auth  | kubectl apply -f -
+# omitted output
 ```
 
 
