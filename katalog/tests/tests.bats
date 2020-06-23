@@ -35,12 +35,17 @@ wait_for_settlement (){
   [ "$status" -eq 0 ]
 }
 
+@test "prepare cert-manager apply" {
+  info
+  kubectl apply -f katalog/cert-manager/cert-manager-controller/crd.yml
+}
+
 @test "testing cert-manager apply" {
   info
-    install() {
+  install() {
       apply katalog/cert-manager
   }
-  loop_it install 30 5
+  loop_it install 45 10
   status=${loop_it_result}
   [ "$status" -eq 0 ]
 }
