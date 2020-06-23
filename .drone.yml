@@ -178,8 +178,8 @@ steps:
       - export CLUSTER_NAME=117
       - export INSTANCE_IP=$(cat /shared/machine/ip)
       - export KUBECONFIG=/shared/kube/kubeconfig-117
-      - bats -t katalog/tests/tests.sh
-      - bats -t katalog/tests/grafana-ldap.sh
+      - bats -t katalog/tests/tests.bats
+      - bats -t katalog/tests/nginx-ldap-auth.sh
 
   - name: destroy
     image: quay.io/sighup/e2e-testing-drone-plugin:v0.4.3
