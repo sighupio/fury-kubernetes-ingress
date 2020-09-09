@@ -9,8 +9,8 @@ kind: Kustomization
 namespace: ingress-nginx
 
 images:
-  - name: quay.io/kubernetes-ingress-controller/nginx-ingress-controller
-    newTag: 0.30.0
+  - name: k8s.gcr.io/ingress-nginx/controller
+    newTag: v0.35.0
 
 resources:
   - deployment.yml
