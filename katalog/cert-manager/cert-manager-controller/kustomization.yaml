@@ -8,6 +8,10 @@ kind: Kustomization
 
 namespace: cert-manager
 
+images:
+  - name: quay.io/jetstack/cert-manager-controller
+    newTag: v1.0.1
+
 commonLabels:
   app: cert-manager
   app.kubernetes.io/name: cert-manager

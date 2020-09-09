@@ -20,23 +20,30 @@ spec:
         prometheus.io/port: '9402'
     spec:
       serviceAccountName: cert-manager
+      securityContext:
+        fsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
       containers:
       - name: cert-manager
-        image: "quay.io/jetstack/cert-manager-controller:v0.14.1"
-        imagePullPolicy: IfNotPresent
+        image: quay.io/jetstack/cert-manager-controller
+        imagePullPolicy: Always
         args:
         - --v=2
         - --cluster-resource-namespace=$(POD_NAMESPACE)
         - --leader-election-namespace=$(POD_NAMESPACE)
-        - --webhook-namespace=$(POD_NAMESPACE)
-        - --webhook-ca-secret=cert-manager-webhook-ca
-        - --webhook-serving-secret=cert-manager-webhook-tls
-        - --webhook-dns-names=cert-manager-webhook,cert-manager-webhook.$(POD_NAMESPACE),cert-manager-webhook.$(POD_NAMESPACE).svc
         - --default-issuer-kind=ClusterIssuer
         - --default-issuer-name=letsencrypt-prod
         ports:
         - name: metrics
           containerPort: 9402
+          protocol: TCP
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
         env:
         - name: POD_NAMESPACE
           valueFrom:

@@ -4,11 +4,15 @@
 
 # namespace: cert-manager
 
+images:
+  - name: quay.io/jetstack/cert-manager-webhook
+    newTag: v1.0.1
+
 commonLabels:
   app: webhook
   app.kubernetes.io/name: webhook
 
 resources:
-- deploy.yml
-- rbac.yml
-- webhookvalidatingconfig.yml
+  - deploy.yml
+  - rbac.yml
+  - webhookvalidatingconfig.yml
