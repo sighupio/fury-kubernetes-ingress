@@ -3,7 +3,7 @@
 # license that can be found in the LICENSE file.
 
 ---
-apiVersion: admissionregistration.k8s.io/v1beta1
+apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
   name: cert-manager-webhook
@@ -19,12 +19,13 @@ webhooks:
           - "cert-manager.io"
           - "acme.cert-manager.io"
         apiVersions:
-          - v1alpha2
+          - "*"
         operations:
           - CREATE
           - UPDATE
         resources:
           - "*/*"
+    admissionReviewVersions: ["v1", "v1beta1"]
     failurePolicy: Fail
     # Only include 'sideEffects' field in Kubernetes 1.12+
     sideEffects: None
@@ -34,7 +35,7 @@ webhooks:
         namespace: "cert-manager"
         path: /mutate
 ---
-apiVersion: admissionregistration.k8s.io/v1beta1
+apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
   name: cert-manager-webhook
@@ -58,12 +59,13 @@ webhooks:
           - "cert-manager.io"
           - "acme.cert-manager.io"
         apiVersions:
-          - v1alpha2
+          - "*"
         operations:
           - CREATE
           - UPDATE
         resources:
           - "*/*"
+    admissionReviewVersions: ["v1", "v1beta1"]
     failurePolicy: Fail
     # Only include 'sideEffects' field in Kubernetes 1.12+
     sideEffects: None
@@ -71,4 +73,4 @@ webhooks:
       service:
         name: cert-manager-webhook
         namespace: "cert-manager"
-        path: /mutate
+        path: /validate

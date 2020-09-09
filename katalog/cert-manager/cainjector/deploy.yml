@@ -18,7 +18,7 @@ spec:
       serviceAccountName: cert-manager-cainjector
       containers:
       - name: cainjector
-        image: "quay.io/jetstack/cert-manager-cainjector:v0.14.1"
+        image: quay.io/jetstack/cert-manager-cainjector
         imagePullPolicy: Always
         args:
         - --v=2
@@ -28,6 +28,12 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
         resources:
           requests:
             cpu: 50m

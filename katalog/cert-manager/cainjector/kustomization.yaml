@@ -8,6 +8,10 @@ kind: Kustomization
 
 namespace: cert-manager
 
+images:
+  - name: quay.io/jetstack/cert-manager-cainjector
+    newTag: v1.0.1
+
 commonLabels:
   app: cainjector
   app.kubernetes.io/name: cainjector

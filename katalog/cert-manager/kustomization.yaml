@@ -12,7 +12,7 @@ bases:
   - webhook
 
 commonLabels:
-  app.kubernetes.io/version: 0.14.1
+  app.kubernetes.io/version: 1.0.1
   app.kubernetes.io/component: cert-manager
   app.kubernetes.io/part-of: fury-kubernetes-ingress
   app.kubernetes.io/managed-by: kustomize
