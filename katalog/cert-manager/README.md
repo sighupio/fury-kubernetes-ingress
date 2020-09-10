@@ -1,6 +1,6 @@
 # cert-manager
 
-cert-manager is an automation tool for management and issuance of TLS
+cert-manager is an automation tool to manage and issue TLS
 certificates from various issuing resource in a Kubernetes native way. It
 ensures that certificates are valid and attempts to renew them before expiry.
 
@@ -9,13 +9,12 @@ Encrypt](https://letsencrypt.org/) Certificate Authority.
 
 ## Requirements
 
-- Kubernetes >= `1.10.0`
-- Kustomize >= `v1`
-- [nginx-ingress](../nginx)
+- Kubernetes >= `1.16.0`
+- Kustomize >= `v3`
 
 ## Image repository and tag
 
-- Cert Manager image: `quay.io/jetstack/cert-manager-controller:v0.14.1`
+- Cert Manager image: `quay.io/jetstack/cert-manager-controller:v1.0.1`
 - Cert Manager repo: [https://github.com/jetstack/cert-manager](https://github.com/jetstack/cert-manager)
 - Cert Manager documentation: [https://cert-manager.io/docs/](https://cert-manager.io/docs/)
 
@@ -23,26 +22,27 @@ Encrypt](https://letsencrypt.org/) Certificate Authority.
 
 Fury distribution cert-manager is deployed with the following configuration:
 
-- Default issuer kind is ClusterIssuer
-- Default issuer is letsencrypt
+- The default issuer kind is ClusterIssuer
+- The default issuer is letsencrypt
 
 ## Deployment
 
-The deployment is the following, but keep in mind that, depending of `nginx` or `dual-nginx` you need to specify the class name accordingly.
-To do that you need to patch the ClusterIssuer resource in order to keep it synced with your specific deployment.
-So before proceed to the build and apply, you should provide a patchesJson6902 like the following:
+The deployment is the following, but keep in mind that, depending on `nginx` or `dual-nginx`
+you need to specify the class name accordingly.
+To do that you need to patch the ClusterIssuer resource to keep it synced with your specific deployment.
+So before proceeding to the build and apply, you should provide a patchesJson6902 like the following:
 
 ```yml
 patchesJson6902:
     - target:
           group: cert-manager.io
-          version: v1alpha2
+          version: v1
           kind: ClusterIssuer
           name: letsencrypt-staging
       path: patches/dual-nginx.yml
     - target:
           group: cert-manager.io
-          version: v1alpha2
+          version: v1
           kind: ClusterIssuer
           name: letsencrypt-prod
       path: patches/dual-nginx.yml
