@@ -9,14 +9,14 @@ The following packages are included in Fury Kubernetes Ingress katalog:
 
 - [cert-manager](katalog/cert-manager): cert-manager is a Kubernetes
 add-on to automate the management and issuance of TLS certificates
-from various issuing sources.. Version: **v0.14.1**
+from various issuing sources. Version: **v1.0.1**
 - [forecastle](katalog/forecastle): Forecastle gives you access to a control
 panel where you can see your running applications and access them
 on Kubernetes. Version: **1.0.42**.
 - [nginx](katalog/nginx): The Nginx Ingress Controller for Kubernetes
 provides delivery services for Kubernetes applications. Version: **0.35.0**
 - [dual-nginx](katalog/dual-nginx): It deploys two identical Nginx ingress controllers
-but with two different scopes: public/external and private/internal. Version: **0.30.0**
+but with two different scopes: public/external and private/internal. Version: **0.35.0**
 - [nginx-ldap-auth](katalog/nginx-ldap-auth): Use this to provide an ingress authentication over LDAP for
 Kubernetes. Version: **1.0.6**
 
@@ -38,3 +38,7 @@ Kubernetes. Version: **1.0.6**
 - :white_check_mark: Compatible
 - :warning: Has issues
 - :x: Incompatible
+
+## LICENSE
+
+For license details please see [LICENSE](LICENSE)
