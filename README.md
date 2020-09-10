@@ -33,11 +33,16 @@ Kubernetes. Version: **1.0.6**
 | v1.6.0                              | :white_check_mark: | :white_check_mark: | :white_check_mark: |                    |                    |                    |
 | v1.6.1                              | :white_check_mark: | :white_check_mark: | :white_check_mark: |                    |                    |                    |
 | v1.7.0                              |                    |                    | :white_check_mark: | :white_check_mark: | :white_check_mark: |                    |
-| v1.8.0                              |                    |                    |                    |                    |                    |                    |
+| v1.8.0                              |                    |                    | :white_check_mark: | :white_check_mark: | :white_check_mark: |      :warning:     |
 
 - :white_check_mark: Compatible
 - :warning: Has issues
 - :x: Incompatible
+
+### Warning
+
+- :warning: : module version: `v1.8.0` and Kubernetes Version: `1.19.x`. It works as expected. Marked as warning
+because it is not officially supported by [SIGHUP](https://sighup.io).
 
 ## LICENSE
 
