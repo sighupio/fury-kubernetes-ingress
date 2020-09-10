@@ -12,7 +12,7 @@ add-on to automate the management and issuance of TLS certificates
 from various issuing sources. Version: **v1.0.1**
 - [forecastle](katalog/forecastle): Forecastle gives you access to a control
 panel where you can see your running applications and access them
-on Kubernetes. Version: **1.0.42**.
+on Kubernetes. Version: **1.0.57**.
 - [nginx](katalog/nginx): The Nginx Ingress Controller for Kubernetes
 provides delivery services for Kubernetes applications. Version: **0.35.0**
 - [dual-nginx](katalog/dual-nginx): It deploys two identical Nginx ingress controllers

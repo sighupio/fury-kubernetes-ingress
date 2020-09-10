@@ -5,3 +5,8 @@
 namespaceSelector:
   any: true
 crdEnabled: false
+customApps: {}
+headerBackground: null
+headerForeground: null
+instanceName: null
+title: null

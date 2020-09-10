@@ -1,14 +1,14 @@
 # Forecastle
-[Forecastle](https://github.com/stakater/Forecastle) provides an handy dashboard
+[Forecastle](https://github.com/stakater/Forecastle) provides a handy dashboard
 to show all the applications running on Kubernetes exposed through an Ingress.
 
 ## Requirements
-- Kubernetes >= `1.14.0`
+- Kubernetes >= `1.16.0`
 - Kustomize >= `v3`
 
 
 ## Image repository and tag
-- Forecastle image: `docker.io/stakater/forecastle:v1.0.42`
+- Forecastle image: `docker.io/stakater/forecastle:v1.0.57`
 - Forecastl repo: [https://github.com/stakater/Forecastle](https://github.com/stakater/Forecastle)
 
 ## Configuration

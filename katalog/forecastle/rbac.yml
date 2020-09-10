@@ -16,14 +16,12 @@ metadata:
   labels:
     app: forecastle
 rules:
-  - apiGroups:
-      - extensions
-      - networking.k8s.io
-    resources:
-      - ingresses
-    verbs:
-      - get
-      - list
+  - apiGroups: ["", "route.openshift.io", "extensions"]
+    resources: ["ingresses", "routes", "namespaces"]
+    verbs: ["get", "list"]
+  - apiGroups: ["forecastle.stakater.com"]
+    resources: ["*"]
+    verbs: ["*"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
