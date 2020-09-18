@@ -1,7 +1,7 @@
-# Nginx Configuration
+# NGINX Configuration
 
-This example shows how to override Nginx configuration set via ConfigMap for Nginx Ingress Controller. For full list of
-configuration parameters please follow Nginx
+This example shows how to override NGINX configuration set via ConfigMap for NGINX Ingress Controller. For full list of
+configuration parameters please follow NGINX
 [documentation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/)
 
 1. Run furyctl to get packages: `$ furyctl install --dev`
