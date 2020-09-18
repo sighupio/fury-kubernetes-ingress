@@ -4,4 +4,4 @@
 
 bases:
   - name: ingress/nginx-ldap-auth
-    version: v1.8.0-rc5
+    version: v1.8.0
