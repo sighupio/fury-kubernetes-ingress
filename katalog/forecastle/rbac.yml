@@ -16,8 +16,8 @@ metadata:
   labels:
     app: forecastle
 rules:
-  - apiGroups: ["", "route.openshift.io", "extensions"]
-    resources: ["ingresses", "routes", "namespaces"]
+  - apiGroups: ["", "extensions"]
+    resources: ["ingresses", "namespaces"]
     verbs: ["get", "list"]
   - apiGroups: ["forecastle.stakater.com"]
     resources: ["*"]
