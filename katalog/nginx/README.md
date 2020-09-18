@@ -1,7 +1,7 @@
-# Ingress Nginx
+# Ingress NGINX
 
-Ingress Nginx is an Ingress Controller for [NGINX](https://nginx.org) webserver and reverse proxy,
-it manages Nginx in a Kubernetes native manner. This package deploys Ingress Controller for clusters created with
+Ingress NGINX is an Ingress Controller for [NGINX](https://nginx.org) webserver and reverse proxy,
+it manages NGINX in a Kubernetes native manner. This package deploys Ingress Controller for clusters created with
 `kubeadm`.
 
 ## Requirements
@@ -11,12 +11,12 @@ it manages Nginx in a Kubernetes native manner. This package deploys Ingress Con
 
 ## Image repository and tag
 
-* Ingress Nginx image: `k8s.gcr.io/ingress-nginx/controller:0.35.0`
-* Ingress Nginx repo: [https://github.com/kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
+* Ingress NGINX image: `k8s.gcr.io/ingress-nginx/controller:0.35.0`
+* Ingress NGINX repo: [https://github.com/kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
 
 ## Configuration
 
-Fury distribution Ingress Nginx is deployed with the following configuration:
+Fury distribution Ingress NGINX is deployed with the following configuration:
 
 - Maximum allowed size of the client request body: `10m`
 - HTTP status code used in redirects: `301`
@@ -24,7 +24,7 @@ Fury distribution Ingress Nginx is deployed with the following configuration:
 
 ## Deployment
 
-You can deploy Nginx by running the following command in the root of the project:
+You can deploy NGINX by running the following command in the root of the project:
 
 `$ kustomize build | kubectl apply -f -`
 

@@ -1,6 +1,6 @@
-# Default SSL Certificate for Nginx
+# Default SSL Certificate for NGINX
 
-This example shows how to add a default SSL certificate to configure Nginx as a catch-all server.
+This example shows how to add a default SSL certificate to configure NGINX as a catch-all server.
 TLS secret name should be passed with respective namespace as `<name-space>/<mycert-tls>`
 
 0. Run furyctl to get packages: `$ furyctl install --dev`

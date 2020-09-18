@@ -1,7 +1,7 @@
-# Ingress Dual Nginx
+# Ingress Dual NGINX
 
-Ingress Nginx is an Ingress Controller for [NGINX](https://nginx.org) webserver and reverse proxy, it manages Nginx in
-a Kubernetes native manner. This package deploys 2 Nginx Controllers, one `external` to serve public traffic,
+Ingress NGINX is an Ingress Controller for [NGINX](https://nginx.org) webserver and reverse proxy, it manages NGINX in
+a Kubernetes native manner. This package deploys 2 NGINX Controllers, one `external` to serve public traffic,
 one `internal` to serve internal traffic.
 
 ## Requirements
@@ -11,12 +11,12 @@ one `internal` to serve internal traffic.
 
 ## Image repository and tag
 
-* Ingress Nginx image: `k8s.gcr.io/ingress-nginx/controller:0.35.0`
-* Ingress Nginx repo: [https://github.com/kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
+* Ingress NGINX image: `k8s.gcr.io/ingress-nginx/controller:0.35.0`
+* Ingress NGINX repo: [https://github.com/kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
 
 ## Configuration
 
-Fury distribution Ingress Nginx Double is deployed with the following configuration *(for both of the Ingress Controllers)*:
+Fury distribution Ingress NGINX Double is deployed with the following configuration *(for both of the Ingress Controllers)*:
 
 - Maximum allowed size of the client request body: `10m`
 - HTTP status code used in redirects: `301`
@@ -24,7 +24,7 @@ Fury distribution Ingress Nginx Double is deployed with the following configurat
 
 ## Deployment
 
-You can deploy Nginx Double by running the following command in the root of the project:
+You can deploy NGINX Double by running the following command in the root of the project:
 
 `$ kustomize build | kubectl apply -f -`
 

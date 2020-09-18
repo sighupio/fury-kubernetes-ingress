@@ -1,6 +1,6 @@
-# Nginx LDAP Auth
+# NGINX LDAP Auth
 
-[Nginx LDAP Auth](https://github.com/tiagoapimenta/nginx-ldap-auth/blob/v1.0.6/README.md) provides ingress
+[NGINX LDAP Auth](https://github.com/tiagoapimenta/nginx-ldap-auth/blob/v1.0.6/README.md) provides ingress
 authentication over LDAP for Kubernetes.
 
 
@@ -12,14 +12,14 @@ authentication over LDAP for Kubernetes.
 
 ## Image repository and tag
 
-* Nginx LDAP Auth image: `docker.io/tpimenta/nginx-ldap-auth:1.0.6`
-* Nginx LDAP Auth repo:
+* NGINX LDAP Auth image: `docker.io/tpimenta/nginx-ldap-auth:1.0.6`
+* NGINX LDAP Auth repo:
 [https://github.com/tiagoapimenta/nginx-ldap-auth](https://github.com/tiagoapimenta/nginx-ldap-auth/tree/v1.0.6)
 
 
 ## Configuration
 
-Nginx LDAP Auth is deployed with following configuration:
+NGINX LDAP Auth is deployed with following configuration:
 
 - POD runs unprivileged
 - POD with limited hardened rbac configuration
@@ -28,7 +28,7 @@ Nginx LDAP Auth is deployed with following configuration:
 
 ### LDAP Configuration
 
-The Nginx LDAP Auth needs a kubernetes secret named `nginx-ldap-auth` with a `config.yaml` key. An example is available
+The NGINX LDAP Auth needs a kubernetes secret named `nginx-ldap-auth` with a `config.yaml` key. An example is available
 under the [`config`](config) directory.
 
 ```bash
@@ -43,7 +43,7 @@ metadata:
 type: Opaque
 ```
 
-Note that [`config.yaml`](config/sample.config.yaml) property is a file with the Nginx LDAP Auth:
+Note that [`config.yaml`](config/sample.config.yaml) property is a file with the NGINX LDAP Auth:
 
 ```yaml
 web: 0.0.0.0:5555
@@ -87,7 +87,7 @@ group:
 
 ## Deployment
 
-You can deploy Nginx LDAP Auth by running following command in the root of the project:
+You can deploy NGINX LDAP Auth by running following command in the root of the project:
 
 ```bash
 $ kustomize build katalog/nginx-ldap-auth/config/  | kubectl apply -f -
@@ -105,7 +105,7 @@ Once deployed, any ingress definition can be configured to be protected by HTTP 
 kubectl annotate ingress YOUR_INGRESS "nginx.ingress.kubernetes.io/auth-url=http://nginx-ldap-auth.ingress-nginx.svc.cluster.local" --overwrite
 ```
 
-More information related to nginx ingress defintion authentication can be found at the nginx ingress
+More information related to NGINX ingress defintion authentication can be found at the NGINX ingress
 [official documentation site](https://kubernetes.github.io/ingress-nginx/examples/auth/external-auth/)
 
 

@@ -1,6 +1,6 @@
-# Nginx Ingress Controller for GKE
+# NGINX Ingress Controller for GKE
 
-Ingress Nginx is an Ingress Controller for [NGINX](https://nginx.org) webserver and reverse proxy, it manages Nginx in a Kubernetes native manner. This package deploys Ingress Controller for GKE.
+Ingress NGINX is an Ingress Controller for [NGINX](https://nginx.org) webserver and reverse proxy, it manages NGINX in a Kubernetes native manner. This package deploys Ingress Controller for GKE.
 
 ## Requirements
 
@@ -9,13 +9,13 @@ Ingress Nginx is an Ingress Controller for [NGINX](https://nginx.org) webserver 
 
 ## Image repository and tag
 
-* Ingress Nginx GKE image: `quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.19.0`
-* Ingress Nginx CKE repo: [https://github.com/kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
+* Ingress NGINX GKE image: `quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.19.0`
+* Ingress NGINX CKE repo: [https://github.com/kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
 
 
 ## Configuration
 
-Fury distribution Nginx GKE is deployed with following configuration:
+Fury distribution NGINX GKE is deployed with following configuration:
 
 - Maximum allowed size of the client request body: `10m`
 - HTTP status code used in redirects: `301`
@@ -24,7 +24,7 @@ Fury distribution Nginx GKE is deployed with following configuration:
 
 ## Deployment
 
-You can deploy Nginx GKE by running following command in the root of the project:
+You can deploy NGINX GKE by running following command in the root of the project:
 
 `$ kustomize build | kubectl apply -f -`
 
