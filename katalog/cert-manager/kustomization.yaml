@@ -10,6 +10,7 @@ bases:
   - cainjector
   - cert-manager-controller
   - webhook
+  - dashboards
 
 commonLabels:
   app.kubernetes.io/version: 1.0.1
