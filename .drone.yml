@@ -27,7 +27,51 @@ steps:
   - name: lint
     image: quay.io/sighup/policeman
     pull: always
+    depends_on:
+      - clone
 
+  - name: render
+    image: quay.io/sighup/e2e-testing:1.1.0_0.2.2_2.16.1_1.4.0_1.18.8_3.3.0_2.4.1
+    pull: always
+    depends_on:
+      - clone
+    commands:
+      - kustomize build katalog/cert-manager > cert-manager.yml
+      - kustomize build katalog/dual-nginx > dual-nginx.yml
+      - kustomize build katalog/forecastle > forecastle.yml
+      - kustomize build katalog/nginx > nginx.yml
+      - kustomize build katalog/nginx-ldap-auth > nginx-ldap-auth.yml
+
+  - &deprek8ion
+    name: deprek8ion-cert-manager
+    image: eu.gcr.io/swade1987/deprek8ion:1.1.31
+    pull: always
+    environment:
+      KUBERNETES_MANIFESTS: cert-manager.yml
+    depends_on:
+      - render
+    commands:
+      - /conftest test -p /policies $${KUBERNETES_MANIFESTS}
+
+  - <<: *deprek8ion
+    name: deprek8ion-dual-nginx
+    environment:
+      KUBERNETES_MANIFESTS: dual-nginx.yml
+
+  - <<: *deprek8ion
+    name: deprek8ion-forecastle
+    environment:
+      KUBERNETES_MANIFESTS: forecastle.yml
+
+  - <<: *deprek8ion
+    name: deprek8ion-nginx
+    environment:
+      KUBERNETES_MANIFESTS: nginx.yml
+
+  - <<: *deprek8ion
+    name: deprek8ion-nginx-ldap-auth
+    environment:
+      KUBERNETES_MANIFESTS: nginx-ldap-auth.yml
 ---
 kind: pipeline
 name: render-examples
