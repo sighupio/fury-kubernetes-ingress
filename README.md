@@ -35,6 +35,7 @@ Kubernetes. Version: **1.0.6**
 | v1.7.0                              |                    |                    | :white_check_mark: | :white_check_mark: | :white_check_mark: |                    |
 | v1.8.0                              |                    |                    | :white_check_mark: | :white_check_mark: | :white_check_mark: |      :warning:     |
 | v1.8.1                              |                    |                    | :white_check_mark: | :white_check_mark: | :white_check_mark: |      :warning:     |
+| v1.8.2                              |                    |                    | :white_check_mark: | :white_check_mark: | :white_check_mark: |      :warning:     |
 
 - :white_check_mark: Compatible
 - :warning: Has issues
