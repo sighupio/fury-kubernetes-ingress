@@ -9,12 +9,12 @@ Encrypt](https://letsencrypt.org/) Certificate Authority.
 
 ## Requirements
 
-- Kubernetes >= `1.16.0`
+- Kubernetes >= `1.17.0`
 - Kustomize >= `v3`
 
 ## Image repository and tag
 
-- Cert Manager image: `quay.io/jetstack/cert-manager-controller:v1.0.1`
+- Cert Manager image: `quay.io/jetstack/cert-manager-controller:v1.1.0`
 - Cert Manager repo: [https://github.com/jetstack/cert-manager](https://github.com/jetstack/cert-manager)
 - Cert Manager documentation: [https://cert-manager.io/docs/](https://cert-manager.io/docs/)
 
@@ -57,7 +57,7 @@ and under the `patches/dual-nginx.yml`:
   value: "external"
 ```
 
-this is only needed when you'll use the the `dual-nginx` because the default is the `nginx` single node
+this is only needed when you'll use the `dual-nginx` because the default is the `nginx` single node
 
 Once do that, you just need to hit:
 
