@@ -1,0 +1,11 @@
+apiVersion: builtin
+kind: LabelTransformer
+metadata:
+  name: retrocompatible-labels
+labels:
+  app.kubernetes.io/version: 1.0.1
+fieldSpecs:
+- path: spec/template/metadata/labels
+  create: false
+- path: spec/selector/matchLabels
+  create: false
