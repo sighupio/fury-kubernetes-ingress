@@ -14,7 +14,7 @@ resources:
 
 images:
   - name: stakater/forecastle
-    newTag: v1.0.57
+    newTag: v1.0.61
 
 configMapGenerator:
   - name: forecastle-config
