@@ -43,6 +43,7 @@ spec:
             runAsUser: 101
             runAsNonRoot: true
             runAsGroup: 101
+            allowPrivilegeEscalation: true
           env:
             - name: POD_NAME
               valueFrom:
@@ -52,6 +53,8 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+            - name: LD_PRELOAD
+              value: /usr/local/lib/libmimalloc.so
           ports:
             - name: http
               containerPort: 8080
@@ -60,7 +63,7 @@ spec:
             - name: metrics
               containerPort: 10254
           livenessProbe:
-            failureThreshold: 3
+            failureThreshold: 5
             httpGet:
               path: /healthz
               port: 10254
@@ -75,6 +78,11 @@ spec:
               path: /healthz
               port: 10254
               scheme: HTTP
+            initialDelaySeconds: 10
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
+          resources:
+            requests:
+              cpu: 100m
+              memory: 90Mi
