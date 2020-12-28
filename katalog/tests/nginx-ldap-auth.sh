@@ -32,30 +32,17 @@ load ./helper
 @test "Setup httpbin demo project" {
     info
     setup_demo(){
-        kubectl create ns demo-nginx-ldap-auth
+        kubectl create ns demo-nginx-ldap-auth --dry-run -o yaml | kubectl apply -f -
         kubectl apply -f katalog/tests/nginx-ldap-auth/httpbin.yaml -n demo-nginx-ldap-auth
     }
     run setup_demo
     [ "$status" -eq 0 ]
 }
 
-@test "Test no-auth httpbin ingress demo project (cloud)" {
-    if [ "${INSTANCE_IP}" == "localhost" ]; then skip "This test was designed to be run on cloud instances"; fi
+@test "Test no-auth httpbin ingress demo project" {
     info
     test(){
-        http_code=$(curl "http://httpbin.${INSTANCE_IP}.nip.io:${CLUSTER_NAME}80/get" -s -o /dev/null -w "%{http_code}")
-        if [ "${http_code}" -ne "200" ]; then return 1; fi
-    }
-    loop_it test 30 2
-    status=${loop_it_result}
-    [ "$status" -eq 0 ]
-}
-
-@test "Test no-auth httpbin ingress demo project (local)" {
-    info
-    if [ "${INSTANCE_IP}" != "localhost" ]; then skip; fi
-    test(){
-        http_code=$(curl -H "Host: httpbin.${INSTANCE_IP}.nip.io" "http://${INSTANCE_IP}:${CLUSTER_NAME}80/get" -s -o /dev/null -w "%{http_code}")
+        http_code=$(curl -H "Host: ${INSTANCE_IP//./-}.nip.io" "http://${INSTANCE_IP}:${CLUSTER_NAME}80/get" -s -o /dev/null -w "%{http_code}")
         if [ "${http_code}" -ne "200" ]; then return 1; fi
     }
     loop_it test 30 2
@@ -115,11 +102,10 @@ load ./helper
     [ "$status" -eq 0 ]
 }
 
-@test "Users. Test no-auth secured httpbin ingress demo project (cloud)" {
+@test "Users. Test no-auth secured httpbin ingress demo project" {
     info
-    if [ "${INSTANCE_IP}" == "localhost" ]; then skip "This test was designed to be run on cloud instances"; fi
     test(){
-        http_code=$(curl "http://httpbin.${INSTANCE_IP}.nip.io:${CLUSTER_NAME}80/get" -s -o /dev/null -w "%{http_code}")
+        http_code=$(curl -H "Host: ${INSTANCE_IP//./-}.nip.io" "http://${INSTANCE_IP}:${CLUSTER_NAME}80/get" -s -o /dev/null -w "%{http_code}")
         if [ "${http_code}" -ne "401" ]; then return 1; fi
     }
     loop_it test 30 2
@@ -127,23 +113,10 @@ load ./helper
     [ "$status" -eq 0 ]
 }
 
-@test "Users. Test no-auth secured httpbin ingress demo project (local)" {
+@test "Users. Test auth httpbin secured ingress demo project" {
     info
-    if [ "${INSTANCE_IP}" != "localhost" ]; then skip; fi
     test(){
-        http_code=$(curl -H "Host: httpbin.${INSTANCE_IP}.nip.io" "http://${INSTANCE_IP}:${CLUSTER_NAME}80/get" -s -o /dev/null -w "%{http_code}")
-        if [ "${http_code}" -ne "401" ]; then return 1; fi
-    }
-    loop_it test 30 2
-    status=${loop_it_result}
-    [ "$status" -eq 0 ]
-}
-
-@test "Users. Test auth httpbin secured ingress demo project (cloud)" {
-    info
-    if [ "${INSTANCE_IP}" == "localhost" ]; then skip "This test was designed to be run on cloud instances"; fi
-    test(){
-        http_code=$(curl -u angel:angel "http://httpbin.${INSTANCE_IP}.nip.io:${CLUSTER_NAME}80/get" -s -o /dev/null -w "%{http_code}")
+        http_code=$(curl -u angel:angel -H "Host: ${INSTANCE_IP//./-}.nip.io" "http://${INSTANCE_IP}:${CLUSTER_NAME}80/get" -s -o /dev/null -w "%{http_code}")
         if [ "${http_code}" -ne "200" ]; then return 1; fi
     }
     loop_it test 30 2
@@ -151,35 +124,10 @@ load ./helper
     [ "$status" -eq 0 ]
 }
 
-@test "Users. Test auth httpbin secured ingress demo project (local)" {
+@test "Users. Test auth (no authorized) httpbin secured ingress demo project" {
     info
-    if [ "${INSTANCE_IP}" != "localhost" ]; then skip; fi
     test(){
-        http_code=$(curl -u angel:angel -H "Host: httpbin.${INSTANCE_IP}.nip.io" "http://${INSTANCE_IP}:${CLUSTER_NAME}80/get" -s -o /dev/null -w "%{http_code}")
-        if [ "${http_code}" -ne "200" ]; then return 1; fi
-    }
-    loop_it test 30 2
-    status=${loop_it_result}
-    [ "$status" -eq 0 ]
-}
-
-@test "Users. Test auth (no authorized) httpbin secured ingress demo project (cloud)" {
-    info
-    if [ "${INSTANCE_IP}" == "localhost" ]; then skip "This test was designed to be run on cloud instances"; fi
-    test(){
-        http_code=$(curl -u ramiro:ramiro "http://httpbin.${INSTANCE_IP}.nip.io:${CLUSTER_NAME}80/get" -s -o /dev/null -w "%{http_code}")
-        if [ "${http_code}" -ne "401" ]; then return 1; fi
-    }
-    loop_it test 30 2
-    status=${loop_it_result}
-    [ "$status" -eq 0 ]
-}
-
-@test "Users. Test auth (no authorized) httpbin secured ingress demo project (local)" {
-    info
-    if [ "${INSTANCE_IP}" != "localhost" ]; then skip; fi
-    test(){
-        http_code=$(curl -u ramiro:ramiro -H "Host: httpbin.${INSTANCE_IP}.nip.io" "http://${INSTANCE_IP}:${CLUSTER_NAME}80/get" -s -o /dev/null -w "%{http_code}")
+        http_code=$(curl -u ramiro:ramiro -H "Host: ${INSTANCE_IP//./-}.nip.io" "http://${INSTANCE_IP}:${CLUSTER_NAME}80/get" -s -o /dev/null -w "%{http_code}")
         if [ "${http_code}" -ne "401" ]; then return 1; fi
     }
     loop_it test 30 2
@@ -230,11 +178,10 @@ load ./helper
     [ "$status" -eq 0 ]
 }
 
-@test "Groups. Test no-auth secured httpbin ingress demo project (cloud)" {
+@test "Groups. Test no-auth secured httpbin ingress demo project" {
     info
-    if [ "${INSTANCE_IP}" == "localhost" ]; then skip "This test was designed to be run on cloud instances"; fi
     test(){
-        http_code=$(curl "http://httpbin.${INSTANCE_IP}.nip.io:${CLUSTER_NAME}80/get" -s -o /dev/null -w "%{http_code}")
+        http_code=$(curl -H "Host: ${INSTANCE_IP//./-}.nip.io" "http://${INSTANCE_IP}:${CLUSTER_NAME}80/get" -s -o /dev/null -w "%{http_code}")
         if [ "${http_code}" -ne "401" ]; then return 1; fi
     }
     loop_it test 30 2
@@ -242,23 +189,10 @@ load ./helper
     [ "$status" -eq 0 ]
 }
 
-@test "Groups. Test no-auth secured httpbin ingress demo project (local)" {
+@test "Groups. Test auth httpbin secured ingress demo project" {
     info
-    if [ "${INSTANCE_IP}" != "localhost" ]; then skip; fi
     test(){
-        http_code=$(curl -H "Host: httpbin.${INSTANCE_IP}.nip.io" "http://${INSTANCE_IP}:${CLUSTER_NAME}80/get" -s -o /dev/null -w "%{http_code}")
-        if [ "${http_code}" -ne "401" ]; then return 1; fi
-    }
-    loop_it test 30 2
-    status=${loop_it_result}
-    [ "$status" -eq 0 ]
-}
-
-@test "Groups. Test auth httpbin secured ingress demo project (cloud)" {
-    info
-    if [ "${INSTANCE_IP}" == "localhost" ]; then skip "This test was designed to be run on cloud instances"; fi
-    test(){
-        http_code=$(curl -u jacopo:admin "http://httpbin.${INSTANCE_IP}.nip.io:${CLUSTER_NAME}80/get" -s -o /dev/null -w "%{http_code}")
+        http_code=$(curl -u jacopo:admin -H "Host: ${INSTANCE_IP//./-}.nip.io" "http://${INSTANCE_IP}:${CLUSTER_NAME}80/get" -s -o /dev/null -w "%{http_code}")
         if [ "${http_code}" -ne "200" ]; then return 1; fi
     }
     loop_it test 30 2
@@ -266,36 +200,10 @@ load ./helper
     [ "$status" -eq 0 ]
 }
 
-@test "Groups. Test auth httpbin secured ingress demo project (local)" {
+@test "Groups. Test auth (no authorized) httpbin secured ingress demo project" {
     info
-    if [ "${INSTANCE_IP}" != "localhost" ]; then skip; fi
     test(){
-        http_code=$(curl -u jacopo:admin -H "Host: httpbin.${INSTANCE_IP}.nip.io" "http://${INSTANCE_IP}:${CLUSTER_NAME}80/get" -s -o /dev/null -w "%{http_code}")
-        if [ "${http_code}" -ne "200" ]; then return 1; fi
-    }
-    loop_it test 30 2
-    status=${loop_it_result}
-    [ "$status" -eq 0 ]
-}
-
-
-@test "Groups. Test auth (no authorized) httpbin secured ingress demo project (cloud)" {
-    info
-    if [ "${INSTANCE_IP}" == "localhost" ]; then skip "This test was designed to be run on cloud instances"; fi
-    test(){
-        http_code=$(curl -u angel:angel "http://httpbin.${INSTANCE_IP}.nip.io:${CLUSTER_NAME}80/get" -s -o /dev/null -w "%{http_code}")
-        if [ "${http_code}" -ne "401" ]; then return 1; fi
-    }
-    loop_it test 30 2
-    status=${loop_it_result}
-    [ "$status" -eq 0 ]
-}
-
-@test "Groups. Test auth (no authorized) httpbin secured ingress demo project (local)" {
-    info
-    if [ "${INSTANCE_IP}" != "localhost" ]; then skip; fi
-    test(){
-        http_code=$(curl -u angel:angel -H "Host: httpbin.${INSTANCE_IP}.nip.io" "http://${INSTANCE_IP}:${CLUSTER_NAME}80/get" -s -o /dev/null -w "%{http_code}")
+        http_code=$(curl -u angel:angel -H "Host: ${INSTANCE_IP//./-}.nip.io" "http://${INSTANCE_IP}:${CLUSTER_NAME}80/get" -s -o /dev/null -w "%{http_code}")
         if [ "${http_code}" -ne "401" ]; then return 1; fi
     }
     loop_it test 30 2
