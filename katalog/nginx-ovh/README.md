@@ -5,7 +5,7 @@ a Kubernetes native manner. This package deploys Ingress Controller for OVH Kube
 
 ## Requirements
 
-- Kubernetes >= `1.16.0`
+- Kubernetes >= `1.17.0`
 - Kustomize >= `v3.3.0`
 
 ## Image repository and tag
