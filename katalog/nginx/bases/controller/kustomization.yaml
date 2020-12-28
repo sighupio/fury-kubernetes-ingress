@@ -8,9 +8,12 @@ kind: Kustomization
 
 namespace: ingress-nginx
 
+transformers:
+  - global-labels.yaml
+
 images:
   - name: k8s.gcr.io/ingress-nginx/controller
-    newTag: v0.35.0
+    newTag: v0.42.0
 
 resources:
   - deployment.yml
