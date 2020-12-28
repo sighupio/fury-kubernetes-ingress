@@ -6,7 +6,7 @@ one `internal` to serve internal traffic.
 
 ## Requirements
 
-- Kubernetes >= `1.14.0`
+- Kubernetes >= `1.17.0`
 - Kustomize >= `v3`
 
 ## Image repository and tag
