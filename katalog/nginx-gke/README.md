@@ -9,7 +9,7 @@ Ingress NGINX is an Ingress Controller for [NGINX](https://nginx.org) webserver 
 
 ## Image repository and tag
 
-* Ingress NGINX GKE image: `k8s.gcr.io/ingress-nginx/controller:v0.42.0`
+* Ingress NGINX GKE image: `k8s.gcr.io/ingress-nginx/controller:v0.43.0`
 * Ingress NGINX CKE repo: [https://github.com/kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
 
 
