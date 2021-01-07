@@ -29,7 +29,7 @@ spec:
         fsGroup: 2000
       serviceAccountName: nginx-ldap-auth
       containers:
-      - image: docker.io/tpimenta/nginx-ldap-auth:v1.0.6
+      - image: docker.io/tpimenta/nginx-ldap-auth
         name: nginx-ldap-auth
         securityContext:
           allowPrivilegeEscalation: false

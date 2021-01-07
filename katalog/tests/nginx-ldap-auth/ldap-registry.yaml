@@ -63,7 +63,7 @@ spec:
         persistentVolumeClaim:
           claimName: registry
       containers:
-      - image: registry:2.7.1
+      - image: reg.sighup.io/sighupio/fury/registry:2.7.1
         name: registry
         ports:
         - containerPort: 5000
