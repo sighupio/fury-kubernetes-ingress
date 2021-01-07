@@ -13,6 +13,7 @@ transformers:
 
 images:
   - name: k8s.gcr.io/ingress-nginx/controller
+    newName: reg.sighup.io/sighupio/fury/ingress-nginx/controller
     newTag: v0.43.0
 
 resources:

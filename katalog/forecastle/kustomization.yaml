@@ -14,6 +14,7 @@ resources:
 
 images:
   - name: stakater/forecastle
+    newName: reg.sighup.io/sighupio/fury/stakater/forecastle
     newTag: v1.0.61
 
 configMapGenerator:

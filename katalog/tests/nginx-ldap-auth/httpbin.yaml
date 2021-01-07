@@ -47,7 +47,7 @@ spec:
         app: httpbin
     spec:
       containers:
-      - image: kennethreitz/httpbin
+      - image: reg.sighup.io/sighupio/fury/kennethreitz/httpbin:latest
         name: httpbin
         ports:
         - containerPort: 80
