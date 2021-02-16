@@ -20,3 +20,4 @@ commonLabels:
 transformers:
   - version-label.yaml
   - retrocompatible-version-label.yaml
+  - version-label-sm.yaml
