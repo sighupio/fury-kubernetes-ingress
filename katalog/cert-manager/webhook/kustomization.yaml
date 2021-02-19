@@ -9,10 +9,6 @@ images:
     newName: reg.sighup.io/sighupio/fury/jetstack/cert-manager-webhook
     newTag: v1.1.0
 
-commonLabels:
-  app: webhook
-  app.kubernetes.io/name: webhook
-
 resources:
   - deploy.yml
   - rbac.yml

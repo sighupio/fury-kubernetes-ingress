@@ -13,10 +13,6 @@ images:
     newName: reg.sighup.io/sighupio/fury/jetstack/cert-manager-cainjector
     newTag: v1.1.0
 
-commonLabels:
-  app: cainjector
-  app.kubernetes.io/name: cainjector
-
 resources:
   - deploy.yml
   - rbac.yml

@@ -13,11 +13,4 @@ resources:
   - dashboards
 
 commonLabels:
-  app.kubernetes.io/component: cert-manager
-  app.kubernetes.io/part-of: fury-kubernetes-ingress
-  app.kubernetes.io/managed-by: kustomize
-
-transformers:
-  - version-label.yaml
-  - retrocompatible-version-label.yaml
-  - version-label-sm.yaml
+  app: cert-manager
