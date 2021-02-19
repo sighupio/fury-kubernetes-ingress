@@ -9,7 +9,6 @@ metadata:
   name: cert-manager-webhook
   labels:
     app: webhook
-    app.kubernetes.io/name: webhook
   annotations:
     cert-manager.io/inject-ca-from-secret: "cert-manager/cert-manager-webhook-tls"
 webhooks:

@@ -8,9 +8,6 @@ kind: Kustomization
 
 namespace: ingress-nginx
 
-transformers:
-  - global-labels.yaml
-
 images:
   - name: k8s.gcr.io/ingress-nginx/controller
     newName: reg.sighup.io/sighupio/fury/ingress-nginx/controller

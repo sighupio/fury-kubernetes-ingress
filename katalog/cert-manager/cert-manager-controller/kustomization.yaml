@@ -13,10 +13,6 @@ images:
     newName: reg.sighup.io/sighupio/fury/jetstack/cert-manager-controller
     newTag: v1.1.0
 
-commonLabels:
-  app: cert-manager
-  app.kubernetes.io/name: cert-manager
-
 resources:
   - crd.yml
   - deploy.yml
