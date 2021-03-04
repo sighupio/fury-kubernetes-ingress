@@ -8,10 +8,8 @@ kind: Kustomization
 
 namespace: ingress-nginx
 
-bases:
-  - dashboards
-
 resources:
+  - dashboards
   - ns.yml
   - rbac.yml
   - sm.yml
