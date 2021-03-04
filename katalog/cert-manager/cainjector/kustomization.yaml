@@ -10,7 +10,7 @@ namespace: cert-manager
 
 images:
   - name: quay.io/jetstack/cert-manager-cainjector
-    newName: reg.sighup.io/sighupio/fury/jetstack/cert-manager-cainjector
+    newName: registry.sighup.io/fury/jetstack/cert-manager-cainjector
     newTag: v1.1.0
 
 resources:
