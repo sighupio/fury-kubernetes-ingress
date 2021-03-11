@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pomerium
+
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: pomerium
+          image: pomerium/pomerium:v0.13.2
+          ports:
+            - containerPort: 443
+              name: https
+              protocol: TCP
+          args:
+            - -config
+            - /etc/pomerium/policy.yml
+          envFrom:
+            - secretRef:
+                name: pomerium-env
+            - configMapRef:
+                name: pomerium
+          env:
+            - name: SERVICES
+              value: all
+            - name: INSECURE_SERVER
+              value: "TRUE"
+            - name: JWT_CLAIMS_HEADERS
+              value: "email"
+            - name: LOG_LEVEL
+              value: "debug"
+            - name: PROXY_LOG_LEVEL
+              value: "debug"
+            - name: POMERIUM_DEBUG
+              value: "true"
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /ping
+              port: 443
+              scheme: HTTP
+            initialDelaySeconds: 10
+            timeoutSeconds: 1
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: 443
+              scheme: HTTP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          volumeMounts:
+            - mountPath: /etc/pomerium/
+              name: pomerium-policy
+      volumes:
+        - configMap:
+            defaultMode: 420
+            name: pomerium-policy
+          name: pomerium-policy

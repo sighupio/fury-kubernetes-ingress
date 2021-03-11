@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: pomerium
+  annotations:
+    kubernetes.io/ingress.class: "internal"
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/appName: "Pomerium"
+    forecastle.stakater.com/icon: "https://pbs.twimg.com/profile_images/1161448498849390592/fJZaKEGR.png"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
+    kubernetes.io/tls-acme: "true"
+spec:
+  rules:
+    - host: $(AUTHENTICATE_SERVICE_HOST)
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: pomerium
+              servicePort: 80
+  tls:
+    - hosts:
+        - $(AUTHENTICATE_SERVICE_HOST)
+      secretName: pomerium-tls
