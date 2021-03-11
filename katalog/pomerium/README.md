@@ -1,6 +1,6 @@
 # Pomerium Setup
 
-This document is intended to give a brief overview on how Pomerium can be implemented, for further details, please look at the official doc : https://www.pomerium.io/docs/
+This document is intended to give a brief overview on how Pomerium can be implemented, for further details, please look at the official doc : <https://www.pomerium.io/docs/>
 
 ## Setup
 
@@ -23,20 +23,20 @@ Once do that, you will need to use ovverride the configuration example ([policy]
 
 ```yaml
 configMapGenerator:
-    - name: pomerium-policy
-      behavior: replace
-      files:
-          - policy.yml=config/pomerium-policy.yml
-    - name: pomerium
-      behavior: replace
-      envs:
-          - config/pomerium-config.env
+  - name: pomerium-policy
+    behavior: replace
+    files:
+      - policy.yml=config/pomerium-policy.yml
+  - name: pomerium
+    behavior: replace
+    envs:
+      - config/pomerium-config.env
 
 secretGenerator:
-    - name: pomerium-env
-      behavior: replace
-      envs:
-          - secrets/pomerium.env
+  - name: pomerium-env
+    behavior: replace
+    envs:
+      - secrets/pomerium.env
 ```
 
 just copy the examples in the module and override them accordingly with your settings.
@@ -53,30 +53,30 @@ The only missing step is to add annotations to the ingresses you've added previo
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-    annotations:
-        forecastle.stakater.com/expose: "true"
-        forecastle.stakater.com/appName: "Prometheus"
-        forecastle.stakater.com/icon: "https://github.com/stakater/ForecastleIcons/raw/master/prometheus.png"
-        kubernetes.io/ingress.class: "internal"
-        kubernetes.io/tls-acme: "true"
-        # authentication annotations
-        nginx.ingress.kubernetes.io/auth-url: "https://pomerium.example.com/verify?uri=$scheme://$host$request_uri"
-        nginx.ingress.kubernetes.io/auth-signin: "https://pomerium.example.com/?uri=$scheme://$host$request_uri"
-    name: prometheus
-    namespace: monitoring
+  annotations:
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/appName: "Prometheus"
+    forecastle.stakater.com/icon: "https://github.com/stakater/ForecastleIcons/raw/master/prometheus.png"
+    kubernetes.io/ingress.class: "internal"
+    kubernetes.io/tls-acme: "true"
+    # authentication annotations
+    nginx.ingress.kubernetes.io/auth-url: "https://pomerium.example.com/verify?uri=$scheme://$host$request_uri"
+    nginx.ingress.kubernetes.io/auth-signin: "https://pomerium.example.com/?uri=$scheme://$host$request_uri"
+  name: prometheus
+  namespace: monitoring
 spec:
-    rules:
-        - host: prometheus.example.com
-          http:
-              paths:
-                  - path: /
-                    backend:
-                        serviceName: prometheus-k8s
-                        servicePort: web
-    tls:
-        - hosts:
-              - prometheus.example.com
-          secretName: prometheus-tls
+  rules:
+    - host: prometheus.example.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: prometheus-k8s
+              servicePort: web
+  tls:
+    - hosts:
+        - prometheus.example.com
+      secretName: prometheus-tls
 ```
 
 Now if you'll try to reach the `prometheus.example.com` you'll be forwarded to the dex login page accordingly with the rules set in your policy. Enjoy!
