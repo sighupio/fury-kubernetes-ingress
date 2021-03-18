@@ -15,8 +15,8 @@ spec:
         - name: pomerium
           image: pomerium/pomerium:v0.13.2
           ports:
-            - containerPort: 443
-              name: https
+            - containerPort: 8080
+              name: http
               protocol: TCP
           args:
             - -config
@@ -43,14 +43,14 @@ spec:
             failureThreshold: 3
             httpGet:
               path: /ping
-              port: 443
+              port: 8080
               scheme: HTTP
             initialDelaySeconds: 10
             timeoutSeconds: 1
           readinessProbe:
             httpGet:
               path: /ping
-              port: 443
+              port: 8080
               scheme: HTTP
           resources:
             limits:
