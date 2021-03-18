@@ -1,4 +1,8 @@
-# Pomerium Setup
+# Pomerium
+
+Pomerium is an identity-aware proxy that enables secure access to internal applications. Pomerium provides a standardized interface to add access control to applications regardless of whether the application itself has authorization or authentication baked-in
+
+## Pomerium Setup
 
 This document is intended to give a brief overview on how Pomerium can be implemented, for further details, please look at the official doc : <https://www.pomerium.io/docs/>
 
