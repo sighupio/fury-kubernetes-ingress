@@ -18,7 +18,9 @@ provides delivery services for Kubernetes applications. Version: **0.42.0**
 - [dual-nginx](katalog/dual-nginx): It deploys two identical NGINX ingress controllers
 but with two different scopes: public/external and private/internal. Version: **0.42.0**
 - [nginx-ldap-auth](katalog/nginx-ldap-auth): Use this to provide an ingress authentication over LDAP for
+Kubernetes. Version: **1.0.6**
 - [pomerium](katalog/pomerium): Use this to provide an ingress authentication over dex oidc auth. Version **0.13.2**
+  
 
 ## Compatibility
 
