@@ -49,8 +49,7 @@ Just copy the examples in the module and override them according to your setting
 
 ## Ingresses
 
-Once do that, Pomerium and Dex and correctly configured.
-The only missing step is to add annotations to the ingresses you've added previously in the policy yaml file:
+Once Pomerium and Dex are correctly configured, the last step is to add annotations to the ingresses you've added previously in the policy yaml file:
 
 ```yaml
 ---
