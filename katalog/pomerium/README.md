@@ -45,7 +45,7 @@ secretGenerator:
 
 Just copy the examples in the module and override them according to your settings.
 
-**⚠ WARNING: in the policy file, you'll need to setup many policy as many ingress you want to protect under the pomerium authorization service.**
+**⚠ WARNING: in the policy file, you'll need to set up a policy for each ingress you want to protect with Pomerium authorization service.**
 
 ## Ingresses
 
