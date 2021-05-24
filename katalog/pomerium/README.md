@@ -43,7 +43,7 @@ secretGenerator:
       - secrets/pomerium.env
 ```
 
-just copy the examples in the module and override them accordingly with your settings.
+Just copy the examples in the module and override them according to your settings.
 
 **⚠ WARNING: in the policy file, you'll need to setup many policy as many ingress you want to protect under the pomerium authorization service.**
 
