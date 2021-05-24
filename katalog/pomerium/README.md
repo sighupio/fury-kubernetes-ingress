@@ -21,7 +21,7 @@ In order to do so, you will need to edit your Dex configuration, adding a static
        - "https://pomerium.example.com/oauth2/callback"
 ```
 
-setting the redirectURIs, accordingly with the host you used for the pomerium ingress.
+Configure the `redirectURIs` section accordingly to the hosts used for the pomerium ingress.
 
 Once do that, you will need to use ovverride the configuration example ([policy](./config/policy.example.yaml) and environment variables as [configmap](./config/config.example.env) and [secret](secrets/pomerium.example.env)) like in the example above:
 
