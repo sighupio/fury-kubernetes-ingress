@@ -23,7 +23,7 @@ In order to do so, you will need to edit your Dex configuration, adding a static
 
 Configure the `redirectURIs` section accordingly to the hosts used for the pomerium ingress.
 
-Once do that, you will need to use ovverride the configuration example ([policy](./config/policy.example.yaml) and environment variables as [configmap](./config/config.example.env) and [secret](secrets/pomerium.example.env)) like in the example above:
+Once dex is configured correctly, you will need to ovverride the configuration example ([policy](./config/policy.example.yaml) and environment variables via a [configmap](./config/config.example.env) and [secret](secrets/pomerium.example.env)) like in the example below:
 
 ```yaml
 configMapGenerator:
