@@ -8,7 +8,7 @@ This document is intended to give a brief overview on how Pomerium can be implem
 
 ## Setup
 
-the base kustomization component present [here](./kustomization.yaml) allows to quickly integrate this service with an existing Dex service that very likely is connected to an LDAP.
+The base kustomization file present [here](./kustomization.yaml) allows to quickly integrate this service with an existing Dex service, that could, for example, be connected to LDAP.
 
 In order to do so, you will need to edit your Dex configuration, adding a static client to be used by Pomerium, like in the example below:
 
