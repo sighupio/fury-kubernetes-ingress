@@ -6,7 +6,7 @@ authentication over LDAP for Kubernetes.
 
 ## Requirements
 
-- Kubernetes >= `1.14.0`
+- Kubernetes >= `1.18.0`
 - Kustomize >= `v3`
 
 
