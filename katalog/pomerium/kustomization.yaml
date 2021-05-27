@@ -50,5 +50,5 @@ vars:
 
 images:
   - name: pomerium/pomerium
-    newName: pomerium/pomerium
-    newTag: v0.13.2
+    newName: registry.sighup.io/fury/pomerium/pomerium
+    newTag: v0.14.4
