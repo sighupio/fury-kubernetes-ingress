@@ -17,3 +17,4 @@ resources:
   - deployment.yml
   - cm.yml
   - service.yml
+  - ingressClass.yml

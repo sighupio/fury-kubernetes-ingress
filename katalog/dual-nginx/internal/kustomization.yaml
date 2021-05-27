@@ -5,10 +5,11 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+transformers:
+- ./patch/suffix.yml
+
 bases:
   - ../../nginx/bases/controller
-
-nameSuffix: "-internal"
 
 commonLabels:
   app: ingress
@@ -33,3 +34,14 @@ patchesJson6902:
       kind: ConfigMap
       name: nginx-configuration
     path: patch/cm.yml
+
+patches:
+- target:
+    kind: IngressClass
+    name: nginx
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: internal
+    - op: remove
+      path: /metadata/annotations

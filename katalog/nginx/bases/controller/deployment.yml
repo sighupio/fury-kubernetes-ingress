@@ -12,10 +12,6 @@ spec:
     matchLabels:
       app: ingress-nginx
   revisionHistoryLimit: 10
-  strategy:
-    rollingUpdate:
-      maxUnavailable: 1
-    type: RollingUpdate
   minReadySeconds: 0
   template:
     metadata:
