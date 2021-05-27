@@ -2,12 +2,12 @@
 # Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
-# namespace: cert-manager
+namespace: cert-manager
 
 images:
   - name: quay.io/jetstack/cert-manager-webhook
     newName: registry.sighup.io/fury/jetstack/cert-manager-webhook
-    newTag: v1.1.0
+    newTag: v1.3.1
 
 resources:
   - deploy.yml
