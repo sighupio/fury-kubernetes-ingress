@@ -3,12 +3,12 @@
 to show all the applications running on Kubernetes exposed through an Ingress.
 
 ## Requirements
-- Kubernetes >= `1.16.0`
+- Kubernetes >= `1.18.0`
 - Kustomize >= `v3`
 
 
 ## Image repository and tag
-- Forecastle image: `docker.io/stakater/forecastle:v1.0.61`
+- Forecastle image: `docker.io/stakater/forecastle:v1.0.64`
 - Forecastl repo: [https://github.com/stakater/Forecastle](https://github.com/stakater/Forecastle)
 
 ## Configuration
