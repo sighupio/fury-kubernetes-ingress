@@ -23,7 +23,7 @@ spec:
         imagePullPolicy: Always
         args:
         - --v=2
-        - --secure-port=6443
+        - --secure-port=10250
         - --dynamic-serving-ca-secret-namespace=$(POD_NAMESPACE)
         - --dynamic-serving-ca-secret-name=cert-manager-webhook-tls
         - --dynamic-serving-dns-names=cert-manager-webhook,cert-manager-webhook.$(POD_NAMESPACE),cert-manager-webhook.$(POD_NAMESPACE).svc
@@ -60,7 +60,7 @@ spec:
               fieldPath: metadata.namespace
         ports:
         - name: https
-          containerPort: 6443
+          containerPort: 10250
         resources:
           requests:
             cpu: 50m
