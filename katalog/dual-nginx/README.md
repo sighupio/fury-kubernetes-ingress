@@ -11,7 +11,7 @@ one `internal` to serve internal traffic.
 
 ## Image repository and tag
 
-* Ingress NGINX image: `k8s.gcr.io/ingress-nginx/controller:v0.46.0`
+* Ingress NGINX image: `k8s.gcr.io/ingress-nginx/controller:v0.48.1`
 * Ingress NGINX repo: [https://github.com/kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
 
 ## Configuration
