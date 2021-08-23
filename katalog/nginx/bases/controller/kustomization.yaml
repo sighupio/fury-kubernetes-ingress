@@ -11,7 +11,7 @@ namespace: ingress-nginx
 images:
   - name: k8s.gcr.io/ingress-nginx/controller
     newName: registry.sighup.io/fury/ingress-nginx/controller
-    newTag: v0.48.1
+    newTag: v0.49.0
 
 resources:
   - deployment.yml
