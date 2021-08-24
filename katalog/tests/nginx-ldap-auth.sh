@@ -29,6 +29,16 @@ load ./helper
     [ "$status" -eq 0 ]
 }
 
+@test "Check Ingress controller is ready" {
+    info
+    test() {
+        kubectl get pods -n ingress-nginx -l app=ingress,type=external -o json | jq '.items[].status.containerStatuses[].ready' | uniq | grep -q true
+    }
+    loop_it test 60 10
+    status=${loop_it_result}
+    [ "$status" -eq 0 ]
+}
+
 @test "Setup httpbin demo project" {
     info
     setup_demo(){
