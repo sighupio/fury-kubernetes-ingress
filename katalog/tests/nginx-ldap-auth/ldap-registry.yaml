@@ -15,8 +15,11 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: registry
-          servicePort: 5000
+          service:
+            name: registry
+            port:
+              number: 5000
+        pathType: ImplementationSpecific
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
