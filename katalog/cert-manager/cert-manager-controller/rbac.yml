@@ -300,6 +300,29 @@ rules:
   - list
   - watch
 ---
+# Permission to:
+# - Update and sign CertificatSigningeRequests referencing cert-manager.io Issuers and ClusterIssuers
+# - Perform SubjectAccessReviews to test whether users are able to reference Namespaced Issuers
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cert-manager-controller-certificatesigningrequests
+  labels: {}
+rules:
+  - apiGroups: ["certificates.k8s.io"]
+    resources: ["certificatesigningrequests"]
+    verbs: ["get", "list", "watch", "update"]
+  - apiGroups: ["certificates.k8s.io"]
+    resources: ["certificatesigningrequests/status"]
+    verbs: ["update"]
+  - apiGroups: ["certificates.k8s.io"]
+    resources: ["signers"]
+    resourceNames: ["issuers.cert-manager.io/*", "clusterissuers.cert-manager.io/*"]
+    verbs: ["sign"]
+  - apiGroups: ["authorization.k8s.io"]
+    resources: ["subjectaccessreviews"]
+    verbs: ["create"]
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -340,6 +363,12 @@ rules:
   - ingresses/finalizers
   verbs:
   - update
+- apiGroups: ["networking.x-k8s.io"]
+  resources: ["gateways", "httproutes"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["networking.x-k8s.io"]
+  resources: ["gateways/finalizers", "httproutes/finalizers"]
+  verbs: ["update"]
 - apiGroups:
   - ""
   resources:
@@ -493,6 +522,19 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
+  name: cert-manager-controller-certificatesigningrequests
+  labels: {}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cert-manager-controller-certificatesigningrequests
+subjects:
+- name: cert-manager
+  kind: ServiceAccount
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
   name: cert-manager-controller-ingress-shim
   labels: {}
 roleRef:
@@ -522,20 +564,16 @@ metadata:
   name: cert-manager:leaderelection
   labels: {}
 rules:
-- apiGroups:
-  - ""
+- apiGroups: ["coordination.k8s.io", ""]
+  resources: ["leases", "configmaps"]
   resourceNames:
   - cert-manager-controller
-  resources:
-  - configmaps
   verbs:
   - get
   - update
   - patch
-- apiGroups:
-  - ""
-  resources:
-  - configmaps
+- apiGroups: ["coordination.k8s.io", ""]
+  resources: ["leases", "configmaps"]
   verbs:
   - create
 ---
