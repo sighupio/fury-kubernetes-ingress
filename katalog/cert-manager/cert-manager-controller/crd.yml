@@ -22,8 +22,11 @@ spec:
           name: cert-manager-webhook
           namespace: cert-manager
           path: /convert
+      # v1beta1 is not to be supported but is maintained to be
+      # compatible with upstream
       conversionReviewVersions:
       - v1
+      - v1beta1
   group: cert-manager.io
   names:
     categories:
@@ -958,8 +961,11 @@ spec:
           name: cert-manager-webhook
           namespace: cert-manager
           path: /convert
+      # v1beta1 is not to be supported but is maintained to be
+      # compatible with upstream
       conversionReviewVersions:
       - v1
+      - v1beta1
   group: cert-manager.io
   names:
     categories:
@@ -2818,8 +2824,11 @@ spec:
           name: cert-manager-webhook
           namespace: cert-manager
           path: /convert
+      # v1beta1 is not to be supported but is maintained to be
+      # compatible with upstream
       conversionReviewVersions:
       - v1
+      - v1beta1
   group: acme.cert-manager.io
   names:
     categories:
@@ -10667,8 +10676,11 @@ spec:
           name: cert-manager-webhook
           namespace: cert-manager
           path: /convert
+      # v1beta1 is not to be supported but is maintained to be
+      # compatible with upstream
       conversionReviewVersions:
       - v1
+      - v1beta1
   group: cert-manager.io
   names:
     categories:
@@ -21023,8 +21035,11 @@ spec:
           name: cert-manager-webhook
           namespace: cert-manager
           path: /convert
+      # v1beta1 is not to be supported but is maintained to be
+      # compatible with upstream
       conversionReviewVersions:
       - v1
+      - v1beta1
   group: cert-manager.io
   names:
     categories:
@@ -31375,8 +31390,11 @@ spec:
           name: cert-manager-webhook
           namespace: cert-manager
           path: /convert
+      # v1beta1 is not to be supported but is maintained to be
+      # compatible with upstream
       conversionReviewVersions:
       - v1
+      - v1beta1
   group: acme.cert-manager.io
   names:
     categories:
