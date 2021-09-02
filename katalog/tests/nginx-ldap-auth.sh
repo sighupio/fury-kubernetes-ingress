@@ -10,8 +10,8 @@ load ./helper
 @test "Ensure ingress controller" {
     info
     ensure_ingress(){
-        kubectl apply -f https://raw.githubusercontent.com/sighupio/fury-kubernetes-monitoring/sync_kube_prom/katalog/prometheus-operator/crd-servicemonitor.yml
-        kubectl apply -f https://raw.githubusercontent.com/sighupio/fury-kubernetes-monitoring/sync_kube_prom/katalog/prometheus-operator/crd-rule.yml
+        kubectl apply -f https://raw.githubusercontent.com/sighupio/fury-kubernetes-monitoring/v1.13.0-rc/katalog/prometheus-operator/crd-servicemonitor.yml
+        kubectl apply -f https://raw.githubusercontent.com/sighupio/fury-kubernetes-monitoring/v1.13.0-rc/katalog/prometheus-operator/crd-rule.yml
         apply katalog/dual-nginx
     }
     run ensure_ingress
