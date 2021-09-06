@@ -11,7 +11,7 @@ it manages NGINX in a Kubernetes native manner. This package deploys Ingress Con
 
 ## Image repository and tag
 
-* Ingress NGINX image: `k8s.gcr.io/ingress-nginx/controller:v0.48.1`
+* Ingress NGINX image: `k8s.gcr.io/ingress-nginx/controller:v1.0.0`
 * Ingress NGINX repo: [https://github.com/kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
 
 ## Configuration

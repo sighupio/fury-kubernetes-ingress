@@ -10,7 +10,7 @@ a Kubernetes native manner. This package deploys Ingress Controller for OVH Kube
 
 ## Image repository and tag
 
-* Ingress NGINX OVH image: `k8s.gcr.io/ingress-nginx/controller:v0.48.1`
+* Ingress NGINX OVH image: `k8s.gcr.io/ingress-nginx/controller:v1.0.0`
 * Ingress NGINX repo: [https://github.com/kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
 
 

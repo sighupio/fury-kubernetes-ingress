@@ -98,21 +98,17 @@ metadata:
   name: cert-manager-cainjector:leaderelection
   labels: {}
 rules:
-- apiGroups:
-  - ""
+- apiGroups: ["coordination.k8s.io", ""]
+  resources: ["leases", "configmaps"]
   resourceNames:
   - cert-manager-cainjector-leader-election
   - cert-manager-cainjector-leader-election-core
-  resources:
-  - configmaps
   verbs:
   - get
   - update
   - patch
-- apiGroups:
-  - ""
-  resources:
-  - configmaps
+- apiGroups: ["coordination.k8s.io", ""]
+  resources: ["leases", "configmaps"]
   verbs:
   - create
 ---

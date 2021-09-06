@@ -10,8 +10,8 @@ load ./helper
 @test "Ensure ingress controller" {
     info
     ensure_ingress(){
-        kubectl apply -f https://raw.githubusercontent.com/sighupio/fury-kubernetes-monitoring/v1.3.0/katalog/prometheus-operator/crd-servicemonitor.yml
-        kubectl apply -f https://raw.githubusercontent.com/sighupio/fury-kubernetes-monitoring/v1.3.0/katalog/prometheus-operator/crd-rule.yml
+        kubectl apply -f https://raw.githubusercontent.com/sighupio/fury-kubernetes-monitoring/v1.13.0-rc/katalog/prometheus-operator/crd-servicemonitor.yml
+        kubectl apply -f https://raw.githubusercontent.com/sighupio/fury-kubernetes-monitoring/v1.13.0-rc/katalog/prometheus-operator/crd-rule.yml
         apply katalog/dual-nginx
     }
     run ensure_ingress
@@ -25,6 +25,16 @@ load ./helper
         if [ "${status}" != "Running" ]; then return 1; fi
     }
     loop_it test 30 2
+    status=${loop_it_result}
+    [ "$status" -eq 0 ]
+}
+
+@test "Check Ingress controller is ready" {
+    info
+    test() {
+        kubectl get pods -n ingress-nginx -l app=ingress,type=external -o json | jq '.items[].status.containerStatuses[].ready' | uniq | grep -q true
+    }
+    loop_it test 60 10
     status=${loop_it_result}
     [ "$status" -eq 0 ]
 }

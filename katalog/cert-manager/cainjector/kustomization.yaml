@@ -11,7 +11,7 @@ namespace: cert-manager
 images:
   - name: quay.io/jetstack/cert-manager-cainjector
     newName: registry.sighup.io/fury/jetstack/cert-manager-cainjector
-    newTag: v1.4.1
+    newTag: v1.5.3
 
 resources:
   - deploy.yml
