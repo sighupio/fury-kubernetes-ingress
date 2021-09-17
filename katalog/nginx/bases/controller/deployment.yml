@@ -37,6 +37,8 @@ spec:
             - --annotations-prefix=nginx.ingress.kubernetes.io
             - --http-port=8080
             - --https-port=8443
+            - --ingress-class=nginx
+            - --election-id=ingress-controller-leader
           securityContext:
             capabilities:
               drop:

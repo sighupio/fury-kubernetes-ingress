@@ -10,6 +10,10 @@
   path: "/spec/template/spec/containers/0/args/2"
   value: "--publish-service=$(POD_NAMESPACE)/ingress-nginx-external"
 
-- op: "add"
-  path: "/spec/template/spec/containers/0/args/-"
+- op: "replace"
+  path: "/spec/template/spec/containers/0/args/6"
   value: "--ingress-class=external"
+
+- op: "replace"
+  path: "/spec/template/spec/containers/0/args/7"
+  value: "--election-id=ingress-controller-leader-external"
