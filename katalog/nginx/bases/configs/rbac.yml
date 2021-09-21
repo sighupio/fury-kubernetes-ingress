@@ -93,7 +93,6 @@ rules:
       - get
       - list
       - watch
-      - update
   - apiGroups:
       - ""
     resources:
@@ -136,7 +135,8 @@ rules:
       # Here: "<ingress-controller-leader>-<nginx>"
       # This has to be adapted if you change either parameter
       # when launching the nginx-ingress-controller.
-      - "ingress-controller-leader-nginx"
+      # TODO the logic was left to be managed by admins, the above is no more valid see https://github.com/kubernetes/ingress-nginx/blame/5c6a28464bad138ff84f1d9a3414963d4b7c236f/internal/ingress/controller/nginx.go#L259
+      - "ingress-controller-leader"
     verbs:
       - get
       - update
