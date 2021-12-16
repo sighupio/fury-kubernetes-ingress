@@ -468,7 +468,7 @@ steps:
     commands:
       - export CLUSTER_NAME=123
       - export INSTANCE_IP=$(cat /shared/machine/ip)
-      - export KUBECONFIG=/shared/kube/kubeconfig-119
+      - export KUBECONFIG=/shared/kube/kubeconfig-123
       - bats -t katalog/tests/tests.bats
       - bats -t katalog/tests/nginx-ldap-auth.sh
 
