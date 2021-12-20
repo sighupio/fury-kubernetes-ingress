@@ -9,12 +9,12 @@ Encrypt](https://letsencrypt.org/) Certificate Authority.
 
 ## Requirements
 
-- Kubernetes >= `1.18.0`
+- Kubernetes >= `1.20.0`
 - Kustomize >= `v3`
 
 ## Image repository and tag
 
-- Cert Manager image: `quay.io/jetstack/cert-manager-controller:v1.5.3`
+- Cert Manager image: `quay.io/jetstack/cert-manager-controller:v1.6.1`
 - Cert Manager repo: [https://github.com/jetstack/cert-manager](https://github.com/jetstack/cert-manager)
 - Cert Manager documentation: [https://cert-manager.io/docs/](https://cert-manager.io/docs/)
 

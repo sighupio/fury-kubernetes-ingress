@@ -9,17 +9,17 @@ The following packages are included in Fury Kubernetes Ingress katalog:
 
 - [cert-manager](katalog/cert-manager): cert-manager is a Kubernetes
 add-on to automate the management and issuance of TLS certificates
-from various issuing sources. Version: **v1.5.3**
+from various issuing sources. Version: **v1.6.1**
 - [forecastle](katalog/forecastle): Forecastle gives you access to a control
 panel where you can see your running applications and access them
-on Kubernetes. Version: **1.0.66**.
+on Kubernetes. Version: **1.0.70**.
 - [nginx](katalog/nginx): The NGINX Ingress Controller for Kubernetes
-provides delivery services for Kubernetes applications. Version: **1.0.0**
+provides delivery services for Kubernetes applications. Version: **1.1.0**
 - [dual-nginx](katalog/dual-nginx): It deploys two identical NGINX ingress controllers
-but with two different scopes: public/external and private/internal.  Version: **1.0.0**
+but with two different scopes: public/external and private/internal.  Version: **1.1.0**
 - [nginx-ldap-auth](katalog/nginx-ldap-auth): Use this to provide an ingress authentication over LDAP for
 Kubernetes. Version: **1.0.6**
-- [pomerium](katalog/pomerium): Use this to provide ingress authentication over dex oidc auth. Version **0.15.0**
+- [pomerium](katalog/pomerium): Use this to provide ingress authentication over dex oidc auth. Version **0.15.8**
 
 
 ## Compatibility
@@ -42,6 +42,7 @@ Kubernetes. Version: **1.0.6**
 | v1.10.0                             |                    |                    |                    |                    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :warning:          |           |
 | v1.11.0                             |                    |                    |                    |                    |                    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :warning: |
 
+
 - :white_check_mark: Compatible
 - :warning: Has issues
 - :x: Incompatible
@@ -55,6 +56,8 @@ Move to v1.9.1 instead. [Follow the migration path.](docs/releases/v1.9.1.md)
 - :warning: : module version: `v1.10.0` and Kubernetes Version: `1.21.x`. It works as expected. Marked as a warning
 because it is not officially supported by [SIGHUP](https://sighup.io).
 - :warning: : module version: `v1.11.0` and Kubernetes Version: `1.22.x`. It works as expected. Marked as a warning
+because it is not officially supported by [SIGHUP](https://sighup.io).
+- :warning: : module version: `v1.12.0` and Kubernetes Version: `1.23.x`. It works as expected. Marked as a warning
 because it is not officially supported by [SIGHUP](https://sighup.io).
 
 ## LICENSE

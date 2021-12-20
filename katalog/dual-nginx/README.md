@@ -6,12 +6,12 @@ one `internal` to serve internal traffic.
 
 ## Requirements
 
-- Kubernetes >= `1.18.0`
+- Kubernetes >= `1.20.0`
 - Kustomize >= `v3`
 
 ## Image repository and tag
 
-* Ingress NGINX image: `k8s.gcr.io/ingress-nginx/controller:1.0.0`
+* Ingress NGINX image: `k8s.gcr.io/ingress-nginx/controller:1.1.0`
 * Ingress NGINX repo: [https://github.com/kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
 
 ## Configuration
