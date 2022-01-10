@@ -5,12 +5,12 @@ a Kubernetes native manner. This package deploys Ingress Controller for OVH Kube
 
 ## Requirements
 
-- Kubernetes >= `1.17.0`
+- Kubernetes >= `1.20.0`
 - Kustomize >= `v3.3.0`
 
 ## Image repository and tag
 
-* Ingress NGINX OVH image: `k8s.gcr.io/ingress-nginx/controller:v1.0.0`
+* Ingress NGINX OVH image: `k8s.gcr.io/ingress-nginx/controller:v1.1.0`
 * Ingress NGINX repo: [https://github.com/kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
 
 
