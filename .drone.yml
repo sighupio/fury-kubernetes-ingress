@@ -126,7 +126,6 @@ trigger:
   ref:
     include:
       - refs/heads/master
-      - refs/heads/update_images
       - refs/tags/**
 
 steps:
@@ -226,7 +225,6 @@ trigger:
   ref:
     include:
       - refs/heads/master
-      - refs/heads/update_images
       - refs/tags/**
 
 steps:
@@ -325,7 +323,6 @@ trigger:
   ref:
     include:
       - refs/heads/master
-      - refs/heads/update_images
       - refs/tags/**
 
 steps:
@@ -424,7 +421,6 @@ trigger:
   ref:
     include:
       - refs/heads/master
-      - refs/heads/update_images
       - refs/tags/**
 
 steps:
