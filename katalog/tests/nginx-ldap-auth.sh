@@ -42,7 +42,7 @@ load ./helper
 @test "Setup httpbin demo project" {
     info
     setup_demo(){
-        kubectl create ns demo-nginx-ldap-auth --dry-run -o yaml | kubectl apply -f -
+        kubectl create ns demo-nginx-ldap-auth --dry-run=client -o yaml | kubectl apply -f -
         kubectl apply -f katalog/tests/nginx-ldap-auth/httpbin.yaml -n demo-nginx-ldap-auth
     }
     run setup_demo
@@ -64,7 +64,7 @@ load ./helper
     info
     setup_ldap(){
         kubectl create ns demo-ldap
-        kubectl create configmap ldap-ldif --from-file=sighup.io.ldif=katalog/tests/nginx-ldap-auth/sighup.io-users.ldif  -n demo-ldap --dry-run -o yaml |kubectl apply -f -
+        kubectl create configmap ldap-ldif --from-file=sighup.io.ldif=katalog/tests/nginx-ldap-auth/sighup.io-users.ldif -n demo-ldap --dry-run=client -o yaml |kubectl apply -f -
         kubectl apply -f katalog/tests/nginx-ldap-auth/ldap-server.yaml -n demo-ldap
     }
     run setup_ldap
@@ -149,7 +149,7 @@ load ./helper
 @test "Groups. Deploy example ldap instance" {
     info
     setup_ldap(){
-        kubectl create configmap ldap-ldif --from-file=sighup.io.ldif=katalog/tests/nginx-ldap-auth/sighup.io-groups.ldif  -n demo-ldap --dry-run -o yaml |kubectl apply -f -
+        kubectl create configmap ldap-ldif --from-file=sighup.io.ldif=katalog/tests/nginx-ldap-auth/sighup.io-groups.ldif -n demo-ldap --dry-run=client -o yaml |kubectl apply -f -
         kubectl rollout restart deploy/ldap-server -n demo-ldap
     }
     run setup_ldap
@@ -159,7 +159,7 @@ load ./helper
 @test "Groups. Deploy nginx-ldap-auth" {
     info
     setup_nginx_ldap_auth() {
-        kubectl create secret generic nginx-ldap-auth --from-file=config.yaml=katalog/tests/nginx-ldap-auth/nginx-ldap-auth-config-groups.yaml -n ingress-nginx --dry-run -o yaml |kubectl apply -f -
+        kubectl create secret generic nginx-ldap-auth --from-file=config.yaml=katalog/tests/nginx-ldap-auth/nginx-ldap-auth-config-groups.yaml -n ingress-nginx --dry-run=client -o yaml |kubectl apply -f -
         kubectl rollout restart deploy/nginx-ldap-auth  -n ingress-nginx
     }
     run setup_nginx_ldap_auth
