@@ -74,7 +74,7 @@ lint: check-docker
 	@$(MAKE) clean-lint
 
 ## deploy-all: Deploys all the components in the ingress module
-deploy-all: deploy-nginx-dual deploy-pomerium deploy-cert-manager deploy-forecastle
+deploy-all: deploy-nginx deploy-pomerium deploy-cert-manager deploy-forecastle
 
 ## deploy-nginx: Deploys `nginx` componenet
 deploy-nginx: check-kustomize check-kubectl
@@ -82,7 +82,7 @@ deploy-nginx: check-kustomize check-kubectl
 
 ## deploy-nginx-dual: Deploys `nginx-dual` componenet
 deploy-nginx-dual: check-kustomize check-kubectl
-	@kustomize build katalog/nginx-dual | kubectl apply -f-
+	@kustomize build katalog/dual-nginx | kubectl apply -f-
 
 ## deploy-cert-manager: Deploys `cert-manager` componenet
 deploy-cert-manager: check-kustomize check-kubectl
@@ -93,7 +93,7 @@ deploy-pomerium: check-kustomize check-kubectl
 	@kustomize build katalog/pomerium | kubectl apply -f-
 
 ## deploy-forecastle: Deploys `forecastle` componenet
-deploy-pomerium: check-kustomize check-kubectl
+deploy-forecastle: check-kustomize check-kubectl
 	@kustomize build katalog/forecastle | kubectl apply -f-
 
 ## clean-%: Clean the container image resulting from another target. make build clean-build
