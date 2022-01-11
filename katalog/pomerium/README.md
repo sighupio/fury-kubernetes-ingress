@@ -74,8 +74,10 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: prometheus-k8s
-              servicePort: web
+              service:
+                name: prometheus-k8s
+                port:
+                  name: web
   tls:
     - hosts:
         - prometheus.example.com
