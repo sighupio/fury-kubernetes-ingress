@@ -48,8 +48,6 @@ If you don't have infra nodes and you don't want to run ingress-controllers on a
 
 Finally, you can deploy NGINX by running the following command in the root of the project:
 
-You can deploy NGINX OVH by running the following command in the root of the project:
-
 `$ kustomize build | kubectl apply -f -`
 
 
