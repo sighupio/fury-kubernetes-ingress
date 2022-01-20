@@ -35,6 +35,16 @@ If your cluster has `infra` nodes you should patch the daemonset adding the `Nod
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
+  name: nginx-ingress-external
+spec:
+  template:
+    spec:
+      nodeSelector:
+        node-kind.sighup.io/infra: ""
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
   name: nginx-ingress-internal
 spec:
   template:
