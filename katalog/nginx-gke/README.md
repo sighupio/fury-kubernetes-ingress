@@ -24,7 +24,28 @@ Fury distribution NGINX GKE is deployed with following configuration:
 
 ## Deployment
 
-You can deploy NGINX GKE by running following command in the root of the project:
+Our Ingress module by default is deployed as a `DaemonSet`, meaning that it will try to deploy 1 ingress-controller pod on every worker node.
+
+This is probably NOT what you want, standard Fury clusters have at least 1 `infra` node (nodes that are dedicated to run Fury infrastructural components, like prometheus, elasticsearch, and the ingress controllers).
+
+If your cluster has `infra` nodes you should patch the daemonset adding the `NodeSelector` for the `infra` nodes to the Ingress `DaemonSet`. You can do this usiing the following kustomize patch:
+
+```yaml
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nginx-ingress-controller
+spec:
+  template:
+    spec:
+      nodeSelector:
+        node-kind.sighup.io/infra: ""
+```
+
+If you don't have infra nodes and you don't want to run ingress-controllers on all your worker nodes, you should probably label some nodes and adjust the previous `NodeSelector` accordingly.
+
+Finally, you can deploy NGINX by running the following command in the root of the project:
 
 `$ kustomize build | kubectl apply -f -`
 
