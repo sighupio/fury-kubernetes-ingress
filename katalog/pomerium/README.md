@@ -1,5 +1,7 @@
 # Pomerium
 
+<!-- <KFD-DOCS> -->
+
 Pomerium is an identity-aware proxy that enables secure access to internal applications. Pomerium provides a standardized interface to add access control to applications regardless of whether the application itself has authorization or authentication baked-in
 
 ## Pomerium Setup
@@ -85,3 +87,5 @@ spec:
 ```
 
 Now if you'll try to reach the `prometheus.example.com` you'll be forwarded to the dex login page accordingly with the rules set in your policy. Enjoy!
+
+<!-- </KFD-DOCS> -->

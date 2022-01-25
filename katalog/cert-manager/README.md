@@ -1,11 +1,10 @@
 # cert-manager
 
-cert-manager is an automation tool to manage and issue TLS
-certificates from various issuing resource in a Kubernetes native way. It
-ensures that certificates are valid and attempts to renew them before expiry.
+<!-- <KFD-DOCS> -->
 
-This package deploys cert-manager to be used with [Let's
-Encrypt](https://letsencrypt.org/) Certificate Authority.
+cert-manager is an automation tool to manage and issue TLS certificates from various issuing resource in a Kubernetes native way. It ensures that certificates are valid and attempts to renew them before expiry.
+
+This package deploys cert-manager to be used with [Let's Encrypt](https://letsencrypt.org/) Certificate Authority.
 
 ## Requirements
 
@@ -65,6 +64,8 @@ Once do that, you just need to hit:
 $ kustomize build | kubectl apply -f -
 # omitted output
 ```
+
+<!-- </KFD-DOCS> -->
 
 ## License
 

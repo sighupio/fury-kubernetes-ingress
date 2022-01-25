@@ -1,5 +1,7 @@
 # NGINX Ingress Controller for OVH
 
+<!-- <KFD-DOCS> -->
+
 Ingress NGINX is an Ingress Controller for [NGINX](https://nginx.org) webserver and reverse proxy, it manages NGINX in
 a Kubernetes native manner. This package deploys Ingress Controller for OVH Kubernetes Service.
 
@@ -10,9 +12,8 @@ a Kubernetes native manner. This package deploys Ingress Controller for OVH Kube
 
 ## Image repository and tag
 
-* Ingress NGINX OVH image: `k8s.gcr.io/ingress-nginx/controller:v1.1.0`
-* Ingress NGINX repo: [https://github.com/kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
-
+- Ingress NGINX OVH image: `k8s.gcr.io/ingress-nginx/controller:v1.1.0`
+- Ingress NGINX repo: [https://github.com/kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
 
 ## Configuration
 
@@ -21,7 +22,6 @@ Fury distribution NGINX OVH is deployed with the following configuration:
 - Maximum allowed size of the client request body: `10m`
 - HTTP status code used in redirects: `301`
 - Metrics are scraped by Prometheus every `10s`
-
 
 ## Deployment
 
@@ -50,12 +50,12 @@ Finally, you can deploy NGINX by running the following command in the root of th
 
 `$ kustomize build | kubectl apply -f -`
 
-
 ## Alerts
 
 Followings Prometheus [alerts](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/) are already defined for this package.
 
 ### ingress-nginx.rules
+
 | Parameter                         | Description                                                                                                                                        | Severity | Interval |
 | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | :------: |
 | NginxIngressDown                  | This alert fires if Promethes target discovery was not able to reach ingress-nginx-metrics in the last 15 minutes.                                 | critical |   15m    |
@@ -66,6 +66,7 @@ Followings Prometheus [alerts](https://prometheus.io/docs/prometheus/latest/conf
 | NginxIngressCertificateExpiration | This alert fires if the certificate for a given host is expiring in less than 7 days.                                                              | warning  |          |
 | NginxIngressCertificateExpiration | This alert fires if the certificate for a given host is expiring in less than 1 days.                                                              | critical |          |
 
+<!-- </KFD-DOCS> -->
 
 ## License
 

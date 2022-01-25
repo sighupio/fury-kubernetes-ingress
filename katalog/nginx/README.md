@@ -1,5 +1,7 @@
 # Ingress NGINX
 
+<!-- <KFD-DOCS> -->
+
 Ingress NGINX is an Ingress Controller for [NGINX](https://nginx.org) webserver and reverse proxy,
 it manages NGINX in a Kubernetes native manner. This package deploys Ingress Controller for clusters created with
 `kubeadm`.
@@ -65,6 +67,7 @@ Followings Prometheus [alerts](https://prometheus.io/docs/prometheus/latest/conf
 | NginxIngressCertificateExpiration | This alert fires if the certificate for a given host is expiring in less than 7 days. | warning |  |
 | NginxIngressCertificateExpiration | This alert fires if the certificate for a given host is expiring in less than 1 day. | critical |  |
 
+<!-- </KFD-DOCS> -->
 
 ## License
 
