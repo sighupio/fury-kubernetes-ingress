@@ -2,7 +2,7 @@
 
 <!-- <KFD-DOCS> -->
 
-[NGINX LDAP Auth](https://github.com/tiagoapimenta/nginx-ldap-auth/blob/v1.0.6/README.md) provides ingress authentication over LDAP for Kubernetes.
+[NGINX LDAP Auth][nginx-ldap-auth-repo] provides ingress authentication over LDAP for Kubernetes.
 
 ## Requirements
 
@@ -55,11 +55,9 @@ user:
   filter: "(cn={0})"
 ```
 
-To know all available configuration options
-[go to the upstream project at github](https://github.com/tiagoapimenta/nginx-ldap-auth/tree/v1.0.6).
+To know all available configuration options [go to the upstream project at github](https://github.com/tiagoapimenta/nginx-ldap-auth/tree/v1.0.6).
 
-More configuration examples under [tests/nginx-ldap-auth](../../katalog/tests/nginx-ldap-auth) including
-[one filtering users by LDAP groups](../../katalog/tests/nginx-ldap-auth/nginx-ldap-auth-config-groups.yaml):
+More configuration examples under [tests/nginx-ldap-auth](../../katalog/tests/nginx-ldap-auth) including [one filtering users by LDAP groups](../../katalog/tests/nginx-ldap-auth/nginx-ldap-auth-config-groups.yaml):
 
 ```yaml
 web: 0.0.0.0:5555
@@ -97,15 +95,18 @@ $ kustomize build katalog/nginx-ldap-auth  | kubectl apply -f -
 Once deployed, any ingress definition can be configured to be protected by HTTP basic access authentication against LDAP:
 
 ```bash
-kubectl annotate ingress YOUR_INGRESS "nginx.ingress.kubernetes.io/auth-url=http://nginx-ldap-auth.ingress-nginx.svc.cluster.local" --overwrite
+kubectl annotate ingress <YOUR_INGRESS> "nginx.ingress.kubernetes.io/auth-url=http://nginx-ldap-auth.ingress-nginx.svc.cluster.local" --overwrite
 ```
 
-More information related to NGINX ingress defintion authentication can be found at the NGINX ingress
-[official documentation site](https://kubernetes.github.io/ingress-nginx/examples/auth/external-auth/)
+More information related to NGINX ingress defintion authentication can be found at the NGINX ingress [official documentation site][nginx-ldap-auth-docs]
 
 ## Important note
 
 Be aware this authentication method is transmitted in every request by your browser in plain text, so you should be using HTTPS.
+
+<!-- Links -->
+[nginx-ldap-auth-repo]: https://github.com/tiagoapimenta/nginx-ldap-auth/blob/v1.0.6/README.md
+[nginx-ldap-auth-docs]: https://kubernetes.github.io/ingress-nginx/examples/auth/external-auth/
 
 <!-- </KFD-DOCS> -->
 

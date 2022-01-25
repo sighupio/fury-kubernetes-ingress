@@ -14,9 +14,9 @@ If you are new to KFD please refer to the [official documentation][kfd-docs] on 
 
 ## Overview
 
-Our ingress module makes use of CNCF recommended, Cloud Native projects, such as [Ingress nginx](https://github.com/kubernetes/ingress-nginx) an ingress controller using the well-known NGINX server as a URL path-based routing reverse proxy and load balancer, and [cert-manager](https://github.com/jetstack/cert-manager) to automate the management and issuance of TLS certificates from various issuing sources that will ensure certificates are valid and renew them before they expire.
+Our ingress module makes use of CNCF recommended, Cloud Native projects, such as [Ingress NGINX][ingress-nginx-docs] an ingress controller using the well-known NGINX server as a URL path-based routing reverse proxy and load balancer, and [cert-manager](https://github.com/jetstack/cert-manager) to automate the issuing and renwal of TLS certificates from various issuing sources.
 
-The module also includes [Forecastle](https://github.com/stakater/Forecastle), a web-based global directory of all the services offered by your cluster.
+The module also includes additional tools like [Forecastle][forecastle-repo], a web-based global directory of all the services offered by your cluster, and [Pomerium][pomerium-repo], an identity-aware proxy that enables secure access to internal applications.
 
 ### Architecture
 
@@ -44,7 +44,7 @@ Kubernetes Fury Ingress provides the following packages:
 | [cert-manager](katalog/cert-manager)       | `v1.6.1`  | cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources. |
 | [forecastle](katalog/forecastle)           | `v1.0.70` | Forecastle gives you access to a control panel where you can see your ingresses and access them on Kubernetes.                |
 | [pomerium](katalog/pomerium)               | `v0.15.8` | Use this to provide ingress authentication with `dex` and OIDC.                                                               |
-| [nginx-ldap-auth](katalog/nginx-ldap-auth) | `v1.0.6`  | Use this to provide an ingress authentication with LDAP for Kubernetes. To be deprecated.                                     |
+| [nginx-ldap-auth](katalog/nginx-ldap-auth) | `v1.0.6`  | Use this to provide an ingress authentication with LDAP for Kubernetes.                                                       |
 
 ## Compatibility
 
@@ -65,7 +65,6 @@ Check the [compatibility matrix][compatibility-matrix] for additional informatio
 |-----------------------------------------|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [furyctl][furyctl-repo]                 | `>=0.6.0`  | The recommended tool to download and manage KFD modules and their packages. To learn more about `furyctl` read the [official documentation][furyctl-repo].     |
 | [kustomize][kustomize-repo]             | `>=3.5.0`  | Packages are customized using `kustomize`. To learn how to create your customization layer with `kustomize`, please refer to the [repository][kustomize-repo]. |
-| [KFD Monitoring Module][kfd-monitoring] | `>v1.10.0` | Expose metrics to Prometheus *(optional)*                                                                                                                      |
 
 ### Single vs Dual Controller
 
@@ -73,9 +72,11 @@ As the first step, you should choose what type of ingress controller you want to
 
 The Single Controller Package deploys a single class NGINX Ingress Controller that serves all the traffic, both internal (private) and external (public) to the cluster.
 
-The Dual Controller Package deploys a dual-class NGINX Ingress Controller, the `internal-ingress` and the `external-ingress` classes. The `internal-ingress` class is in charge of serving traffic that is inside the cluster's network, like users accessing via VPN to internal services, for example, application's admin panels or other resources that you don't want to expose to the Internet. The `external-ingress` serves all the traffic for the applications that are exposed to the outside of the cluster, for example, the frontend application to end-users.
+The Dual Controller Package creates two NGINX Ingress Controller classes, the `internal-ingress` and the `external-ingress` classes:
 
-If your internal traffic is considerable and you don't want to stress the same Ingress controller that serves your public traffic, you should prefer the dual-ingress.
+- The `internal-ingress` class is in charge of serving traffic that is inside the cluster's network, like users accessing via VPN to internal services, for example, application's admin panels or other resources that you don't want to expose to the Internet.
+
+- The `external-ingress` class serves all the traffic for the applications that are exposed to the outside of the cluster, for example, the frontend application to end-users.
 
 ### Default Configuration
 
@@ -85,7 +86,7 @@ For all single, dual, and GKE packages, the Kubernetes Fury Ingress module is de
 - HTTP status code used in redirects: `301`
 - Metrics are scraped by Prometheus every `10s`
 
-Additionally, the following Prometheus [alerts](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/) are set up by default:
+Additionally, the following Prometheus [alerts][prometheus-alerts-page] are set up by default:
 
 | Parameter                           | Description                                                                                                                                         | Severity | Interval |
 | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | :------: |
@@ -104,25 +105,29 @@ Additionally, the following Prometheus [alerts](https://prometheus.io/docs/prome
 Single Ingress:
 
 ```yaml
-resources:
+bases:
   - name: ingress/nginx
     version: "v1.12.0"
 ```
 
 Dual Ingress:
 
+> `dual-nginx` depends on the `nginx` package, so we need to download both of them.
+
 ```yaml
-resources:
+bases:
+  - name: ingress/nginx
+    version: "v1.12.0"
   - name: ingress/dual-nginx
     version: "v1.12.0"
 ```
 
 GKE:
 
-> `ingress-gke` depends on the `nginx` package, so we need to download both of them.
+> `nginx-gke` depends on the `nginx` package, so we need to download both of them.
 
 ```yaml
-resources:
+bases:
   - name: ingress/nginx
     version: "v1.12.0"
   - name: ingress/nginx-gke
@@ -131,10 +136,10 @@ resources:
 
 OVH:
 
-> `ingress-ovh` depends on the `nginx` package, so we need to download both of them.
+> `nginx-ovh` depends on the `nginx` package, so we need to download both of them.
 
 ```yaml
-resources:
+bases:
   - name: ingress/nginx
     version: "v1.12.0"
   - name: ingress/nginx-ovh
@@ -147,11 +152,11 @@ resources:
 
 3. Inspect the download packages under `./vendor/katalog/ingress/`.
 
-4. Define a `kustomization.yaml` that includes the `./vendor/katalog/opa/ingress` directory as resource.
+4. Define a `kustomization.yaml` that includes the `./vendor/katalog/ingress` directory as resource.
 
 ```yaml
 resources:
-- ./vendor/katalog/opa/ingress
+- ./vendor/katalog/ingress
 ```
 
 5. Apply the necessary patches. You can find a list of common customization [here](#common-customizations).
@@ -165,6 +170,37 @@ kustomize build . | kubectl apply -f -
 Your are now ready to expose your applications using Kubernetes `Ingress` objects.
 
 ### Common customizations
+
+`nginx` package is deployed by default as a `DaemonSet`, meaning that it will deploy 1 ingress-controller pod on every worker node.
+
+This is probably NOT what you want, standard Fury clusters have at least 1 `infra` node (nodes that are dedicated to run Fury infrastructural components, like Prometheus, elasticsearch, and the ingress controllers).
+
+If your cluster has `infra` nodes you should patch the daemonset adding the `NodeSelector` for the `infra` nodes to the Ingress `DaemonSet`. You can do this usiing the following kustomize patch:
+
+```yaml
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nginx-ingress-controller-external
+spec:
+  template:
+    spec:
+      nodeSelector:
+        node-kind.sighup.io/infra: ""
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nginx-ingress-controller-internal
+spec:
+  template:
+    spec:
+      nodeSelector:
+        node-kind.sighup.io/infra: ""
+```
+
+If you don't have infra nodes and you don't want to run ingress-controllers on all your worker nodes, you should probably label some nodes and adjust the previous `NodeSelector` accordingly.
 
 #### Certificates automation with cert-manager
 
@@ -180,7 +216,7 @@ To deploy the `cert-manager` package:
 1. Add the package to your bases inside the `Furyfile.yml`:
 
 ```yaml
-resources:
+bases:
   - name: ingress/dual-nginx
     version: "v1.12.0"
   - name: ingress/cert-manager
@@ -243,7 +279,7 @@ To deploy the `forecastle` package:
 1. Add the package to your bases inside the `Furyfile.yml`:
 
 ```yaml
-resources:
+bases:
   - name: ingress/dual-nginx
     version: "v1.12.0"
   - name: ingress/cert-manager
@@ -288,7 +324,7 @@ Add the following annotations to your ingresses to be discovered by Forecastle:
 
 > See Forecastle [official repository][forecastle-repository] for more details.
 
-<!-- Lnks -->
+<!-- Links -->
 [furyctl-repo]: https://github.com/sighupio/furyctl
 [sighup-page]: https://sighup.io
 [kfd-repo]: https://github.com/sighupio/fury-distribution
@@ -296,9 +332,12 @@ Add the following annotations to your ingresses to be discovered by Forecastle:
 [kfd-docs]: https://docs.kubernetesfury.com/docs/distribution/
 [compatibility-matrix]: https://github.com/sighupio/fury-kubernetes-ingress/blob/master/docs/COMPATIBILITY_MATRIX.md
 [kubernetes-ingress]: https://kubernetes.io/docs/concepts/services-networking/ingress/
+[forecastle-repo]: https://github.com/stakater/Forecastle
 [forecastle-icons]: https://github.com/stakater/ForecastleIcons
 [forecastle-repository]: https://github.com/stakater/Forecastle/blob/v1.0.61/README.md
-
+[ingress-nginx-docs]: https://github.com/kubernetes/ingress-nginx
+[prometheus-alerts-page]: https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/
+[pomerium-repo]: https://github.com/pomerium/pomerium
 <!-- </KFD-DOCS> -->
 
 <!-- <FOOTER> -->
