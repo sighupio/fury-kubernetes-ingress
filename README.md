@@ -42,7 +42,7 @@ Kubernetes Fury Ingress provides the following packages:
 | [nginx-gke](katalog/nginx-ovh)             | `v1.1.0`  | The same as `nginx`, but uses the native OVH LoadBalancer to expose the Ingress Controller to the Internet.                   |
 | [dual-nginx](katalog/dual-nginx)           | `v1.1.0`  | It deploys two identical NGINX ingress controllers but with two different scopes: public/external and private/internal.       |
 | [cert-manager](katalog/cert-manager)       | `v1.6.1`  | cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources. |
-| [forecastle](katalog/forecastle)           | `v1.0.70` | Forecastle gives you access to a control panel where you can see your ingresses and access them on Kubernetes.                |
+| [forecastle](katalog/forecastle)           | `v1.0.75` | Forecastle gives you access to a control panel where you can see your ingresses and access them on Kubernetes.                |
 | [pomerium](katalog/pomerium)               | `v0.15.8` | Use this to provide ingress authentication with `dex` and OIDC.                                                               |
 | [nginx-ldap-auth](katalog/nginx-ldap-auth) | `v1.0.6`  | Use this to provide an ingress authentication with LDAP for Kubernetes.                                                       |
 

@@ -21,7 +21,7 @@ resources:
 images:
   - name: stakater/forecastle
     newName: registry.sighup.io/fury/stakater/forecastle
-    newTag: v1.0.70
+    newTag: v1.0.75
 
 configMapGenerator:
   - name: forecastle-config
