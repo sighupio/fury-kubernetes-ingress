@@ -21,9 +21,11 @@
 | v1.11.2                             |                    |                    |                    |                    |                    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :warning: |           |
 | v1.12.0                             |                    |                    |                    |                    |                    |                    | :white_check_mark: | :white_check_mark: | :warning: | :warning: |
 
-- :white_check_mark: Compatible
-- :warning: Has issues
-- :x: Incompatible
+:white_check_mark: Compatible
+
+:warning: Has issues
+
+:x: Incompatible
 
 ## Warning
 

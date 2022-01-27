@@ -8,28 +8,27 @@
 ![Slack](https://img.shields.io/badge/slack-@kubernetes/fury-yellow.svg?logo=slack&label=Slack)
 
 <!-- <KFD-DOCS> -->
-**Kubernetes Fury Ingress** provides several options to run an Ingress Controller and manage TLS certificates to provide external access to the services in [Kubernetes Fury Distribution (KFD)][kfd-repo].
+**Kubernetes Fury Ingress** provides Ingress Controllers to expose services and TLS certificates management solutions for the [Kubernetes Fury Distribution (KFD)][kfd-repo].
 
 If you are new to KFD please refer to the [official documentation][kfd-docs] on how to get started with KFD.
 
 ## Overview
 
-Our ingress module makes use of CNCF recommended, Cloud Native projects, such as [Ingress NGINX][ingress-nginx-docs] an ingress controller using the well-known NGINX server as a URL path-based routing reverse proxy and load balancer, and [cert-manager](https://github.com/jetstack/cert-manager) to automate the issuing and renwal of TLS certificates from various issuing sources.
+**Kubernetes Fury Ingress** use CNCF recommended, Cloud Native projects, such as [Ingress NGINX][ingress-nginx-docs] an ingress controller using the well-known NGINX server as a URL path-based routing reverse proxy and load balancer, and [cert-manager](https://github.com/jetstack/cert-manager) to automate the issuing and renewal of TLS certificates from various issuing sources.
 
 The module also includes additional tools like [Forecastle][forecastle-repo], a web-based global directory of all the services offered by your cluster, and [Pomerium][pomerium-repo], an identity-aware proxy that enables secure access to internal applications.
 
 ### Architecture
 
-The reference architecture used to deploy the Fury Kubernetes Ingress Module is
-shown in the following figure:
+The reference architecture used to deploy the Fury Kubernetes Ingress Module is shown in the following figure:
 
 ![Ingress Architecture](/docs/images/fury-ingress.png)
 
-The traffic from end users arrives first to a Load Balancer that distributes the traffic between the available Ingress Controllers (usually, one for each availability zone).
+- The traffic from end users arrives first to a Load Balancer that distributes the traffic between the available Ingress Controllers (usually, one for each availability zone).
+- Once the traffic reaches the Ingress Controller, the Ingress proxies the traffic to the Kubernetes service based on the URL path of the request.
+- The `service` is a Kubernetes abstraction that makes the traffic arrive at the pods where the actual application is running, usually using `iptables` rules.
 
-Once the traffic reaches the Ingress Controller, the Ingress proxies the traffic to the Kuberentes service based on the URL path of the request. The service is a Kubernetes abstraction that makes the traffic arrive at the pods where the actual application is running.
-
-> For more information please refer to Kubernetes Ingress [offiicial documentation][kubernetes-ingress]
+> For more information, please refer to Kubernetes Ingress [offiicial documentation][kubernetes-ingress]
 
 ## Packages
 
@@ -70,17 +69,17 @@ Check the [compatibility matrix][compatibility-matrix] for additional informatio
 
 As the first step, you should choose what type of ingress controller you want to use in your cluster. Kubernetes Fury Ingress provides two types, Single and Dual Ingress Controller.
 
-The Single Controller Package deploys a single class NGINX Ingress Controller that serves all the traffic, both internal (private) and external (public) to the cluster.
+The Single Controller Package deploys a single class NGINX Ingress Controller that serves all the internal (private) and external (public) traffic.
 
 The Dual Controller Package creates two NGINX Ingress Controller classes, the `internal-ingress` and the `external-ingress` classes:
 
-- The `internal-ingress` class is in charge of serving traffic that is inside the cluster's network, like users accessing via VPN to internal services, for example, application's admin panels or other resources that you don't want to expose to the Internet.
+- The `internal-ingress` class is in charge of serving traffic inside the cluster's network, like users accessing via VPN to internal services, for example, application's admin panels or other resources that you don't want to expose to the Internet.
 
-- The `external-ingress` class serves all the traffic for the applications that are exposed to the outside of the cluster, for example, the frontend application to end-users.
+- The `external-ingress` class serves traffic for the applications exposed to the outside of the cluster (e.g., the frontend application to end-users).
 
 ### Default Configuration
 
-For all single, dual, and GKE packages, the Kubernetes Fury Ingress module is deployed with the following default configuration:
+For all single, dual, and GKE packages, the Kubernetes Fury Ingress module has the following default configuration:
 
 - Maximum allowed size of the client request body: `10m`
 - HTTP status code used in redirects: `301`
