@@ -33,7 +33,5 @@ because it is not officially supported by [SIGHUP](https://sighup.io).
 Move to v1.9.1 instead. [Follow the migration path.](docs/releases/v1.9.1.md)
 - :warning: : module version: `v1.10.0` and Kubernetes Version: `1.21.x`. It works as expected. Marked as a warning
 because it is not officially supported by [SIGHUP](https://sighup.io).
-- :warning: : module version: `v1.11.X` and Kubernetes Version: `1.22.x`. This version is not fully supported since the component
-  `forecastle` is not supported in k8s version `1.22`
-- :warning: : module version: `v1.12.0` and Kubernetes Version: `1.23.x`. This version is not fully supported since the component
-  `forecastle` is not supported in k8s version `1.23`
+- :warning: : module version: `v1.11.X` and Kubernetes Version: `1.22.x`. It works as expected. Marked as a warning because it is not officially supported by [SIGHUP](https://sighup.io).
+- :warning: : module version: `v1.12.X` and Kubernetes Version: `1.23.x`. It works as expected. Marked as a warning because it is not officially supported by [SIGHUP](https://sighup.io).
