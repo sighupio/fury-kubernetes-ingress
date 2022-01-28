@@ -174,7 +174,7 @@ Your are now ready to expose your applications using Kubernetes `Ingress` object
 
 This is probably NOT what you want, standard Fury clusters have at least 1 `infra` node (nodes that are dedicated to run Fury infrastructural components, like Prometheus, elasticsearch, and the ingress controllers).
 
-If your cluster has `infra` nodes you should patch the daemonset adding the `NodeSelector` for the `infra` nodes to the Ingress `DaemonSet`. You can do this usiing the following kustomize patch:
+If your cluster has `infra` nodes you should patch the daemonset adding the `NodeSelector` for the `infra` nodes to the Ingress `DaemonSet`. You can do this using the following kustomize patch:
 
 ```yaml
 ---
@@ -271,7 +271,7 @@ kustomize build . | kubectl apply -f -
 
 Forecastle list all the annotated ingress (applications) that exists in your cluster with and icon grouped by namesapce, in a nice web UI. It let's you search, personalize the header for the landing page (title and colors), let's you list custom ingress and add details to each entry.
 
-You can use Forecastle as the entrypoint to your cluster to discover easily the running applications.
+Use Forecastle as your cluster entry point to discover the running applications easily.
 
 To deploy the `forecastle` package:
 

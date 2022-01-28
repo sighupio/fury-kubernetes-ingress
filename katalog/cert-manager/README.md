@@ -2,7 +2,7 @@
 
 <!-- <KFD-DOCS> -->
 
-cert-manager is an automation tool to manage and issue TLS certificates from various issuing resource in a Kubernetes native way. It ensures that certificates are valid and attempts to renew them before expiry.
+cert-manager is an automation tool to manage and issue TLS certificates from various issuing resources in a Kubernetes native way. It ensures that certificates are valid and attempts to renew them before expiry.
 
 This package deploys cert-manager to be used with [Let's Encrypt](https://letsencrypt.org/) as the Certificate Authority.
 
