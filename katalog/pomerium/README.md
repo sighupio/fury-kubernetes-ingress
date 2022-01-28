@@ -1,14 +1,18 @@
 # Pomerium
 
+<!-- <KFD-DOCS> -->
+
 Pomerium is an identity-aware proxy that enables secure access to internal applications. Pomerium provides a standardized interface to add access control to applications regardless of whether the application itself has authorization or authentication baked-in
 
 ## Pomerium Setup
 
-This document is intended to give a brief overview on how Pomerium can be implemented, for further details, please look at the official doc : <https://www.pomerium.io/docs/>
+This document is intended to give a brief overview on how Pomerium can be implemented, for further details, please look at the [official documentation][pomerium-docs].
 
-## Setup
+## Deploy
 
 The base kustomization file present [here](./kustomization.yaml) allows to quickly integrate this service with an existing Dex service, that could, for example, be connected to LDAP.
+
+> See [Dex official documentation][dex-docs] for more details.
 
 In order to do so, you will need to edit your Dex configuration, adding a static client to be used by Pomerium, like in the example below:
 
@@ -85,3 +89,9 @@ spec:
 ```
 
 Now if you'll try to reach the `prometheus.example.com` you'll be forwarded to the dex login page accordingly with the rules set in your policy. Enjoy!
+
+<!-- Links -->
+[pomerium-docs]: https://www.pomerium.io/docs/
+[dex-docs]: https://dexidp.io/docs/kubernetes/
+
+<!-- </KFD-DOCS> -->

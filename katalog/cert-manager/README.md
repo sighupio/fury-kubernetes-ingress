@@ -1,11 +1,10 @@
 # cert-manager
 
-cert-manager is an automation tool to manage and issue TLS
-certificates from various issuing resource in a Kubernetes native way. It
-ensures that certificates are valid and attempts to renew them before expiry.
+<!-- <KFD-DOCS> -->
 
-This package deploys cert-manager to be used with [Let's
-Encrypt](https://letsencrypt.org/) Certificate Authority.
+cert-manager is an automation tool to manage and issue TLS certificates from various issuing resources in a Kubernetes native way. It ensures that certificates are valid and attempts to renew them before expiry.
+
+This package deploys cert-manager to be used with [Let's Encrypt](https://letsencrypt.org/) as the Certificate Authority.
 
 ## Requirements
 
@@ -20,35 +19,57 @@ Encrypt](https://letsencrypt.org/) Certificate Authority.
 
 ## Configuration
 
-Fury distribution cert-manager is deployed with the following configuration:
+`cert-manager` is deployed with the following configuration:
 
-- The default issuer kind is ClusterIssuer
-- The default issuer is letsencrypt
+- The default issuer kind is `ClusterIssuer`
+- The default issuer is `letsencrypt`
 
 ## Deployment
 
-The deployment is the following, but keep in mind that, depending on `nginx` or `dual-nginx`
-you need to specify the class name accordingly.
-To do that you need to patch the ClusterIssuer resource to keep it synced with your specific deployment.
-So before proceeding to the build and apply, you should provide a patchesJson6902 like the following:
+
+To deploy the `cert-manager` package:
+
+1. Add the package to your bases inside the `Furyfile.yml`:
+
+```yaml
+resources:
+  - name: ingress/dual-nginx
+    version: "v1.12.0"
+  - name: ingress/cert-manager
+    version: "v1.12.0"
+```
+
+2. Execute `furyctl vendor -H` to download the packages
+
+3. Inspect the download packages under `./vendor/katalog/ingress/cert-manager`.
+
+4. Define a `kustomization.yaml` that includes the `./vendor/katalog/ingress/cert-manager` directory as resource.
+
+```yaml
+resources:
+- ./vendor/katalog/ingress/cert-manager
+```
+
+For the `dual-nginx` you will need to patch the `ClusterIssuer` resource with the right ingress class:
 
 ```yml
+---
 patchesJson6902:
     - target:
-          group: cert-manager.io
+          group: certmanager.k8s.io
           version: v1
           kind: ClusterIssuer
           name: letsencrypt-staging
       path: patches/dual-nginx.yml
     - target:
-          group: cert-manager.io
+          group: certmanager.k8s.io
           version: v1
           kind: ClusterIssuer
           name: letsencrypt-prod
       path: patches/dual-nginx.yml
 ```
 
-and under the `patches/dual-nginx.yml`:
+and in the `patches/dual-nginx.yml`:
 
 ```yml
 ---
@@ -57,14 +78,14 @@ and under the `patches/dual-nginx.yml`:
   value: "external"
 ```
 
-this is only needed when you'll use the `dual-nginx` because the default is the `nginx` single node
-
-Once do that, you just need to hit:
+5. Finally, execute the following command to deploy the package:
 
 ```shell
-$ kustomize build | kubectl apply -f -
-# omitted output
+kustomize build . | kubectl apply -f -
 ```
+
+
+<!-- </KFD-DOCS> -->
 
 ## License
 
