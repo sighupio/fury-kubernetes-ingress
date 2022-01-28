@@ -106,7 +106,7 @@ Single Ingress:
 ```yaml
 bases:
   - name: ingress/nginx
-    version: "v1.12.0"
+    version: "v1.12.1"
 ```
 
 Dual Ingress:
