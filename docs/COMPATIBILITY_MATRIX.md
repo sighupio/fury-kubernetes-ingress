@@ -40,4 +40,4 @@ because it is not officially supported by [SIGHUP](https://sighup.io).
 - :warning: : module version: `v1.11.X` and Kubernetes Version: `1.22.x`. It works as expected. Marked as a warning because it is not officially supported by [SIGHUP](https://sighup.io).
 - :warning: : module version: `v1.12.X` and Kubernetes Version: `1.23.x`. It works as expected. Marked as a warning because it is not officially supported by [SIGHUP](https://sighup.io).
 - :x:: module version: `v1.12.0` has a known bug breaking upgrades. Please do not use.
-- :x:: module version: `v1.12.0` has a known bug breaking upgrades. Please do not use.
+- :x:: module version: `v1.12.1` has a known bug breaking upgrades. Please do not use.
