@@ -106,7 +106,7 @@ Single Ingress:
 ```yaml
 bases:
   - name: ingress/nginx
-    version: "v1.12.1"
+    version: "v1.12.2"
 ```
 
 Dual Ingress:
@@ -116,9 +116,9 @@ Dual Ingress:
 ```yaml
 bases:
   - name: ingress/nginx
-    version: "v1.12.0"
+    version: "v1.12.2"
   - name: ingress/dual-nginx
-    version: "v1.12.0"
+    version: "v1.12.2"
 ```
 
 GKE:
@@ -128,9 +128,9 @@ GKE:
 ```yaml
 bases:
   - name: ingress/nginx
-    version: "v1.12.0"
+    version: "v1.12.2"
   - name: ingress/nginx-gke
-    version: "v1.12.0"
+    version: "v1.12.2"
 ```
 
 OVH:
@@ -140,9 +140,9 @@ OVH:
 ```yaml
 bases:
   - name: ingress/nginx
-    version: "v1.12.0"
+    version: "v1.12.2"
   - name: ingress/nginx-ovh
-    version: "v1.12.0"
+    version: "v1.12.2"
 ```
 
 > See `furyctl` [documentation][furyctl-repo] for additional details about `Furyfile.yml` format.
@@ -217,9 +217,9 @@ To deploy the `cert-manager` package:
 ```yaml
 bases:
   - name: ingress/dual-nginx
-    version: "v1.12.0"
+    version: "v1.12.2"
   - name: ingress/cert-manager
-    version: "v1.12.0"
+    version: "v1.12.2"
 ```
 
 2. Execute `furyctl vendor -H` to download the packages
@@ -280,11 +280,11 @@ To deploy the `forecastle` package:
 ```yaml
 bases:
   - name: ingress/dual-nginx
-    version: "v1.12.0"
+    version: "v1.12.2"
   - name: ingress/cert-manager
-    version: "v1.12.0"
+    version: "v1.12.2"
   - name: ingress/forecastle
-    version: "v1.12.0"
+    version: "v1.12.2"
 ```
 
 2. Execute `furyctl vendor -H` to download the packages
