@@ -8,12 +8,6 @@ kind: Kustomization
 
 namespace: ingress-nginx
 
-commonLabels:
-  module.kfd.sighup.io/name: "ingress"
-  module.kfd.sighup.io/version: "v1.12.1"
-  module.kfd.sighup.io/component: "forecastle"
-  kfd.sighup.io/source: "kustomize"
-
 resources:
   - deploy.yml
   - rbac.yml

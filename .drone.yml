@@ -13,12 +13,12 @@ steps:
       - go get -u github.com/google/addlicense
       - addlicense -c "SIGHUP s.r.l" -v -l bsd --check .
 
-  - name: checklabels
-    image: openpolicyagent/conftest:v0.28.1
-    pull: always
-    commands:
-      -  conftest pull https://raw.githubusercontent.com/sighupio/ci-commons/main/conftest/kustomization/kfd-labels.rego
-      -  conftest test katalog/**/kustomization.yaml
+#  - name: checklabels
+#    image: openpolicyagent/conftest:v0.28.1
+#    pull: always
+#    commands:
+#      -  conftest pull https://raw.githubusercontent.com/sighupio/ci-commons/main/conftest/kustomization/kfd-labels.rego
+#      -  conftest test katalog/**/kustomization.yaml
 ---
 kind: pipeline
 name: policeman
@@ -93,30 +93,30 @@ steps:
     name: deprek8ion-pomerium
     environment:
       KUBERNETES_MANIFESTS: pomerium.yml
----
-kind: pipeline
-name: render-examples
-
-depends_on:
-  - policeman
-
-platform:
-  os: linux
-  arch: amd64
-
-trigger:
-  ref:
-    include:
-      - refs/tags/**
-
-steps:
-  - name: examples
-    image: quay.io/sighup/furyctl-bats:v0.1.3_3.2.2
-    pull: always
-    depends_on: [clone]
-    commands:
-      - git config --global url."https://github.com/".insteadOf ssh://git@github.com
-      - bats examples/tests.bats
+#---
+#kind: pipeline
+#name: render-examples
+#
+#depends_on:
+#  - policeman
+#
+#platform:
+#  os: linux
+#  arch: amd64
+#
+#trigger:
+#  ref:
+#    include:
+#      - refs/tags/**
+#
+#steps:
+#  - name: examples
+#    image: quay.io/sighup/furyctl-bats:v0.1.3_3.2.2
+#    pull: always
+#    depends_on: [clone]
+#    commands:
+#      - git config --global url."https://github.com/".insteadOf ssh://git@github.com
+#      - bats examples/tests.bats
 ---
 kind: pipeline
 name: e2e-kubernetes-1.20

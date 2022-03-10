@@ -10,10 +10,6 @@ configurations:
 
 commonLabels:
   app: pomerium
-  module.kfd.sighup.io/name: "ingress"
-  module.kfd.sighup.io/version: "v1.12.1"
-  module.kfd.sighup.io/component: "pomerium"
-  kfd.sighup.io/source: "kustomize"
 
 namespace: pomerium
 

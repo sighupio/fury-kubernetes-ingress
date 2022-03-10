@@ -14,7 +14,3 @@ resources:
 
 commonLabels:
   app: cert-manager
-  module.kfd.sighup.io/name: "ingress"
-  module.kfd.sighup.io/version: "v1.12.1"
-  module.kfd.sighup.io/component: "cert-manager"
-  kfd.sighup.io/source: "kustomize"
