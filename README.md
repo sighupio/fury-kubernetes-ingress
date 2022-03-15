@@ -147,7 +147,7 @@ bases:
 
 > See `furyctl` [documentation][furyctl-repo] for additional details about `Furyfile.yml` format.
 
-2. Execute `furyctl vendor -H` to download the packages
+2. Execute `furyctl distribution download -H` to download the packages
 
 3. Inspect the download packages under `./vendor/katalog/ingress/`.
 
@@ -222,7 +222,7 @@ bases:
     version: "v1.12.2"
 ```
 
-2. Execute `furyctl vendor -H` to download the packages
+2. Execute `furyctl distribution download -H` to download the packages
 
 3. Inspect the download packages under `./vendor/katalog/ingress/cert-manager`.
 
@@ -287,7 +287,7 @@ bases:
     version: "v1.12.2"
 ```
 
-2. Execute `furyctl vendor -H` to download the packages
+2. Execute `furyctl distribution download -H` to download the packages
 
 3. Inspect the download packages under `./vendor/katalog/ingress/forecastle`.
 
