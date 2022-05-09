@@ -55,7 +55,6 @@ steps:
       - kustomize build katalog/dual-nginx > dual-nginx.yml
       - kustomize build katalog/forecastle > forecastle.yml
       - kustomize build katalog/nginx > nginx.yml
-      - kustomize build katalog/nginx-ldap-auth > nginx-ldap-auth.yml
       - kustomize build katalog/pomerium > pomerium.yml
 
   - &deprek8ion
@@ -83,11 +82,6 @@ steps:
     name: deprek8ion-nginx
     environment:
       KUBERNETES_MANIFESTS: nginx.yml
-
-  - <<: *deprek8ion
-    name: deprek8ion-nginx-ldap-auth
-    environment:
-      KUBERNETES_MANIFESTS: nginx-ldap-auth.yml
 
   - <<: *deprek8ion
     name: deprek8ion-pomerium
@@ -180,7 +174,6 @@ steps:
       - export INSTANCE_IP=$(cat /shared/machine/ip)
       - export KUBECONFIG=/shared/kube/kubeconfig-120
       - bats -t katalog/tests/tests.bats
-      - bats -t katalog/tests/nginx-ldap-auth.sh
 
   - name: destroy
     image: quay.io/sighup/e2e-testing-drone-plugin:v0.13.0
@@ -279,7 +272,6 @@ steps:
       - export INSTANCE_IP=$(cat /shared/machine/ip)
       - export KUBECONFIG=/shared/kube/kubeconfig-121
       - bats -t katalog/tests/tests.bats
-      - bats -t katalog/tests/nginx-ldap-auth.sh
 
   - name: destroy
     image: quay.io/sighup/e2e-testing-drone-plugin:v0.13.0
@@ -377,7 +369,6 @@ steps:
       - export INSTANCE_IP=$(cat /shared/machine/ip)
       - export KUBECONFIG=/shared/kube/kubeconfig-122
       - bats -t katalog/tests/tests.bats
-      - bats -t katalog/tests/nginx-ldap-auth.sh
 
   - name: destroy
     image: quay.io/sighup/e2e-testing-drone-plugin:v0.13.0
@@ -475,7 +466,6 @@ steps:
       - export INSTANCE_IP=$(cat /shared/machine/ip)
       - export KUBECONFIG=/shared/kube/kubeconfig-123
       - bats -t katalog/tests/tests.bats
-      - bats -t katalog/tests/nginx-ldap-auth.sh
 
   - name: destroy
     image: quay.io/sighup/e2e-testing-drone-plugin:v0.13.0
