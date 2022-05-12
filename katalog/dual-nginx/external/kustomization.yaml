@@ -43,6 +43,9 @@ patches:
     - op: replace
       path: /metadata/name
       value: external
+    - op: replace
+      path: /spec/controller
+      value: k8s.io/external
     - op: remove
       path: /metadata/annotations
     - op: replace

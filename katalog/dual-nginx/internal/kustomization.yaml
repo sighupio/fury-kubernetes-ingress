@@ -44,6 +44,9 @@ patches:
     - op: replace
       path: /metadata/name
       value: internal
+    - op: replace
+      path: /spec/controller
+      value: k8s.io/internal
     - op: remove
       path: /metadata/annotations
     - op: replace
