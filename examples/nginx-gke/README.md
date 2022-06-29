@@ -1,22 +1,22 @@
-# NGINX Ingress Controller for OVH
+# NGINX Ingress Controller for GKE
 
 <!-- <KFD-DOCS> -->
 
-Ingress NGINX is an Ingress Controller for [NGINX][nginx-page] webserver and reverse proxy, it manages NGINX in a Kubernetes native manner. This package deploys Ingress Controller for OVH Kubernetes Service.
+Ingress NGINX is an Ingress Controller for [NGINX][nginx-page] webserver and reverse proxy, it manages NGINX in a Kubernetes native manner. This package deploys Ingress Controller for Google Kubernetes Engine (GKE) clusters.
 
 ## Requirements
 
 - Kubernetes >= `1.20.0`
-- Kustomize >= `v3.3.0`
+- Kustomize >= `v1`
 
 ## Image repository and tag
 
-- Ingress NGINX OVH image: `k8s.gcr.io/ingress-nginx/controller:v1.1.0`
-- Ingress NGINX repo: [https://github.com/kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
+- Ingress NGINX GKE image: `k8s.gcr.io/ingress-nginx/controller:v1.1.0`
+- Ingress NGINX CKE repo: [https://github.com/kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
 
 ## Configuration
 
-NGINX OVH is deployed with the following default configuration:
+NGINX GKE is deployed with following default configuration:
 
 - Maximum allowed size of the client request body: `10m`
 - HTTP status code used in redirects: `301`
@@ -30,21 +30,34 @@ NGINX OVH is deployed with the following default configuration:
 bases:
   - name: ingress/nginx
     version: "v1.12.2"
-  - name: ingress/nginx-ovh
-    version: "v1.12.2"
 ```
 
 > See `furyctl` [documentation][furyctl-repo] for additional details about `Furyfile.yml` format.
 
 2. Execute `furyctl vendor -H` to download the packages
 
-3. Inspect the download packages under `./vendor/katalog/ingress/dual-nginx`.
+3. Inspect the download packages under `./vendor/katalog/ingress/nginx`.
 
-4. Define a `kustomization.yaml` that includes the `./vendor/katalog/ingress/nginx-gke` directory as resource.
+4. Define a `kustomization.yaml` that includes the `./vendor/katalog/ingress/nginx` directory as resource, and add also the `loadbalancer.yml` patch so the service becomes of Load Balancer type.
 
 ```yaml
 resources:
-- ./vendor/katalog/ingress/nginx-ovh
+- ./vendor/katalog/ingress/nginx
+
+patchesStrategicMerge:
+- loadbalancer.yml
+
+```
+
+`loadbalancer.yml`
+```yaml
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: ingress-nginx
+spec:
+  type: LoadBalancer
 ```
 
 5. Apply the necessary patches. You can find a list of common customization [here](#common-customizations).
@@ -105,4 +118,4 @@ Followings Prometheus [alerts][prometheus-alerts] are already defined for this p
 
 ## License
 
-For license details please see [LICENSE](../../LICENSE)
+For license details please see [LICENSE](https://sighup.io/fury/license)
