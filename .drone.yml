@@ -55,7 +55,6 @@ steps:
       - kustomize build katalog/dual-nginx > dual-nginx.yml
       - kustomize build katalog/forecastle > forecastle.yml
       - kustomize build katalog/nginx > nginx.yml
-      - kustomize build katalog/pomerium > pomerium.yml
 
   - &deprek8ion
     name: deprek8ion-cert-manager
@@ -83,10 +82,6 @@ steps:
     environment:
       KUBERNETES_MANIFESTS: nginx.yml
 
-  - <<: *deprek8ion
-    name: deprek8ion-pomerium
-    environment:
-      KUBERNETES_MANIFESTS: pomerium.yml
 #---
 #kind: pipeline
 #name: render-examples

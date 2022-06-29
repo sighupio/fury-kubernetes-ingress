@@ -74,7 +74,7 @@ lint: check-docker
 	@$(MAKE) clean-lint
 
 ## deploy-all: Deploys all the components in the ingress module
-deploy-all: deploy-nginx deploy-pomerium deploy-cert-manager deploy-forecastle
+deploy-all: deploy-nginx deploy-cert-manager deploy-forecastle
 
 ## deploy-nginx: Deploys `nginx` componenet
 deploy-nginx: check-kustomize check-kubectl
@@ -87,10 +87,6 @@ deploy-nginx-dual: check-kustomize check-kubectl
 ## deploy-cert-manager: Deploys `cert-manager` componenet
 deploy-cert-manager: check-kustomize check-kubectl
 	@kustomize build katalog/cert-manager | kubectl apply -f-
-
-## deploy-pomerium: Deploys `pomerium` componenet
-deploy-pomerium: check-kustomize check-kubectl
-	@kustomize build katalog/pomerium | kubectl apply -f-
 
 ## deploy-forecastle: Deploys `forecastle` componenet
 deploy-forecastle: check-kustomize check-kubectl

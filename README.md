@@ -16,7 +16,7 @@ If you are new to KFD please refer to the [official documentation][kfd-docs] on 
 
 **Kubernetes Fury Ingress** use CNCF recommended, Cloud Native projects, such as [Ingress NGINX][ingress-nginx-docs] an ingress controller using the well-known NGINX server as a URL path-based routing reverse proxy and load balancer, and [cert-manager](https://github.com/jetstack/cert-manager) to automate the issuing and renewal of TLS certificates from various issuing sources.
 
-The module also includes additional tools like [Forecastle][forecastle-repo], a web-based global directory of all the services offered by your cluster, and [Pomerium][pomerium-repo], an identity-aware proxy that enables secure access to internal applications.
+The module also includes additional tools like [Forecastle][forecastle-repo], a web-based global directory of all the services offered by your cluster.
 
 ### Architecture
 
@@ -39,8 +39,7 @@ Kubernetes Fury Ingress provides the following packages:
 | [nginx](katalog/nginx)                     | `v1.1.0`  | The NGINX Ingress Controller for Kubernetes provides delivery services for Kubernetes applications.                           |
 | [dual-nginx](katalog/dual-nginx)           | `v1.1.0`  | It deploys two identical NGINX ingress controllers but with two different scopes: public/external and private/internal.       |
 | [cert-manager](katalog/cert-manager)       | `v1.6.1`  | cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources. |
-| [forecastle](katalog/forecastle)           | `v1.0.75` | Forecastle gives you access to a control panel where you can see your ingresses and access them on Kubernetes.                |
-| [pomerium](katalog/pomerium)               | `v0.15.8` | Use this to provide ingress authentication with `dex` and OIDC.                                                               |
+| [forecastle](katalog/forecastle)           | `v1.0.75` | Forecastle gives you access to a control panel where you can see your ingresses and access them on Kubernetes.                |                                                            |
 
 ## Compatibility
 
@@ -310,7 +309,6 @@ Add the following annotations to your ingresses to be discovered by Forecastle:
 [forecastle-repository]: https://github.com/stakater/Forecastle/blob/v1.0.61/README.md
 [ingress-nginx-docs]: https://github.com/kubernetes/ingress-nginx
 [prometheus-alerts-page]: https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/
-[pomerium-repo]: https://github.com/pomerium/pomerium
 <!-- </KFD-DOCS> -->
 
 <!-- <FOOTER> -->
