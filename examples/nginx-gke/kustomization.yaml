@@ -9,8 +9,7 @@ kind: Kustomization
 namespace: ingress-nginx
 
 resources:
-  - ../nginx/bases/controller
-  - ../nginx/bases/configs
+  - ../../katalog/nginx
 
 patchesStrategicMerge:
   - loadbalancer.yml
