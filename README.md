@@ -37,8 +37,6 @@ Kubernetes Fury Ingress provides the following packages:
 | Package                                    | Version   | Description                                                                                                                   |
 |--------------------------------------------|-----------|-------------------------------------------------------------------------------------------------------------------------------|
 | [nginx](katalog/nginx)                     | `v1.1.0`  | The NGINX Ingress Controller for Kubernetes provides delivery services for Kubernetes applications.                           |
-| [nginx-gke](katalog/nginx-gke)             | `v1.1.0`  | The same as `nginx`, but uses the native GKE LoadBalancer to expose the Ingress Controller to the Internet.                   |
-| [nginx-ovh](katalog/nginx-ovh)             | `v1.1.0`  | The same as `nginx`, but uses the native OVH LoadBalancer to expose the Ingress Controller to the Internet.                   |
 | [dual-nginx](katalog/dual-nginx)           | `v1.1.0`  | It deploys two identical NGINX ingress controllers but with two different scopes: public/external and private/internal.       |
 | [cert-manager](katalog/cert-manager)       | `v1.6.1`  | cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources. |
 | [forecastle](katalog/forecastle)           | `v1.0.75` | Forecastle gives you access to a control panel where you can see your ingresses and access them on Kubernetes.                |
@@ -78,7 +76,7 @@ The Dual Controller Package creates two NGINX Ingress Controller classes, the `i
 
 ### Default Configuration
 
-For all single, dual, and GKE packages, the Kubernetes Fury Ingress module has the following default configuration:
+For both Single and Dual NGINX the Kubernetes Fury Ingress module has the following default configuration:
 
 - Maximum allowed size of the client request body: `10m`
 - HTTP status code used in redirects: `301`
@@ -98,7 +96,7 @@ Additionally, the following Prometheus [alerts][prometheus-alerts-page] are set 
 
 ### Deployment
 
-1. Once you selected the type of ingress you want to deploy (`nginx`, `dual-nginx` or `nginx-gke`) the next step is to specify this in a `Furyfile.yml`:
+1. Once you selected the type of ingress you want to deploy (`nginx` or `dual-nginx`) the next step is to specify this in a `Furyfile.yml`:
 
 Single Ingress:
 
@@ -120,29 +118,6 @@ bases:
     version: "v1.12.2"
 ```
 
-GKE:
-
-> `nginx-gke` depends on the `nginx` package, so we need to download both of them.
-
-```yaml
-bases:
-  - name: ingress/nginx
-    version: "v1.12.2"
-  - name: ingress/nginx-gke
-    version: "v1.12.2"
-```
-
-OVH:
-
-> `nginx-ovh` depends on the `nginx` package, so we need to download both of them.
-
-```yaml
-bases:
-  - name: ingress/nginx
-    version: "v1.12.2"
-  - name: ingress/nginx-ovh
-    version: "v1.12.2"
-```
 
 > See `furyctl` [documentation][furyctl-repo] for additional details about `Furyfile.yml` format.
 
