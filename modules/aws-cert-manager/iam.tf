@@ -9,7 +9,7 @@ data "aws_eks_cluster" "this" {
 }
 
 resource "aws_iam_policy" "cert_manager" {
-  name   = "cert-manager"
+  name   = "${var.cluster_name}-cert-manager"
   policy = <<EOF
 {
     "Version": "2012-10-17",
