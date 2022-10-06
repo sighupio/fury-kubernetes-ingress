@@ -93,6 +93,6 @@ module "external_dns_private_iam_assumable_role" {
   create_role                   = true
   role_name                     = "${var.cluster_name}-e-dns-private"
   provider_url                  = replace(data.aws_eks_cluster.this.identity.0.oidc.0.issuer, "https://", "")
-  role_policy_arns              = [aws_iam_policy.external_dns_private.arn]
+  role_policy_arns              = [aws_iam_policy.external_dns_private[0].arn]
   oidc_fully_qualified_subjects = ["system:serviceaccount:ingress-nginx:external-dns-private"]
 }
