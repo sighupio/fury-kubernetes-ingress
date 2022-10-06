@@ -10,4 +10,3 @@ namespace: ingress-nginx
 resources:
   - deploy.yml
   - rbac.yml
-  - sm.yml

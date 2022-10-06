@@ -10,7 +10,5 @@ namespace: ingress-nginx
 resources:
   - ../base
 
+nameSuffix: -public
 
-patchesStrategicMerge:
-  - patches/deploy.yml
-  - patches/external-dns-service-account.yml
