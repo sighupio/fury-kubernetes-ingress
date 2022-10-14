@@ -1,4 +1,4 @@
-# Copyright (c) 2020 SIGHUP s.r.l All rights reserved.
+# Copyright (c) 2017-present SIGHUP s.r.l All rights reserved.
 # Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
@@ -16,7 +16,7 @@ spec:
     rules:
     - alert: NginxIngressDown
       annotations:
-        message: 'NGINX Ingress Controller has disapperead from Prometheus
+        description: 'NGINX Ingress Controller has disapperead from Prometheus
           target discovery.'
         doc: "This alert fires if Promethes target discovery was not able to
           reach ingress-nginx-metrics in the last 15 minutes."
@@ -27,7 +27,7 @@ spec:
         severity: critical
     - alert: NginxIngressFailureRate
       annotations:
-        message: 'NGINX Ingress {{ $labels.ingress }} failure rate is {{ printf
+        description: 'NGINX Ingress {{ $labels.ingress }} failure rate is {{ printf
           "%.2f" $value }}%.'
         doc: "This alert fires if the failure rate (the rate of 5xx reponses)
           measured on a time window of 2 minutes was higher than 10% in the last
@@ -41,7 +41,7 @@ spec:
         severity: critical
     - alert: NginxIngressFailedReload
       annotations:
-        message: "Reloading NGINX Ingress' configuration has failed for {{
+        description: "Reloading NGINX Ingress' configuration has failed for {{
           $labels.namespace }}/{{ $labels.pod }}."
         doc: "This alert fires if the ingress' configuration reload failed in
           the last 10 minutes."
@@ -52,7 +52,7 @@ spec:
         severity: warning
     - alert: NginxIngressLatencyTooHigh
       annotations:
-        message: 'NGINX Ingress {{ $labels.ingress }} 50th percentile response
+        description: 'NGINX Ingress {{ $labels.ingress }} 50th percentile response
           latency too high, current value is {{ $value }}s.'
         doc: "This alert fires if the ingress 99th percentile latency was more
           than 5 seconds in the last 10 minutes."
@@ -63,7 +63,7 @@ spec:
         severity: warning
     - alert: NginxIngressLatencyTooHigh
       annotations:
-        message: 'NGINX Ingress {{ $labels.ingress }} 99th percentile response
+        description: 'NGINX Ingress {{ $labels.ingress }} 99th percentile response
           latency too high, current value is {{ $value }}s.'
         doc: "This alert fires if the ingress 99th percentile latency was more
           than 10 seconds in the last 10 minutes."
@@ -74,7 +74,7 @@ spec:
         severity: critical
     - alert: NginxIngressCertificateExpiration
       annotations:
-        message: 'NGINX Ingress certificate for host {{ $labels.host }} is
+        description: 'NGINX Ingress certificate for host {{ $labels.host }} is
           expiring in less than 7 days.'
         doc: "This alert fires if the certificate for a given host is expiring
           in less than 7 days."
@@ -85,7 +85,7 @@ spec:
         severity: warning
     - alert: NginxIngressCertificateExpiration
       annotations:
-        message: 'NGINX Ingress certificate for host {{ $labels.host }} is
+        description: 'NGINX Ingress certificate for host {{ $labels.host }} is
           expiring in less than 1 days.'
         doc: "This alert fires if the certificate for a given host is expiring
           in less than 1 days."
