@@ -2,8 +2,9 @@
 # Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
-kind: pipeline
 name: license
+kind: pipeline
+type: docker
 
 steps:
   - name: check
@@ -13,15 +14,10 @@ steps:
       - go get -u github.com/google/addlicense
       - addlicense -c "SIGHUP s.r.l" -v -l bsd --check .
 
-#  - name: checklabels
-#    image: openpolicyagent/conftest:v0.28.1
-#    pull: always
-#    commands:
-#      -  conftest pull https://raw.githubusercontent.com/sighupio/ci-commons/main/conftest/kustomization/kfd-labels.rego
-#      -  conftest test katalog/**/kustomization.yaml
 ---
-kind: pipeline
 name: policeman
+kind: pipeline
+type: docker
 
 platform:
   os: linux
@@ -42,6 +38,8 @@ steps:
       VALIDATE_JSCPD: "false"
       # hadolint already validated dockerfiles
       VALIDATE_DOCKERFILE: "false"
+      # disable natural language
+      VALIDATE_NATURAL_LANGUAGE: "false"
     depends_on:
       - clone
 
@@ -107,8 +105,9 @@ steps:
 #      - git config --global url."https://github.com/".insteadOf ssh://git@github.com
 #      - bats examples/tests.bats
 ---
-kind: pipeline
 name: e2e-kubernetes-1.20
+kind: pipeline
+type: docker
 
 depends_on:
   - policeman
@@ -205,8 +204,9 @@ volumes:
     temp: {}
 
 ---
-kind: pipeline
 name: e2e-kubernetes-1.21
+kind: pipeline
+type: docker
 
 depends_on:
   - policeman
@@ -302,8 +302,9 @@ volumes:
     temp: {}
 
 ---
-kind: pipeline
 name: e2e-kubernetes-1.22
+kind: pipeline
+type: docker
 
 depends_on:
   - policeman
@@ -399,8 +400,9 @@ volumes:
     temp: {}
 
 ---
-kind: pipeline
 name: e2e-kubernetes-1.23
+kind: pipeline
+type: docker
 
 depends_on:
   - policeman
@@ -496,8 +498,9 @@ volumes:
     temp: {}
 
 ---
-kind: pipeline
 name: release
+kind: pipeline
+type: docker
 
 depends_on:
   - e2e-kubernetes-1.20
