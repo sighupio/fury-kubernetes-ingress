@@ -1,0 +1,24 @@
+# Copyright (c) 2022 SIGHUP s.r.l All rights reserved.
+# Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
+
+- op: "replace"
+  path: "/metadata/labels"
+  value:
+    app: ingress-internal
+
+- op: "replace"
+  path: "/spec/secretName"
+  value: "ingress-nginx-tls-internal"
+
+- op: "replace"
+  path: "/spec/dnsNames/0"
+  value: "ingress-nginx-admission-internal"
+
+- op: "replace"
+  path: "/spec/dnsNames/1"
+  value: "ingress-nginx-admission-internal.ingress-nginx"
+
+- op: "replace"
+  path: "/spec/dnsNames/2"
+  value: "ingress-nginx-admission-internal.ingress-nginx.svc"

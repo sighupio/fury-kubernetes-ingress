@@ -1,0 +1,38 @@
+# Copyright (c) 2022 SIGHUP s.r.l All rights reserved.
+# Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
+
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: ingress-nginx-selfsign
+  labels:
+    app: ingress-nginx
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: ingress-nginx-ca
+  labels:
+    app: ingress-nginx
+spec:
+  secretName: ingress-nginx-ca
+  duration: 43800h
+  issuerRef:
+    name: ingress-nginx-selfsign
+  commonName: "ca.ingress-nginx-admission.ingress-nginx"
+  isCA: true
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: ingress-nginx-ca
+  labels:
+    app: ingress-nginx
+spec:
+  ca:
+    secretName: ingress-nginx-ca
+---

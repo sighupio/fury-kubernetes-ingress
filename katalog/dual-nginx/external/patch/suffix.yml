@@ -15,3 +15,7 @@ fieldSpecs:
   path: metadata/name
 - kind: DaemonSet
   path: metadata/name
+- kind: Certificate
+  path: metadata/name
+- kind: ValidatingWebhookConfiguration
+  path: metadata/name

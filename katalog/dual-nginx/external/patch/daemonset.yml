@@ -17,3 +17,7 @@
 - op: "replace"
   path: "/spec/template/spec/containers/0/args/7"
   value: "--election-id=ingress-controller-leader-external"
+
+- op: "replace"
+  path: "/spec/template/spec/volumes/0/secret/secretName"
+  value: "ingress-nginx-tls-external"
