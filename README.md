@@ -41,7 +41,7 @@ Kubernetes Fury Ingress provides the following packages:
 | [nginx](katalog/nginx)               | `v1.1.2`   | The NGINX Ingress Controller for Kubernetes provides delivery services for Kubernetes applications.                           |
 | [dual-nginx](katalog/dual-nginx)     | `v1.1.2`   | It deploys two identical NGINX ingress controllers but with two different scopes: public/external and private/internal.       |
 | [cert-manager](katalog/cert-manager) | `v1.6.1`   | cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources. |
-| [forecastle](katalog/forecastle)     | `v1.0.103` | Forecastle gives you access to a control panel where you can see your ingresses and access them on Kubernetes.                |  |
+| [forecastle](katalog/forecastle)     | `v1.0.103` | Forecastle gives you access to a control panel where you can see your ingresses and access them on Kubernetes.                |
 
 ## Compatibility
 
@@ -248,7 +248,7 @@ If you don't have infra nodes and you don't want to run ingress-controllers on a
 
 #### Applications directory with Forecastle
 
-Forecastle list all the annotated ingress (applications) that exists in your cluster with and icon grouped by namesapce, in a nice web UI. It let's you search, personalize the header for the landing page (title and colors), let's you list custom ingress and add details to each entry.
+Forecastle list all the annotated ingress (applications) that exists in your cluster with an icon grouped by namesapce, in a nice web UI. It lets you search, personalize the header for the landing page (title and colors), it lets you list custom ingress and add more details to each entry.
 
 Use Forecastle as your cluster entry point to discover the running applications easily.
 
@@ -324,7 +324,7 @@ Before contributing, please read first the [Contributing Guidelines](docs/CONTRI
 
 ### Reporting Issues
 
-In case you experience any problem with the module, please [open a new issue](https://github.com/sighupio/fury-kubernetes-ingress/issues/new/choose).
+In case you experience any problems with the module, please [open a new issue](https://github.com/sighupio/fury-kubernetes-ingress/issues/new/choose).
 
 ## License
 
