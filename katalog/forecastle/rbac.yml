@@ -17,8 +17,17 @@ metadata:
   labels:
     app: forecastle
 rules:
-  - apiGroups: ["", "extensions", "networking.k8s.io"]
-    resources: ["ingresses", "namespaces"]
+  - apiGroups: [""]
+    resources: ["namespaces"]
+    verbs: ["get", "list"]
+  - apiGroups: ["networking.k8s.io"]
+    resources: ["ingresses"]
+    verbs: ["get", "list"]
+  - apiGroups: ["route.openshift.io"]
+    resources: ["routes"]
+    verbs: ["get", "list"]
+  - apiGroups: ["traefik.containo.us"]
+    resources: ["ingressroutes"]
     verbs: ["get", "list"]
   - apiGroups: ["forecastle.stakater.com"]
     resources: ["*"]
