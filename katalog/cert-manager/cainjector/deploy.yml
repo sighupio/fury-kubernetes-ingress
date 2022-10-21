@@ -1,4 +1,4 @@
-# Copyright (c) 2020 SIGHUP s.r.l All rights reserved.
+# Copyright (c) 2017-present SIGHUP s.r.l All rights reserved.
 # Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
@@ -17,24 +17,24 @@ spec:
     spec:
       serviceAccountName: cert-manager-cainjector
       containers:
-      - name: cainjector
-        image: quay.io/jetstack/cert-manager-cainjector
-        imagePullPolicy: Always
-        args:
-        - --v=2
-        - --leader-election-namespace=$(POD_NAMESPACE)
-        env:
-        - name: POD_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        securityContext:
-          capabilities:
-            drop:
-            - ALL
-          readOnlyRootFilesystem: true
-          runAsNonRoot: true
-        resources:
-          requests:
-            cpu: 50m
-            memory: 50Mi
+        - name: cainjector
+          image: quay.io/jetstack/cert-manager-cainjector
+          imagePullPolicy: Always
+          args:
+            - --v=2
+            - --leader-election-namespace=$(POD_NAMESPACE)
+          env:
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          securityContext:
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
