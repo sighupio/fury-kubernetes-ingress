@@ -19,3 +19,9 @@ variable "private_zone_id" {
   type        = string
   default     = ""
 }
+
+variable "tags" {
+  description = "Additional tags for the created resources"
+  type        = map(string)
+  default     = {}
+}

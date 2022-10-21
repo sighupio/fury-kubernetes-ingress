@@ -1,20 +1,22 @@
+<!-- markdownlint-disable MD033 -->
 <h1>
     <img src="https://github.com/sighupio/fury-distribution/blob/master/docs/assets/fury-epta-white.png?raw=true" align="left" width="90" style="margin-right: 15px"/>
     Kubernetes Fury Ingress
 </h1>
+<!-- markdownlint-enable MD033 -->
 
 ![Release](https://img.shields.io/github/v/release/sighupio/fury-kubernetes-ingress?label=Latest%20Release)
 ![License](https://img.shields.io/github/license/sighupio/fury-kubernetes-ingress?label=License)
 ![Slack](https://img.shields.io/badge/slack-@kubernetes/fury-yellow.svg?logo=slack&label=Slack)
 
 <!-- <KFD-DOCS> -->
-**Kubernetes Fury Ingress** provides Ingress Controllers to expose services and TLS certificates management solutions for the [Kubernetes Fury Distribution (KFD)][kfd-repo].
+**Kubernetes Fury Ingress** provides Ingress Controllers to expose services and TLS certificate management solutions for the [Kubernetes Fury Distribution (KFD)][kfd-repo].
 
 If you are new to KFD please refer to the [official documentation][kfd-docs] on how to get started with KFD.
 
 ## Overview
 
-**Kubernetes Fury Ingress** use CNCF recommended, Cloud Native projects, such as [Ingress NGINX][ingress-nginx-docs] an ingress controller using the well-known NGINX server as a URL path-based routing reverse proxy and load balancer, and [cert-manager](https://github.com/jetstack/cert-manager) to automate the issuing and renewal of TLS certificates from various issuing sources.
+**Kubernetes Fury Ingress** uses CNCF recommended, Cloud Native projects, such as [Ingress NGINX][ingress-nginx-docs] an ingress controller using the well-known NGINX server as a URL path-based routing reverse proxy and load balancer, and [cert-manager](https://github.com/jetstack/cert-manager) to automate the issuing and renewal of TLS certificates from various issuing sources.
 
 The module also includes additional tools like [Forecastle][forecastle-repo], a web-based global directory of all the services offered by your cluster.
 
@@ -34,16 +36,18 @@ The reference architecture used to deploy the Fury Kubernetes Ingress Module is 
 
 Kubernetes Fury Ingress provides the following packages:
 
-| Package                                    | Version   | Description                                                                                                                   |
-|--------------------------------------------|-----------|-------------------------------------------------------------------------------------------------------------------------------|
-| [nginx](katalog/nginx)                     | `v1.1.0`  | The NGINX Ingress Controller for Kubernetes provides delivery services for Kubernetes applications.                           |
-| [dual-nginx](katalog/dual-nginx)           | `v1.1.0`  | It deploys two identical NGINX ingress controllers but with two different scopes: public/external and private/internal.       |
-| [cert-manager](katalog/cert-manager)       | `v1.6.1`  | cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources. |
-| [forecastle](katalog/forecastle)           | `v1.0.75` | Forecastle gives you access to a control panel where you can see your ingresses and access them on Kubernetes.                |                                                            |
+| Package                                       | Version   | Description                                                                                                                   |
+| --------------------------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| [nginx](katalog/nginx)                        | `v1.1.0`  | The NGINX Ingress Controller for Kubernetes provides delivery services for Kubernetes applications.                           |
+| [dual-nginx](katalog/dual-nginx)              | `v1.1.0`  | It deploys two identical NGINX ingress controllers but with two different scopes: public/external and private/internal.       |
+| [cert-manager](katalog/cert-manager)          | `v1.6.1`  | cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources. |
+| [forecastle](katalog/forecastle)              | `v1.0.75` | Forecastle gives you access to a control panel where you can see your ingresses and access them on Kubernetes.                |
+| [aws-cert-manager](modules/aws-cert-manager/) | -         | Terraform modules for managing IAM permissions on AWS for cert-manager                                                        |
+| [aws-external-dns](modules/aws-external-dns/) | -         | Terraform modules for managing IAM permissions on AWS for external-dns                                                        |
 
 ## Compatibility
 
-| Kubernetes Version |   Compatibility    |                        Notes                        |
+| Kubernetes Version |   Compatibility    | Notes                                               |
 | ------------------ | :----------------: | --------------------------------------------------- |
 | `1.20.x`           | :white_check_mark: | No known issues                                     |
 | `1.21.x`           | :white_check_mark: | No known issues                                     |
@@ -56,10 +60,10 @@ Check the [compatibility matrix][compatibility-matrix] for additional informatio
 
 ### Prerequisites
 
-| Tool                                    | Version    | Description                                                                                                                                                    |
-|-----------------------------------------|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [furyctl][furyctl-repo]                 | `>=0.6.0`  | The recommended tool to download and manage KFD modules and their packages. To learn more about `furyctl` read the [official documentation][furyctl-repo].     |
-| [kustomize][kustomize-repo]             | `>=3.5.0`  | Packages are customized using `kustomize`. To learn how to create your customization layer with `kustomize`, please refer to the [repository][kustomize-repo]. |
+| Tool                        | Version   | Description                                                                                                                                                    |
+| --------------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [furyctl][furyctl-repo]     | `>=0.6.0` | The recommended tool to download and manage KFD modules and their packages. To learn more about `furyctl` read the [official documentation][furyctl-repo].     |
+| [kustomize][kustomize-repo] | `>=3.5.0` | Packages are customized using `kustomize`. To learn how to create your customization layer with `kustomize`, please refer to the [repository][kustomize-repo]. |
 
 ### Single vs Dual Controller
 
@@ -116,7 +120,6 @@ bases:
   - name: ingress/dual-nginx
     version: "v1.12.2"
 ```
-
 
 > See `furyctl` [documentation][furyctl-repo] for additional details about `Furyfile.yml` format.
 
@@ -284,7 +287,7 @@ Forecastle looks for specific annotations on ingresses objects.
 Add the following annotations to your ingresses to be discovered by Forecastle:
 
 | Annotation                                   | Description                                                                                                                                               | Required |
-|----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | `forecastle.stakater.com/expose`             | Add this with value `true` to the ingress of the app you want to show in Forecastle                                                                       | `true`   |
 | `forecastle.stakater.com/icon`               | Icon/Image URL of the application; An icons/logos/images collection repo [Icons][forecastle-icons]                                                        | `false`  |
 | `forecastle.stakater.com/appName`            | A custom name for your application. Default is the name of the ingress                                                                                    | `false`  |

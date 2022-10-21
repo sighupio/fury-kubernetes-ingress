@@ -13,3 +13,9 @@ variable "public_zone_id" {
   description = "Route53 public zone ID"
   type        = string
 }
+
+variable "tags" {
+  description = "Additional tags for the created resources"
+  type        = map(string)
+  default     = {}
+}

@@ -1,37 +1,49 @@
-# IAM for AWS cert manager
+# IAM for AWS cert-manager
 
-This terraform module provides an easy way to generate cert-manager required IAM permissions.
+This Terraform module provides an easy way to generate cert-manager required IAM permissions.
 
 > ⚠️ **Warning**: this module uses ["IAM Roles for ServiceAccount"](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) to inject AWS credentials inside cluster autoscaler pods
 
 ## Requirements
 
-|   Name    | Version     |
-| --------- | ----------- |
-| terraform | `>= 0.15.4` |
-| aws       | `>= 3.37.0` |
+| Name                                                                      | Version   |
+| ------------------------------------------------------------------------- | --------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.15.4 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws)                   | >= 3.37.0 |
 
 ## Providers
 
-| Name | Version  |
-| ---- | -------- |
-| aws  | `>= 3.37.0` |
+| Name                                              | Version   |
+| ------------------------------------------------- | --------- |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.37.0 |
+
+## Modules
+
+| Name                                                                                                                                      | Source                                                              | Version |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | ------- |
+| <a name="module_cert_manager_iam_assumable_role"></a> [cert\_manager\_iam\_assumable\_role](#module\_cert\_manager\_iam\_assumable\_role) | terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc | v3.16.0 |
+
+## Resources
+
+| Name                                                                                                                  | Type        |
+| --------------------------------------------------------------------------------------------------------------------- | ----------- |
+| [aws_iam_policy.cert_manager](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource    |
+| [aws_eks_cluster.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/eks_cluster)    | data source |
 
 ## Inputs
 
-|         Name         |              Description              |     Type      | Default | Required |
-| -------------------- | ------------------------------------- | ------------- | ------- | :------: |
-| cluster_name         | The EKS cluster name                  | `string`      | n/a     |   yes    |
-| public\_zone\_id     | The public zone ID                    | `string`      | n/a     |   yes    |
+| Name                                                                             | Description                               | Type          | Default | Required |
+| -------------------------------------------------------------------------------- | ----------------------------------------- | ------------- | ------- | :------: |
+| <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name)         | EKS cluster name                          | `string`      | n/a     |   yes    |
+| <a name="input_public_zone_id"></a> [public\_zone\_id](#input\_public\_zone\_id) | Route53 public zone ID                    | `string`      | n/a     |   yes    |
+| <a name="input_tags"></a> [tags](#input\_tags)                                   | Additional tags for the created resources | `map(string)` | `{}`    |    no    |
 
 ## Outputs
 
-|            Name                    |               Description               |
-| ---------------------------------- | --------------------------------------- |
-| cert\_manager\_patches             | Cert Manager SA Kustomize patch   |
-| cert\_manager\_iam\_role\_arn      | Cert Manager IAM role arn       |
-
-
+| Name                                                                                                                    | Description                               |
+| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| <a name="output_cert_manager_iam_role_arn"></a> [cert\_manager\_iam\_role\_arn](#output\_cert\_manager\_iam\_role\_arn) | cert-manager IAM role                     |
+| <a name="output_cert_manager_patches"></a> [cert\_manager\_patches](#output\_cert\_manager\_patches)                    | cert-manager Kubernetes resources patches |
 ## Usage
 
 ```hcl
@@ -39,5 +51,6 @@ module "cert_manager_iam_role" {
   source             = "../vendor/modules/ingress/aws-cert-manager"
   cluster_name       = "myekscluster"
   public_zone_id     = "Z1BM4RA99PG48O"
+  tags               = {"mykey": "myvalue"}
 }
 ```
