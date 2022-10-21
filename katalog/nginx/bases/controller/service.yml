@@ -23,3 +23,18 @@ spec:
       port: 443
       nodePort: 31443
       targetPort: https
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ingress-nginx-admission
+  namespace: ingress-nginx
+spec:
+  type: ClusterIP
+  selector:
+    app: ingress-nginx
+  ports:
+  - appProtocol: https
+    name: https-webhook
+    port: 9443
+    targetPort: webhook
