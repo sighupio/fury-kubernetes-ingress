@@ -1,4 +1,4 @@
-# Copyright (c) 2020 SIGHUP s.r.l All rights reserved.
+# Copyright (c) 2017-present SIGHUP s.r.l All rights reserved.
 # Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
@@ -6,7 +6,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 transformers:
-- ./patch/suffix.yml
+  - ./patch/suffix.yml
 
 bases:
   - ../../nginx/bases/controller
@@ -48,15 +48,15 @@ patchesJson6902:
     path: patch/vwh.yml
 
 patches:
-- target:
-    kind: IngressClass
-    name: nginx
-  patch: |-
-    - op: replace
-      path: /metadata/name
-      value: external
-    - op: remove
-      path: /metadata/annotations
-    - op: replace
-      path: "/apiVersion"
-      value: networking.k8s.io/v1
+  - target:
+      kind: IngressClass
+      name: nginx
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: external
+      - op: remove
+        path: /metadata/annotations
+      - op: replace
+        path: "/apiVersion"
+        value: networking.k8s.io/v1
