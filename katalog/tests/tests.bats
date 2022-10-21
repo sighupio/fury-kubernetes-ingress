@@ -25,16 +25,6 @@ wait_for_settlement (){
   kubectl apply -f https://raw.githubusercontent.com/sighupio/fury-kubernetes-monitoring/v2.0.0/katalog/prometheus-operator/crds/0servicemonitorCustomResourceDefinition.yaml
 }
 
-@test "testing dual-nginx apply" {
-  info
-  install() {
-      apply katalog/dual-nginx
-  }
-  loop_it install 30 5
-  status=${loop_it_result}
-  [ "$status" -eq 0 ]
-}
-
 @test "prepare cert-manager apply" {
   info
   kubectl apply -f katalog/cert-manager/cert-manager-controller/crd.yml
@@ -46,6 +36,16 @@ wait_for_settlement (){
       apply katalog/cert-manager
   }
   loop_it install 45 10
+  status=${loop_it_result}
+  [ "$status" -eq 0 ]
+}
+
+@test "testing dual-nginx apply" {
+  info
+  install() {
+      apply katalog/dual-nginx
+  }
+  loop_it install 30 5
   status=${loop_it_result}
   [ "$status" -eq 0 ]
 }
