@@ -34,6 +34,18 @@ patchesJson6902:
       kind: ConfigMap
       name: nginx-configuration
     path: patch/cm.yml
+  - target:
+      group: cert-manager.io
+      version: v1
+      kind: Certificate
+      name: ingress-nginx-tls
+    path: patch/tlsCert.yml
+  - target:
+      group: admissionregistration.k8s.io
+      version: v1
+      kind: ValidatingWebhookConfiguration
+      name: ingress-nginx-admission
+    path: patch/vwh.yml
 
 patches:
 - target:

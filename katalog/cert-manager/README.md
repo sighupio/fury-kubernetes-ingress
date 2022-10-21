@@ -56,13 +56,13 @@ For the `dual-nginx` you will need to patch the `ClusterIssuer` resource with th
 ---
 patchesJson6902:
     - target:
-          group: certmanager.k8s.io
+          group: cert-manager.io
           version: v1
           kind: ClusterIssuer
           name: letsencrypt-staging
       path: patches/dual-nginx.yml
     - target:
-          group: certmanager.k8s.io
+          group: cert-manager.io
           version: v1
           kind: ClusterIssuer
           name: letsencrypt-prod
