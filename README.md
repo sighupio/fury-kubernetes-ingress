@@ -36,12 +36,12 @@ The reference architecture used to deploy the Fury Kubernetes Ingress Module is 
 
 Kubernetes Fury Ingress provides the following packages:
 
-| Package                              | Version   | Description                                                                                                                   |
-| ------------------------------------ | --------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| [nginx](katalog/nginx)               | `v1.1.2`  | The NGINX Ingress Controller for Kubernetes provides delivery services for Kubernetes applications.                           |
-| [dual-nginx](katalog/dual-nginx)     | `v1.1.2`  | It deploys two identical NGINX ingress controllers but with two different scopes: public/external and private/internal.       |
-| [cert-manager](katalog/cert-manager) | `v1.6.1`  | cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources. |
-| [forecastle](katalog/forecastle)     | `v1.0.75` | Forecastle gives you access to a control panel where you can see your ingresses and access them on Kubernetes.                |  |
+| Package                              | Version    | Description                                                                                                                   |
+| ------------------------------------ | ---------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| [nginx](katalog/nginx)               | `v1.1.2`   | The NGINX Ingress Controller for Kubernetes provides delivery services for Kubernetes applications.                           |
+| [dual-nginx](katalog/dual-nginx)     | `v1.1.2`   | It deploys two identical NGINX ingress controllers but with two different scopes: public/external and private/internal.       |
+| [cert-manager](katalog/cert-manager) | `v1.6.1`   | cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources. |
+| [forecastle](katalog/forecastle)     | `v1.0.103` | Forecastle gives you access to a control panel where you can see your ingresses and access them on Kubernetes.                |  |
 
 ## Compatibility
 
@@ -189,7 +189,6 @@ bases:
   - name: ingress/dual-nginx
     version: "v1.12.2"
 ```
-
 
 > See `furyctl` [documentation][furyctl-repo] for additional details about `Furyfile.yml` format.
 
