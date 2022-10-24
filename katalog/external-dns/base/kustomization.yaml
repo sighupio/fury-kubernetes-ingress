@@ -10,3 +10,7 @@ namespace: ingress-nginx
 resources:
   - deploy.yml
   - rbac.yml
+
+images:
+  - name: k8s.gcr.io/external-dns/external-dns
+    newName: registry.sighup.io/fury/external-dns/external-dns
