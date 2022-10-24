@@ -11,11 +11,11 @@ namespace: ingress-nginx
 resources:
   - deploy.yml
   - rbac.yml
+  - service.yml
 
 images:
   - name: stakater/forecastle
     newName: registry.sighup.io/fury/stakater/forecastle
-    newTag: v1.0.75
 
 configMapGenerator:
   - name: forecastle-config

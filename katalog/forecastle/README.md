@@ -7,12 +7,12 @@
 ## Requirements
 
 - Kubernetes >= `1.20.0`
-- Kustomize >= `v3`
+- Kustomize >= `v3.5.3`
 
 ## Image repository and tag
 
-- Forecastle image: `docker.io/stakater/forecastle:v1.0.75`
-- Forecastl repo: [https://github.com/stakater/Forecastle](https://github.com/stakater/Forecastle)
+- Forecastle image: `docker.io/stakater/forecastle:v1.0.103`
+- Forecastle repo: [https://github.com/stakater/Forecastle](https://github.com/stakater/Forecastle)
 
 ## Configuration
 
@@ -26,15 +26,15 @@ Forecastle is deployed with the following configuration:
 
 ## Deployment
 
-Forecastle can be deployed by running the following command in the root of the project:
+Forecastle can be deployed by running the following command at the root of the project:
 
 ```shell
-kustomize build katalog/forecastl | kubectl apply -f -
+kustomize build katalog/forecastle | kubectl apply -f -
 ```
 
 ### Usage
 
-Once deployed, to have your ingress show up in the dashboard provided by Forecastle:
+Once deployed, to have an ingress show up in the dashboard provided by Forecastle run:
 
 ```shell
 kubectl annotate ingress <YOUR_INGRESS> "forecastle.stakater.com/expose=true" --overwrite
