@@ -10,7 +10,7 @@
 ![Slack](https://img.shields.io/badge/slack-@kubernetes/fury-yellow.svg?logo=slack&label=Slack)
 
 <!-- <KFD-DOCS> -->
-**Kubernetes Fury Ingress** provides Ingress Controllers to expose services and TLS certificates management solutions for the [Kubernetes Fury Distribution (KFD)][kfd-repo].
+**Kubernetes Fury Ingress** provides Ingress Controllers to expose services and TLS certificate management solutions for the [Kubernetes Fury Distribution (KFD)][kfd-repo].
 
 If you are new to KFD please refer to the [official documentation][kfd-docs] on how to get started with KFD.
 
@@ -36,12 +36,14 @@ The reference architecture used to deploy the Fury Kubernetes Ingress Module is 
 
 Kubernetes Fury Ingress provides the following packages:
 
-| Package                              | Version    | Description                                                                                                                   |
-| ------------------------------------ | ---------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| [nginx](katalog/nginx)               | `v1.1.2`   | The NGINX Ingress Controller for Kubernetes provides delivery services for Kubernetes applications.                           |
-| [dual-nginx](katalog/dual-nginx)     | `v1.1.2`   | It deploys two identical NGINX ingress controllers but with two different scopes: public/external and private/internal.       |
-| [cert-manager](katalog/cert-manager) | `v1.6.1`   | cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources. |
-| [forecastle](katalog/forecastle)     | `v1.0.103` | Forecastle gives you access to a control panel where you can see your ingresses and access them on Kubernetes.                |
+| Package                                       | Version    | Description                                                                                                                   |
+| --------------------------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| [nginx](katalog/nginx)                        | `v1.1.2`   | The NGINX Ingress Controller for Kubernetes provides delivery services for Kubernetes applications.                           |
+| [dual-nginx](katalog/dual-nginx)              | `v1.1.2`   | It deploys two identical NGINX ingress controllers but with two different scopes: public/external and private/internal.       |
+| [cert-manager](katalog/cert-manager)          | `v1.6.1`   | cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources. |
+| [forecastle](katalog/forecastle).             | `v1.0.103` | Forecastle gives you access to a control panel where you can see your ingresses and access them on Kubernetes.                |
+| [aws-cert-manager](modules/aws-cert-manager/) | -          | Terraform modules for managing IAM permissions on AWS for cert-manager                                                        |
+| [aws-external-dns](modules/aws-external-dns/) | -          | Terraform modules for managing IAM permissions on AWS for external-dns                                                        |
 
 ## Compatibility
 
