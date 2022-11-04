@@ -11,12 +11,12 @@ namespace: ingress-nginx
 images:
   - name: k8s.gcr.io/ingress-nginx/controller
     newName: registry.sighup.io/fury/ingress-nginx/controller
-    newTag: v1.1.2
+    newTag: v1.3.1
 
 resources:
-  - deployment.yml
+  - daemonset.yml
   - cm.yml
   - service.yml
   - ingressClass.yml
-  - tlsCert.yml
-  - vwh.yml
+  - tls-cert.yml
+  - validating-webhook.yml

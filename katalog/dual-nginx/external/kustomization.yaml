@@ -8,7 +8,7 @@ kind: Kustomization
 transformers:
   - ./patch/suffix.yml
 
-bases:
+resources:
   - ../../nginx/bases/controller
 
 commonLabels:
@@ -39,13 +39,13 @@ patchesJson6902:
       version: v1
       kind: Certificate
       name: ingress-nginx-tls
-    path: patch/tlsCert.yml
+    path: patch/tls-cert.yml
   - target:
       group: admissionregistration.k8s.io
       version: v1
       kind: ValidatingWebhookConfiguration
       name: ingress-nginx-admission
-    path: patch/vwh.yml
+    path: patch/validating-webhook.yml
 
 patches:
 - target:

@@ -13,12 +13,17 @@ spec:
       app: ingress-nginx
   revisionHistoryLimit: 10
   minReadySeconds: 0
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
   template:
     metadata:
       labels:
         app: ingress-nginx
     spec:
-      serviceAccountName: nginx-ingress-serviceaccount
+      serviceAccountName: ingress-nginx
       securityContext:
         fsGroup: 101
       containers:
@@ -37,8 +42,9 @@ spec:
             - --annotations-prefix=nginx.ingress.kubernetes.io
             - --http-port=8080
             - --https-port=8443
-            - --ingress-class=nginx
+            - --ingress-class=k8s.io/ingress-nginx
             - --election-id=ingress-controller-leader
+            - --controller-class=k8s.io/ingress-nginx
             - --validating-webhook=:9443
             - --validating-webhook-certificate=/usr/local/certificates/tls.crt
             - --validating-webhook-key=/usr/local/certificates/tls.key
