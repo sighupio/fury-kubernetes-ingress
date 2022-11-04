@@ -42,7 +42,7 @@ spec:
             - --annotations-prefix=nginx.ingress.kubernetes.io
             - --http-port=8080
             - --https-port=8443
-            - --ingress-class=k8s.io/ingress-nginx
+            - --ingress-class=nginx
             - --election-id=ingress-controller-leader
             - --controller-class=k8s.io/ingress-nginx
             - --validating-webhook=:9443
