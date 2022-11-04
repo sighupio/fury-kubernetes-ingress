@@ -48,16 +48,19 @@ patchesJson6902:
     path: patch/vwh.yml
 
 patches:
-  - target:
-      kind: IngressClass
-      name: nginx
-      version: v1
-    patch: |-
-      - op: replace
-        path: /metadata/name
-        value: internal
-      - op: remove
-        path: /metadata/annotations
-      - op: replace
-        path: "/apiVersion"
-        value: networking.k8s.io/v1
+- target:
+    kind: IngressClass
+    name: nginx
+    version: v1
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: internal
+    - op: remove
+      path: /metadata/annotations
+    - op: replace
+      path: "/apiVersion"
+      value: networking.k8s.io/v1
+    - op: replace
+      path: /spec/controller
+      value: k8s.io/internal

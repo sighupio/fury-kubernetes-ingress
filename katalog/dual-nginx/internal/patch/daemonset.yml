@@ -12,12 +12,17 @@
 
 - op: "replace"
   path: "/spec/template/spec/containers/0/args/6"
-  value: "--ingress-class=internal"
+  value: "--ingress-class=k8s.io/internal"
 
 - op: "replace"
   path: "/spec/template/spec/containers/0/args/7"
   value: "--election-id=ingress-controller-leader-internal"
 
+- op: "add"
+  path: "/spec/template/spec/containers/0/args/8"
+  value: "--controller-class=k8s.io/internal"
+
 - op: "replace"
   path: "/spec/template/spec/volumes/0/secret/secretName"
   value: "ingress-nginx-tls-internal"
+
