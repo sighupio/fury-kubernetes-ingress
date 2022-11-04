@@ -1,4 +1,4 @@
-# Copyright (c) 2020 SIGHUP s.r.l All rights reserved.
+# Copyright (c) 2017-present SIGHUP s.r.l All rights reserved.
 # Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
@@ -39,6 +39,9 @@ spec:
             - --https-port=8443
             - --ingress-class=nginx
             - --election-id=ingress-controller-leader
+            - --validating-webhook=:9443
+            - --validating-webhook-certificate=/usr/local/certificates/tls.crt
+            - --validating-webhook-key=/usr/local/certificates/tls.key
           securityContext:
             capabilities:
               drop:
@@ -67,6 +70,8 @@ spec:
               containerPort: 8443
             - name: metrics
               containerPort: 10254
+            - name: webhook
+              containerPort: 9443
           livenessProbe:
             failureThreshold: 5
             httpGet:
@@ -91,3 +96,12 @@ spec:
             requests:
               cpu: 100m
               memory: 90Mi
+          volumeMounts:
+            - mountPath: /usr/local/certificates/
+              name: ingress-nginx-tls
+              readOnly: true
+      volumes:
+        - name: ingress-nginx-tls
+          secret:
+            defaultMode: 420
+            secretName: ingress-nginx-tls

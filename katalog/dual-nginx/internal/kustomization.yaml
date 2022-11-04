@@ -1,4 +1,4 @@
-# Copyright (c) 2020 SIGHUP s.r.l All rights reserved.
+# Copyright (c) 2017-present SIGHUP s.r.l All rights reserved.
 # Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
@@ -6,7 +6,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 transformers:
-- ./patch/suffix.yml
+  - ./patch/suffix.yml
 
 bases:
   - ../../nginx/bases/controller
@@ -34,6 +34,18 @@ patchesJson6902:
       kind: ConfigMap
       name: nginx-configuration
     path: patch/cm.yml
+  - target:
+      group: cert-manager.io
+      version: v1
+      kind: Certificate
+      name: ingress-nginx-tls
+    path: patch/tlsCert.yml
+  - target:
+      group: admissionregistration.k8s.io
+      version: v1
+      kind: ValidatingWebhookConfiguration
+      name: ingress-nginx-admission
+    path: patch/vwh.yml
 
 patches:
 - target:
@@ -44,11 +56,11 @@ patches:
     - op: replace
       path: /metadata/name
       value: internal
-    - op: replace
-      path: /spec/controller
-      value: k8s.io/internal
     - op: remove
       path: /metadata/annotations
     - op: replace
       path: "/apiVersion"
       value: networking.k8s.io/v1
+    - op: replace
+      path: /spec/controller
+      value: k8s.io/internal

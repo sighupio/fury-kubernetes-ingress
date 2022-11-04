@@ -1,4 +1,4 @@
-# Copyright (c) 2020 SIGHUP s.r.l All rights reserved.
+# Copyright (c) 2017-present SIGHUP s.r.l All rights reserved.
 # Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
@@ -11,10 +11,12 @@ namespace: ingress-nginx
 images:
   - name: k8s.gcr.io/ingress-nginx/controller
     newName: registry.sighup.io/fury/ingress-nginx/controller
-    newTag: v1.1.0
+    newTag: v1.1.2
 
 resources:
   - deployment.yml
   - cm.yml
   - service.yml
   - ingressClass.yml
+  - tlsCert.yml
+  - vwh.yml

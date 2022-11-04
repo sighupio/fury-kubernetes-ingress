@@ -27,7 +27,6 @@ $ make help
   deploy-all                    Deploys all the components in the ingress module (with dual-nginx  deploy-nginx           Deploys `nginx` componenet
   deploy-nginx-dual      Deploys `nginx-dual` componenet
   deploy-cert-manager    Deploys `cert-manager` componenet
-  deploy-pomerium        Deploys `pomerium` componenet)
   clean-%                       Clean the container image resulting from another target. make build clean-build
   build-canonical-json          Build a canonical JSON for any tag of module, only to be run inside a clean working directory
 ```
@@ -140,7 +139,7 @@ command, which in turn triggers other make targets for individual components:
 
 ```bash
 $ make deploy-all
-# This deploys nginx-dual, cert-manager, pomerium and forecastle
+# This deploys nginx-dual, cert-manager and forecastle
 ```
 
 ## build-canonical-json

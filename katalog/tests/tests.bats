@@ -4,8 +4,8 @@
 load ./helper
 
 apply (){
-  kustomize build $1 >&2
-  kustomize build $1 | kubectl apply -f -
+  kustomize build "${1}" >&2
+  kustomize build "${1}" | kubectl apply -f -
 }
 
 wait_for_settlement (){
@@ -13,26 +13,16 @@ wait_for_settlement (){
   echo "=====" $max_retry "=====" >&2
   while kubectl get pods --all-namespaces | grep -ie "\(Pending\|Error\|CrashLoop\|ContainerCreating\)" >&2
   do
-    [ $max_retry -lt $1 ] || ( kubectl describe all --all-namespaces >&2 && return 1 )
+    [ $max_retry -lt "${1}" ] || ( kubectl describe all --all-namespaces >&2 && return 1 )
     sleep 10 && echo "# waiting..." $max_retry >&3
-    max_retry=$[ $max_retry + 1 ]
+    max_retry=$(( max_retry + 1 ))
   done
 }
 
 @test "applying monitoring" {
   info
-  kubectl apply -f https://raw.githubusercontent.com/sighupio/fury-kubernetes-monitoring/v1.13.0-rc/katalog/prometheus-operator/crd-servicemonitor.yml
-  kubectl apply -f https://raw.githubusercontent.com/sighupio/fury-kubernetes-monitoring/v1.13.0-rc/katalog/prometheus-operator/crd-rule.yml
-}
-
-@test "testing dual-nginx apply" {
-  info
-  install() {
-      apply katalog/dual-nginx
-  }
-  loop_it install 30 5
-  status=${loop_it_result}
-  [ "$status" -eq 0 ]
+  kubectl apply -f https://raw.githubusercontent.com/sighupio/fury-kubernetes-monitoring/v2.0.0/katalog/prometheus-operator/crds/0prometheusruleCustomResourceDefinition.yaml
+  kubectl apply -f https://raw.githubusercontent.com/sighupio/fury-kubernetes-monitoring/v2.0.0/katalog/prometheus-operator/crds/0servicemonitorCustomResourceDefinition.yaml
 }
 
 @test "prepare cert-manager apply" {
@@ -46,6 +36,16 @@ wait_for_settlement (){
       apply katalog/cert-manager
   }
   loop_it install 45 10
+  status=${loop_it_result}
+  [ "$status" -eq 0 ]
+}
+
+@test "testing dual-nginx apply" {
+  info
+  install() {
+      apply katalog/dual-nginx
+  }
+  loop_it install 30 5
   status=${loop_it_result}
   [ "$status" -eq 0 ]
 }

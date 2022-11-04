@@ -1,0 +1,20 @@
+# Copyright (c) 2022 SIGHUP s.r.l All rights reserved.
+# Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: ingress-nginx-tls
+  labels:
+    app: ingress-nginx
+spec:
+  secretName: ingress-nginx-tls
+  duration: 8760h
+  issuerRef:
+    name: ingress-nginx-ca
+  dnsNames:
+  - ingress-nginx-admission
+  - ingress-nginx-admission.ingress-nginx
+  - ingress-nginx-admission.ingress-nginx.svc
