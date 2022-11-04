@@ -1,4 +1,4 @@
-# Copyright (c) 2022 SIGHUP s.r.l All rights reserved.
+# Copyright (c) 2017-present SIGHUP s.r.l All rights reserved.
 # Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
@@ -6,7 +6,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: nginx-ingress-role
+  name: ingress-nginx
 rules:
   - apiGroups:
       - ""
@@ -32,11 +32,9 @@ rules:
     verbs:
       - get
       - list
-      - update
       - watch
   - apiGroups:
-      - "extensions"
-      - "networking.k8s.io"   # k8s 1.14+
+      - networking.k8s.io
     resources:
       - ingresses
     verbs:
@@ -44,14 +42,13 @@ rules:
       - list
       - watch
   - apiGroups:
-      - "extensions"
-      - "networking.k8s.io"   # k8s 1.14+
+      - networking.k8s.io
     resources:
       - ingresses/status
     verbs:
       - update
   - apiGroups:
-      - "networking.k8s.io"   # k8s 1.14+
+      - networking.k8s.io
     resources:
       - ingressclasses
     verbs:
@@ -60,15 +57,10 @@ rules:
       - watch
   - apiGroups:
       - ""
-    resources:
-      - configmaps
     resourceNames:
-      # Defaults to "<election-id>-<ingress-class>"
-      # Here: "<ingress-controller-leader>-<nginx>"
-      # This has to be adapted if you change either parameter
-      # when launching the nginx-ingress-controller.
-      # TODO the logic was left to be managed by admins, the above is no more valid see https://github.com/kubernetes/ingress-nginx/blame/5c6a28464bad138ff84f1d9a3414963d4b7c236f/internal/ingress/controller/nginx.go#L259
-      - "ingress-controller-leader"
+      - ingress-controller-leader
+    resources:
+      - configmaps
     verbs:
       - get
       - update
@@ -79,13 +71,20 @@ rules:
     verbs:
       - create
   - apiGroups:
-      - ""
+      - coordination.k8s.io
+    resourceNames:
+      - ingress-controller-leader
     resources:
-      - endpoints
+      - leases
     verbs:
-      - create
       - get
       - update
+  - apiGroups:
+      - coordination.k8s.io
+    resources:
+      - leases
+    verbs:
+      - create
   - apiGroups:
       - ""
     resources:
