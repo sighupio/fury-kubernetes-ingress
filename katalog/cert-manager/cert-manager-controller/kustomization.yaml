@@ -11,7 +11,6 @@ namespace: cert-manager
 images:
   - name: quay.io/jetstack/cert-manager-controller
     newName: registry.sighup.io/fury/jetstack/cert-manager-controller
-    newTag: v1.6.1
 
 resources:
   - crd.yml

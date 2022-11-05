@@ -8,12 +8,12 @@ This package deploys cert-manager to be used with [Let's Encrypt](https://letsen
 
 ## Requirements
 
-- Kubernetes >= `1.20.0`
-- Kustomize >= `v3`
+- Kubernetes `1.20` -> `1.25`
+- Kustomize >= `v3.5.3`
 
 ## Image repository and tag
 
-- Cert Manager image: `quay.io/jetstack/cert-manager-controller:v1.6.1`
+- Cert Manager image: `quay.io/jetstack/cert-manager-controller:v1.10.0`
 - Cert Manager repo: [https://github.com/jetstack/cert-manager](https://github.com/jetstack/cert-manager)
 - Cert Manager documentation: [https://cert-manager.io/docs/](https://cert-manager.io/docs/)
 
@@ -25,7 +25,6 @@ This package deploys cert-manager to be used with [Let's Encrypt](https://letsen
 - The default issuer is `letsencrypt`
 
 ## Deployment
-
 
 To deploy the `cert-manager` package:
 
@@ -83,7 +82,6 @@ and in the `patches/dual-nginx.yml`:
 ```shell
 kustomize build . | kubectl apply -f -
 ```
-
 
 <!-- </KFD-DOCS> -->
 
