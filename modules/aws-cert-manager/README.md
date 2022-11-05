@@ -44,6 +44,7 @@ This Terraform module provides an easy way to generate cert-manager required IAM
 | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
 | <a name="output_cert_manager_iam_role_arn"></a> [cert\_manager\_iam\_role\_arn](#output\_cert\_manager\_iam\_role\_arn) | cert-manager IAM role                     |
 | <a name="output_cert_manager_patches"></a> [cert\_manager\_patches](#output\_cert\_manager\_patches)                    | cert-manager Kubernetes resources patches |
+
 ## Usage
 
 ```hcl
