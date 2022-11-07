@@ -67,7 +67,12 @@ wait_for_settlement (){
 
 @test "prepare test ingresses" {
   info
-  kubectl apply -f katalog/tests/ingresses-tests.yaml
+  install() {
+      kubectl apply -f katalog/tests/ingresses-tests.yaml
+  }
+  loop_it install 45 10
+  status=${loop_it_result}
+  [ "$status" -eq 0 ]
 }
 
 @test "Check that internal ingress controller is working" {
