@@ -111,8 +111,10 @@ steps:
         path: /shared
     depends_on: [clone]
     settings:
-      action: cluster-121
+      action: custom-cluster-121
       pipeline_id: cluster-121
+      local_kind_config_path: katalog/tests/kind/config.yml
+      cluster_version: '1.21.12'
       instance_path: /shared
       aws_default_region:
         from_secret: aws_region
@@ -211,8 +213,10 @@ steps:
         path: /shared
     depends_on: [clone]
     settings:
-      action: cluster-122
+      action: custom-cluster-122
       pipeline_id: cluster-122
+      local_kind_config_path: katalog/tests/kind/config.yml
+      cluster_version: '1.22.9'
       instance_path: /shared
       aws_default_region:
         from_secret: aws_region
@@ -310,8 +314,10 @@ steps:
         path: /shared
     depends_on: [clone]
     settings:
-      action: cluster-123
+      action: custom-cluster-123
       pipeline_id: cluster-123
+      local_kind_config_path: katalog/tests/kind/config.yml
+      cluster_version: '1.23.6'
       instance_path: /shared
       aws_default_region:
         from_secret: aws_region
@@ -409,8 +415,10 @@ steps:
         path: /shared
     depends_on: [clone]
     settings:
-      action: cluster-124
+      action: custom-cluster-124
       pipeline_id: cluster-124
+      local_kind_config_path: katalog/tests/kind/config.yml
+      cluster_version: '1.24.0'
       instance_path: /shared
       aws_default_region:
         from_secret: aws_region

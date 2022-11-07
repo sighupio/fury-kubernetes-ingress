@@ -64,3 +64,52 @@ wait_for_settlement (){
   info
   wait_for_settlement 36
 }
+
+@test "prepare test ingresses" {
+  info
+  kubectl apply -f katalog/tests/ingresses-tests.yaml
+}
+
+@test "Check that internal ingress controller is working" {
+  info
+  test() {
+    http_code=$(curl "http://${INSTANCE_IP}:2080/internal" -s -o /dev/null -w "%{http_code}")
+    if [ "${http_code}" -ne "503" ]; then return 1; fi
+  }
+  loop_it test 30 2
+  status=${loop_it_result}
+  [[ "$status" -eq 0 ]]
+}
+
+@test "Check that internal ingress is not working on external ingress controller" {
+  info
+  test() {
+    http_code=$(curl "http://${INSTANCE_IP}:1080/internal" -s -o /dev/null -w "%{http_code}")
+    if [ "${http_code}" -ne "404" ]; then return 1; fi
+  }
+  loop_it test 30 2
+  status=${loop_it_result}
+  [[ "$status" -eq 0 ]]
+}
+
+@test "Check that external ingress controller is working" {
+  info
+  test() {
+    http_code=$(curl "http://${INSTANCE_IP}:1080/external" -s -o /dev/null -w "%{http_code}")
+    if [ "${http_code}" -ne "503" ]; then return 1; fi
+  }
+  loop_it test 30 2
+  status=${loop_it_result}
+  [[ "$status" -eq 0 ]]
+}
+
+@test "Check that external ingress is not working on internal ingress controller" {
+  info
+  test() {
+    http_code=$(curl "http://${INSTANCE_IP}:2080/external" -s -o /dev/null -w "%{http_code}")
+    if [ "${http_code}" -ne "404" ]; then return 1; fi
+  }
+  loop_it test 30 2
+  status=${loop_it_result}
+  [[ "$status" -eq 0 ]]
+}
