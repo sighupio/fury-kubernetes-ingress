@@ -1,5 +1,9 @@
-# Kubernetes ingress object with ingressClass internal
+# Copyright (c) 2017-present SIGHUP s.r.l All rights reserved.
+# Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
 
+---
+# Kubernetes ingress object with ingressClass internal
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
