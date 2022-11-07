@@ -146,8 +146,6 @@ steps:
       - export CLUSTER_NAME=121
       - export INSTANCE_IP=$(cat /shared/machine/ip)
       - export KUBECONFIG=/shared/kube/kubeconfig-121
-      - kustomize version
-      - kustomize build katalog/dual-nginx
       - bats -t katalog/tests/tests.bats
 
   - name: destroy
