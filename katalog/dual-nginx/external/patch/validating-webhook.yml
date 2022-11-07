@@ -5,3 +5,7 @@
 - op: "replace"
   path: "/webhooks/0/name"
   value: "validate.nginx-external.ingress.kubernetes.io"
+
+- op: "replace"
+  path: "/webhooks/0/clientConfig/service/name"
+  value: "ingress-nginx-admission-external"
