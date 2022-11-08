@@ -17,6 +17,6 @@ resources:
   - daemonset.yml
   - cm.yml
   - service.yml
-  - ingressClass.yml
+  - ingress-class.yml
   - tls-cert.yml
   - validating-webhook.yml
