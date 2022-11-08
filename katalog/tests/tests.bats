@@ -68,7 +68,7 @@ wait_for_settlement (){
 @test "prepare test ingresses" {
   info
   install() {
-      kubectl apply -f katalog/tests/ingresses-tests.yaml
+      kubectl apply -f katalog/tests/ingress-dual-test.yaml
   }
   loop_it install 45 10
   status=${loop_it_result}
