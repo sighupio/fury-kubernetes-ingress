@@ -16,7 +16,7 @@ ExternalDNS synchronizes exposed Kubernetes Services and Ingresses with DNS prov
 
 ## Deployment
 
-This package provides two deployments of external-dns, one for "private" records and one for "public" records. The only thing that differs between the two packages is the 
+This package provides two deployments of external-dns, one for "private" records and one for "public" records. The only thing that differs between the two packages is the
 suffix used on kustomize to generate all the resources.
 
 The package itself cannot be used without patches, and in this module we provide terraform modules to generate the required cloud resources and kustomize patches.
