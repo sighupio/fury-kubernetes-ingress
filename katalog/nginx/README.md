@@ -12,7 +12,7 @@ Ingress NGINX is an Ingress Controller for [NGINX][nginx-page] web server and re
 
 ## Image repository and tag
 
-- Ingress NGINX image: `k8s.gcr.io/ingress-nginx/controller:v1.1.2`
+- Ingress NGINX image: `k8s.gcr.io/ingress-nginx/controller:v1.3.1`
 - Ingress NGINX repo: [https://github.com/kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
 
 ## Configuration
@@ -33,7 +33,7 @@ Ingress NGINX single is deployed with the following default configuration:
 ```yaml
 bases:
   - name: ingress/nginx
-    version: "v1.12.2"
+    version: "v1.13.0"
 ```
 
 > See `furyctl` [documentation][furyctl-repo] for additional details about `Furyfile.yml` format.

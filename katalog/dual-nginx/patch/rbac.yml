@@ -6,3 +6,8 @@
   path: "/rules/6/resourceNames"
   value:
     ["ingress-controller-leader-external", "ingress-controller-leader-internal"]
+
+- op: "replace"
+  path: "/rules/8/resourceNames"
+  value:
+    ["ingress-controller-leader-external", "ingress-controller-leader-internal"]

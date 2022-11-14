@@ -19,5 +19,9 @@
   value: "--election-id=ingress-controller-leader-external"
 
 - op: "replace"
+  path: "/spec/template/spec/containers/0/args/8"
+  value: "--controller-class=k8s.io/external"
+
+- op: "replace"
   path: "/spec/template/spec/volumes/0/secret/secretName"
   value: "ingress-nginx-tls-external"
