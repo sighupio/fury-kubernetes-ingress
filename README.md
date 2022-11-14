@@ -42,7 +42,7 @@ Kubernetes Fury Ingress provides the following packages:
 | [dual-nginx](katalog/dual-nginx)              | `v1.3.1`   | It deploys two identical NGINX ingress controllers but with two different scopes: public/external and private/internal.       |
 | [cert-manager](katalog/cert-manager)          | `v1.10.0`  | cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources. |
 | [external-dns](katalog/external-dns)          | `v0.10.2`  | external-dns allows you to manage DNS records natively from Kubernetes.                                                       |
-| [forecastle](katalog/forecastle).             | `v1.0.103` | Forecastle gives you access to a control panel where you can see your ingresses and access them on Kubernetes.                |
+| [forecastle](katalog/forecastle)              | `v1.0.103` | Forecastle gives you access to a control panel where you can see your ingresses and access them on Kubernetes.                |
 | [aws-cert-manager](modules/aws-cert-manager/) | -          | Terraform modules for managing IAM permissions on AWS for cert-manager                                                        |
 | [aws-external-dns](modules/aws-external-dns/) | -          | Terraform modules for managing IAM permissions on AWS for external-dns                                                        |
 
