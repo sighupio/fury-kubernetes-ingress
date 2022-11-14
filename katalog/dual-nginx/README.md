@@ -8,7 +8,7 @@ Ingress NGINX is an Ingress Controller for [NGINX][nginx-page] webserver and rev
 
 - Kubernetes >= `1.20.0`
 - Kustomize >= `v3`
-- `cert-manager`
+- [`cert-manager`](../cert-manager)
 
 ## Image repository and tag
 
