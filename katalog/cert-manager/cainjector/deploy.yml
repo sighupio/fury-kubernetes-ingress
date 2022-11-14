@@ -16,9 +16,13 @@ spec:
       labels: {}
     spec:
       serviceAccountName: cert-manager-cainjector
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
       containers:
-        - name: cainjector
-          image: quay.io/jetstack/cert-manager-cainjector
+        - name: cert-manager-cainjector
+          image: "quay.io/jetstack/cert-manager-cainjector:v1.10.0"
           imagePullPolicy: Always
           args:
             - --v=2
@@ -29,12 +33,13 @@ spec:
                 fieldRef:
                   fieldPath: metadata.namespace
           securityContext:
+            allowPrivilegeEscalation: false
             capabilities:
               drop:
                 - ALL
-            readOnlyRootFilesystem: true
-            runAsNonRoot: true
           resources:
             requests:
               cpu: 50m
               memory: 50Mi
+      nodeSelector:
+        kubernetes.io/os: linux

@@ -11,7 +11,7 @@ metadata:
 spec:
   endpoints:
   - interval: 30s
-    port: metrics
+    port: tcp-prometheus-servicemonitor
   jobLabel: app
   namespaceSelector:
     matchNames:

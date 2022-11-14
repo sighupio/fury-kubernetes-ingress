@@ -1,4 +1,4 @@
-# Copyright (c) 2021 SIGHUP s.r.l All rights reserved.
+# Copyright (c) 2017-present SIGHUP s.r.l All rights reserved.
 # Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
@@ -17,54 +17,66 @@ spec:
       labels: {}
     spec:
       serviceAccountName: cert-manager-webhook
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
       containers:
-      - name: webhook
-        image: quay.io/jetstack/cert-manager-webhook
-        imagePullPolicy: Always
-        args:
-        - --v=2
-        - --secure-port=6443
-        - --dynamic-serving-ca-secret-namespace=$(POD_NAMESPACE)
-        - --dynamic-serving-ca-secret-name=cert-manager-webhook-tls
-        - --dynamic-serving-dns-names=cert-manager-webhook,cert-manager-webhook.$(POD_NAMESPACE),cert-manager-webhook.$(POD_NAMESPACE).svc
-        livenessProbe:
-          httpGet:
-            path: /livez
-            port: 6080
-            scheme: HTTP
-          initialDelaySeconds: 60
-          periodSeconds: 10
-          timeoutSeconds: 1
-          successThreshold: 1
-          failureThreshold: 3
-        readinessProbe:
-          httpGet:
-            path: /healthz
-            port: 6080
-            scheme: HTTP
-          initialDelaySeconds: 5
-          periodSeconds: 5
-          timeoutSeconds: 1
-          successThreshold: 1
-          failureThreshold: 3
-        securityContext:
-          capabilities:
-            drop:
-            - ALL
-          readOnlyRootFilesystem: true
-          runAsNonRoot: true
-        env:
-        - name: POD_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        ports:
-        - name: https
-          containerPort: 6443
-        resources:
-          requests:
-            cpu: 50m
-            memory: 50Mi
+        - name: cert-manager-webhook
+          image: "quay.io/jetstack/cert-manager-webhook:v1.10.0"
+          imagePullPolicy: Always
+          args:
+          - --v=2
+          - --secure-port=10250
+          - --dynamic-serving-ca-secret-namespace=$(POD_NAMESPACE)
+          - --dynamic-serving-ca-secret-name=cert-manager-webhook-ca
+          - --dynamic-serving-dns-names=cert-manager-webhook
+          - --dynamic-serving-dns-names=cert-manager-webhook.$(POD_NAMESPACE)
+          - --dynamic-serving-dns-names=cert-manager-webhook.$(POD_NAMESPACE).svc
+          
+          ports:
+          - name: https
+            protocol: TCP
+            containerPort: 10250
+          - name: healthcheck
+            protocol: TCP
+            containerPort: 6080
+          livenessProbe:
+            httpGet:
+              path: /livez
+              port: 6080
+              scheme: HTTP
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 6080
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+          env:
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+      nodeSelector:
+        kubernetes.io/os: linux
 ---
 apiVersion: v1
 kind: Service
@@ -75,5 +87,6 @@ spec:
   ports:
   - name: https
     port: 443
-    targetPort: https
+    protocol: TCP
+    targetPort: "https"
   selector: {}

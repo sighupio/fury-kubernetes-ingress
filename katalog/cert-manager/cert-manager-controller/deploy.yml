@@ -1,4 +1,4 @@
-# Copyright (c) 2021 SIGHUP s.r.l All rights reserved.
+# Copyright (c) 2017-present SIGHUP s.r.l All rights reserved.
 # Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
@@ -22,38 +22,39 @@ spec:
     spec:
       serviceAccountName: cert-manager
       securityContext:
-        fsGroup: 1000
         runAsNonRoot: true
-        runAsUser: 1000
+        seccompProfile:
+          type: RuntimeDefault
       containers:
-      - name: cert-manager
-        image: quay.io/jetstack/cert-manager-controller
-        imagePullPolicy: Always
-        args:
-        - --v=2
-        - --cluster-resource-namespace=$(POD_NAMESPACE)
-        - --leader-election-namespace=$(POD_NAMESPACE)
-        - --default-issuer-kind=ClusterIssuer
-        - --default-issuer-name=letsencrypt-prod
-        ports:
-        - name: metrics
-          containerPort: 9402
-          protocol: TCP
-        securityContext:
-          capabilities:
-            drop:
-            - ALL
-          readOnlyRootFilesystem: true
-          runAsNonRoot: true
-        env:
-        - name: POD_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        resources:
-          requests:
-            cpu: 50m
-            memory: 50Mi
+        - name: cert-manager-controller
+          image: "quay.io/jetstack/cert-manager-controller:v1.10.0"
+          imagePullPolicy: Always
+          args:
+          - --v=2
+          - --cluster-resource-namespace=$(POD_NAMESPACE)
+          - --leader-election-namespace=$(POD_NAMESPACE)
+          - --default-issuer-kind=ClusterIssuer
+          - --default-issuer-name=letsencrypt-prod
+          ports:
+          - containerPort: 9402
+            name: http-metrics
+            protocol: TCP
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+          env:
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+      nodeSelector:
+        kubernetes.io/os: linux
 ---
 apiVersion: v1
 kind: Service
@@ -61,8 +62,10 @@ metadata:
   name: cert-manager
   labels: {}
 spec:
+  type: ClusterIP
   ports:
-  - name: metrics
+  - protocol: TCP
     port: 9402
-    targetPort: metrics
+    name: tcp-prometheus-servicemonitor
+    targetPort: 9402
   selector: {}
