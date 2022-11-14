@@ -8,10 +8,11 @@ Ingress NGINX is an Ingress Controller for [NGINX][nginx-page] webserver and rev
 
 - Kubernetes >= `1.20.0`
 - Kustomize >= `v3`
+- [`cert-manager`](../cert-manager)
 
 ## Image repository and tag
 
-- Ingress NGINX image: `k8s.gcr.io/ingress-nginx/controller:1.1.0`
+- Ingress NGINX image: `k8s.gcr.io/ingress-nginx/controller:1.3.1`
 - Ingress NGINX repo: [https://github.com/kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
 
 ## Configuration
@@ -21,6 +22,7 @@ Ingress NGINX Double is deployed with the following default configuration:
 - Maximum allowed size of the client request body: `10m`
 - HTTP status code used in redirects: `301`
 - Metrics are scraped by Prometheus every `10s`
+- Validating Admission webhook that validates an ingress definition does not break NGINX configuration.
 
 ## Deployment
 

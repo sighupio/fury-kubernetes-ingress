@@ -1,0 +1,40 @@
+# Copyright (c) 2017-present SIGHUP s.r.l All rights reserved.
+# Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
+
+---
+# Kubernetes ingress object with ingressClass internal
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minimal-ingress-internal
+spec:
+  ingressClassName: internal
+  rules:
+    - http:
+        paths:
+          - path: /internal
+            pathType: Prefix
+            backend:
+              service:
+                name: test
+                port:
+                  number: 80
+---
+# Kubernetes ingress object with ingressClass external
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minimal-ingress-external
+spec:
+  ingressClassName: external
+  rules:
+    - http:
+        paths:
+          - path: /external
+            pathType: Prefix
+            backend:
+              service:
+                name: test
+                port:
+                  number: 80
