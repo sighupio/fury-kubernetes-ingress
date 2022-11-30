@@ -7,14 +7,27 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cert-manager
-  labels: {}
+  labels:
+    app: cert-manager
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/component: "controller"
+    app.kubernetes.io/version: "v1.10.0"
 spec:
   replicas: 1
   selector:
-    matchLabels: {}
+    matchLabels:
+      app.kubernetes.io/name: cert-manager
+      app.kubernetes.io/instance: cert-manager
+      app.kubernetes.io/component: "controller"
   template:
     metadata:
-      labels: {}
+      labels:
+        app: cert-manager
+        app.kubernetes.io/name: cert-manager
+        app.kubernetes.io/instance: cert-manager
+        app.kubernetes.io/component: "controller"
+        app.kubernetes.io/version: "v1.10.0"
       annotations:
         prometheus.io/path: "/metrics"
         prometheus.io/scrape: 'true'
@@ -60,7 +73,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: cert-manager
-  labels: {}
+  labels:
+    app: cert-manager
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/component: "controller"
+    app.kubernetes.io/version: "v1.10.0"
 spec:
   type: ClusterIP
   ports:
@@ -68,4 +86,7 @@ spec:
     port: 9402
     name: tcp-prometheus-servicemonitor
     targetPort: 9402
-  selector: {}
+  selector:
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/component: "controller"
