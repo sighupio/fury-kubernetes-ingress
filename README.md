@@ -310,7 +310,7 @@ Add the following annotations to your ingresses to be discovered by Forecastle:
 [kfd-repo]: https://github.com/sighupio/fury-distribution
 [kustomize-repo]: https://github.com/kubernetes-sigs/kustomize
 [kfd-docs]: https://docs.kubernetesfury.com/docs/distribution/
-[compatibility-matrix]: https://github.com/sighupio/fury-kubernetes-ingress/blob/master/docs/COMPATIBILITY_MATRIX.md
+[compatibility-matrix]: https://github.com/sighupio/fury-kubernetes-ingress/blob/main/docs/COMPATIBILITY_MATRIX.md
 [kubernetes-ingress]: https://kubernetes.io/docs/concepts/services-networking/ingress/
 [forecastle-repo]: https://github.com/stakater/Forecastle
 [forecastle-icons]: https://github.com/stakater/ForecastleIcons
