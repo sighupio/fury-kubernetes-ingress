@@ -33,9 +33,9 @@ To deploy the `cert-manager` package:
 ```yaml
 resources:
   - name: ingress/dual-nginx
-    version: "v1.13.0"
+    version: "v1.13.1"
   - name: ingress/cert-manager
-    version: "v1.13.0"
+    version: "v1.13.1"
 ```
 
 2. Execute `furyctl vendor -H` to download the packages

@@ -2,6 +2,6 @@
 # Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
-bases:
-  - name: ingress/nginx
-    version: v1.13.1
+settings:
+  anchor: false
+  html: false

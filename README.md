@@ -5,7 +5,7 @@
 </h1>
 <!-- markdownlint-enable MD033 -->
 
-![Release](https://img.shields.io/badge/Latest%20Release-v1.13.0-blue)
+![Release](https://img.shields.io/badge/Latest%20Release-v1.13.1-blue)
 ![License](https://img.shields.io/github/license/sighupio/fury-kubernetes-ingress?label=License)
 ![Slack](https://img.shields.io/badge/slack-@kubernetes/fury-yellow.svg?logo=slack&label=Slack)
 
@@ -116,9 +116,9 @@ To deploy the `cert-manager` package:
 ```yaml
 bases:
   - name: ingress/dual-nginx
-    version: "v1.13.0"
+    version: "v1.13.1"
   - name: ingress/cert-manager
-    version: "v1.13.0"
+    version: "v1.13.1"
 ```
 
 2. Execute `furyctl vendor -H` to download the packages
@@ -177,7 +177,7 @@ Single Ingress:
 ```yaml
 bases:
   - name: ingress/nginx
-    version: "v1.13.0"
+    version: "v1.13.1"
 ```
 
 Dual Ingress:
@@ -187,9 +187,9 @@ Dual Ingress:
 ```yaml
 bases:
   - name: ingress/nginx
-    version: "v1.13.0"
+    version: "v1.13.1"
   - name: ingress/dual-nginx
-    version: "v1.13.0"
+    version: "v1.13.1"
 ```
 
 > See `furyctl` [documentation][furyctl-repo] for additional details about `Furyfile.yml` format.
@@ -261,11 +261,11 @@ To deploy the `forecastle` package:
 ```yaml
 bases:
   - name: ingress/dual-nginx
-    version: "v1.13.0"
+    version: "v1.13.1"
   - name: ingress/cert-manager
-    version: "v1.13.0"
+    version: "v1.13.1"
   - name: ingress/forecastle
-    version: "v1.13.0"
+    version: "v1.13.1"
 ```
 
 2. Execute `furyctl vendor -H` to download the packages
@@ -310,7 +310,7 @@ Add the following annotations to your ingresses to be discovered by Forecastle:
 [kfd-repo]: https://github.com/sighupio/fury-distribution
 [kustomize-repo]: https://github.com/kubernetes-sigs/kustomize
 [kfd-docs]: https://docs.kubernetesfury.com/docs/distribution/
-[compatibility-matrix]: https://github.com/sighupio/fury-kubernetes-ingress/blob/master/docs/COMPATIBILITY_MATRIX.md
+[compatibility-matrix]: https://github.com/sighupio/fury-kubernetes-ingress/blob/main/docs/COMPATIBILITY_MATRIX.md
 [kubernetes-ingress]: https://kubernetes.io/docs/concepts/services-networking/ingress/
 [forecastle-repo]: https://github.com/stakater/Forecastle
 [forecastle-icons]: https://github.com/stakater/ForecastleIcons
