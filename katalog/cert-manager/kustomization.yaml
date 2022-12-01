@@ -11,6 +11,3 @@ resources:
   - cert-manager-controller
   - webhook
   - dashboards
-
-commonLabels:
-  app: cert-manager
