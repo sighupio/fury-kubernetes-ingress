@@ -17,6 +17,18 @@ And here you can find instructions on how to verify that the installation is OK:
 or you can use this tool also:
 <https://github.com/alenkacz/cert-manager-verifier>
 
+## Customizations
+
+Upstream cert-manager uses the `kube-system` namespace for the leader election lock. We are deploying everything, including the leader election lock, in the `cert-manager` namespace.
+
+We needed to add a custom snippet to the RBAC in version 1.13.0 of the module that was not included (or was deleted) in upstream.
+
+References:
+
+- <https://github.com/sighupio/fury-kubernetes-ingress/issues/91>
+- <https://github.com/cert-manager/cert-manager/issues/5471>
+- <https://github.com/cert-manager/cert-manager/issues/4102>
+
 ## Update guide
 
 1. Download upstream manifests:
