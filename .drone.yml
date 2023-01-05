@@ -54,29 +54,30 @@ steps:
       - kustomize build katalog/forecastle > forecastle.yml
       - kustomize build katalog/nginx > nginx.yml
 
-  - &deprek8ion
-    name: deprek8ion-cert-manager
-    image: eu.gcr.io/swade1987/deprek8ion:1.1.34
+  - &check-deprecated-apis
+    name: check-deprecated-apis-cert-manager
+    image: us-docker.pkg.dev/fairwinds-ops/oss/pluto:v5
     pull: always
-    environment:
-      KUBERNETES_MANIFESTS: cert-manager.yml
     depends_on:
       - render
     commands:
-      - /conftest test -p /policies $${KUBERNETES_MANIFESTS}
+      # we use --ignore-deprecations because we don't want the CI to fail when the API has not been removed yet.
+      - /pluto detect $${KUBERNETES_MANIFESTS} --ignore-deprecations --target-versions=k8s=v1.24.0
+    environment:
+      KUBERNETES_MANIFESTS: cert-manager.yml
 
-  - <<: *deprek8ion
-    name: deprek8ion-dual-nginx
+  - <<: *check-deprecated-apis
+    name: check-deprecated-apis-dual-nginx
     environment:
       KUBERNETES_MANIFESTS: dual-nginx.yml
 
-  - <<: *deprek8ion
-    name: deprek8ion-forecastle
+  - <<: *check-deprecated-apis
+    name: check-deprecated-apis-forecastle
     environment:
       KUBERNETES_MANIFESTS: forecastle.yml
 
-  - <<: *deprek8ion
-    name: deprek8ion-nginx
+  - <<: *check-deprecated-apis
+    name: check-deprecated-apis-nginx
     environment:
       KUBERNETES_MANIFESTS: nginx.yml
 
