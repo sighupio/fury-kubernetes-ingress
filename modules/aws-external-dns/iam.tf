@@ -54,7 +54,7 @@ module "external_dns_public_iam_assumable_role" {
 
 
 resource "aws_iam_policy" "external_dns_private" {
-  count  = var.private_zone_id != "" ? 1 : 0
+  count  = var.enable_private ? 1 : 0
   name   = "${var.cluster_name}-e-dns-private"
   tags   = var.tags
   policy = <<EOF
@@ -89,7 +89,7 @@ EOF
 }
 
 module "external_dns_private_iam_assumable_role" {
-  count                         = var.private_zone_id != "" ? 1 : 0
+  count                         = var.enable_private ? 1 : 0
   source                        = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
   version                       = "v3.16.0"
   create_role                   = true
