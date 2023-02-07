@@ -12,8 +12,6 @@ metadata:
 spec:
   externalTrafficPolicy: Local
   type: NodePort
-  selector:
-    app: ingress-nginx
   ports:
     - name: http
       port: 80
@@ -23,6 +21,8 @@ spec:
       port: 443
       nodePort: 31443
       targetPort: https
+  selector:
+    app: ingress-nginx
 ---
 apiVersion: v1
 kind: Service
@@ -31,10 +31,10 @@ metadata:
   namespace: ingress-nginx
 spec:
   type: ClusterIP
-  selector:
-    app: ingress-nginx
   ports:
     - appProtocol: https
       name: https-webhook
       port: 9443
       targetPort: webhook
+  selector:
+    app: ingress-nginx

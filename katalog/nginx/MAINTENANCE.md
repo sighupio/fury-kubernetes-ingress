@@ -35,3 +35,11 @@ diff templated-from-katalog.yaml templated-from-helm-to-kustomize.yaml
 Check the differences and port them to the `bases/controller` and `bases/configs` folders.
 
 Do the build and compare till there are no important differences.
+
+
+
+# CHANGELOG
+
+### ConfigMap Pameters
+
+  - We added `allow-snippet-annotations` and mark it true, from the 1.5.1 release to permit advanced configuration with snippets.
