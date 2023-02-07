@@ -36,10 +36,7 @@ Check the differences and port them to the `bases/controller` and `bases/configs
 
 Do the build and compare till there are no important differences.
 
-
-
-# CHANGELOG
-
+## CHANGELOG
 ### ConfigMap Pameters
 
   - We added `allow-snippet-annotations` and mark it true, from the 1.5.1 release to permit advanced configuration with snippets.
