@@ -62,7 +62,7 @@ steps:
       - render
     commands:
       # we use --ignore-deprecations because we don't want the CI to fail when the API has not been removed yet.
-      - /pluto detect $${KUBERNETES_MANIFESTS} --ignore-deprecations --target-versions=k8s=v1.24.0
+      - /pluto detect $${KUBERNETES_MANIFESTS} --ignore-deprecations --target-versions=k8s=v1.25.0
     environment:
       KUBERNETES_MANIFESTS: cert-manager.yml
 
@@ -393,6 +393,7 @@ depends_on:
   - e2e-kubernetes-1.22
   - e2e-kubernetes-1.23
   - e2e-kubernetes-1.24
+  - e2e-kubernetes-1.25
 
 platform:
   os: linux
