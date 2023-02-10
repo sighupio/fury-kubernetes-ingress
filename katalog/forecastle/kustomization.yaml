@@ -12,6 +12,7 @@ resources:
   - deploy.yml
   - rbac.yml
   - service.yml
+  - crd.yml
 
 images:
   - name: stakater/forecastle
