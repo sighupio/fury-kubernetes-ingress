@@ -24,7 +24,7 @@
 | v1.12.2                             |                    |                    |                    |                    |                    |                    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |                   |                   |
 | v1.13.0                             |                    |                    |                    |                    |                    |                    |                    |                    | :white_check_mark: | :white_check_mark: | :white_check_mark: |                   |
 | v1.13.1                             |                    |                    |                    |                    |                    |                    |                    |                    | :white_check_mark: | :white_check_mark: | :white_check_mark: |                   |
-| v1.14.0                             |                    |                    |                    |                    |                    |                    |                    |                    |      :warning:     | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| v1.14.0                             |                    |                    |                    |                    |                    |                    |                    |                    |                    | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
 :white_check_mark: Compatible
 
