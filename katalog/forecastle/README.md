@@ -11,7 +11,7 @@
 
 ## Image repository and tag
 
-- Forecastle image: `docker.io/stakater/forecastle:v1.0.103`
+- Forecastle image: `docker.io/stakater/forecastle:v1.0.119`
 - Forecastle repo: [https://github.com/stakater/Forecastle](https://github.com/stakater/Forecastle)
 
 ## Configuration
@@ -38,6 +38,47 @@ Once deployed, to have an ingress show up in the dashboard provided by Forecastl
 
 ```shell
 kubectl annotate ingress <YOUR_INGRESS> "forecastle.stakater.com/expose=true" --overwrite
+```
+#### ForecastleApp CRD
+
+You can now create custom resources to add apps to forecastle dynamically. This decouples the application configuration from Ingresses as well as forecastle config. You can create the custom resource `ForecastleApp` like the following:
+
+```yaml
+apiVersion: forecastle.stakater.com/v1alpha1
+kind: ForecastleApp
+metadata:
+  name: app-name
+spec:
+  name: My Awesome App
+  group: dev
+  icon: https://icon-url
+  url: http://app-url
+  networkRestricted: "false"
+  properties:
+    Version: 1.0
+  instance: "" # Optional
+```
+
+##### Automatically discover URL's from Kubernetes Resources
+
+Forecastle supports discovering URL's ForecastleApp CRD from the following resources:
+
+- Ingress
+
+The above type of resource that you want to discover URL from **MUST** exist in the same namespace as `ForecastleApp` CR. Then you can add the following to the CR:
+
+```yaml
+apiVersion: forecastle.stakater.com/v1alpha1
+kind: ForecastleApp
+metadata:
+  name: app-name
+spec:
+  name: My Awesome App
+  group: dev
+  icon: https://icon-url
+  urlFrom: # This is new
+    ingressRef:
+      name: my-app-ingress
 ```
 
 ## Important notes
