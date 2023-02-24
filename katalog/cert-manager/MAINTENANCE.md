@@ -34,7 +34,7 @@ References:
 1. Download upstream manifests:
 
 ```bash
-export CERT_MANAGER_VERSION=1.10.0
+export CERT_MANAGER_VERSION=1.11.0
 curl --location --remote-name https://github.com/cert-manager/cert-manager/releases/download/v${CERT_MANAGER_VERSION}/cert-manager.yaml
 ```
 
@@ -42,7 +42,7 @@ curl --location --remote-name https://github.com/cert-manager/cert-manager/relea
 
 ```bash
 # Install the tool if you don't have it in your system
-go instal github.com/mogensen/kubernetes-split-yaml@v0.3.0
+go install github.com/mogensen/kubernetes-split-yaml@v0.4.0
 # split the file, the generated files will be found in the `generated` folder
 kubernetes-split-yaml cert-manager.yaml
 ```
