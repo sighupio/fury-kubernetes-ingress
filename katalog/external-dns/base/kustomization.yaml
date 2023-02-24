@@ -13,4 +13,4 @@ resources:
 
 images:
   - name: k8s.gcr.io/external-dns/external-dns
-    newName: k8s.gcr.io/external-dns/external-dns
+    newName: registry.sighup.io/fury/external-dns/external-dns
