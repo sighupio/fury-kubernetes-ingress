@@ -34,12 +34,13 @@ This terraform module provides an easy way to generate external-dns (public and 
 
 ## Inputs
 
-| Name              | Description                               | Type          | Default | Required |
-| ----------------- | ----------------------------------------- | ------------- | ------- | :------: |
-| cluster\_name     | EKS cluster name                          | `string`      | n/a     |   yes    |
-| private\_zone\_id | Route53 private zone ID                   | `string`      | `""`    |    no    |
-| public\_zone\_id  | Route53 public zone ID                    | `string`      | n/a     |   yes    |
-| tags              | Additional tags for the created resources | `map(string)` | `{}`    |    no    |
+| Name              | Description                                          | Type          | Default | Required |
+| ----------------- | ---------------------------------------------------- | ------------- | ------- | :------: |
+| cluster\_name     | EKS cluster name                                     | `string`      | n/a     |   yes    |
+| private\_zone\_id | Route53 private zone ID                              | `string`      | `""`    |    no    |
+| enable\_private   | Flag to enable the creation for the private IAM role | `bool`        | `false` |    no    |
+| public\_zone\_id  | Route53 public zone ID                               | `string`      | n/a     |   yes    |
+| tags              | Additional tags for the created resources            | `map(string)` | `{}`    |    no    |
 
 ## Outputs
 
@@ -58,6 +59,7 @@ module "cert_manager_iam_role" {
   cluster_name       = "myekscluster"
   public_zone_id     = "Z1BM4RA99PG48O"
   private_zone_id    = "Z1BM4RA99PG499"
+  enable_private     = true
   tags               = {"mykey": "myvalue"}
 }
 ```
