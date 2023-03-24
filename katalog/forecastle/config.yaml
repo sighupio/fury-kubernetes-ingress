@@ -5,7 +5,7 @@
 ---
 namespaceSelector:
   any: true
-crdEnabled: false
+crdEnabled: true
 customApps: {}
 instanceName: null
 title: "Kubernetes Fury Distribution - Applications Directory"

@@ -9,45 +9,44 @@ networking:
   apiServerAddress: "0.0.0.0"
   disableDefaultCNI: false
   podSubnet: 172.16.0.0/16
-
 nodes:
-- role: control-plane
-  kubeadmConfigPatches:
-  - |
-    group: kubeadm.k8s.io
-    version: v1beta1
-    kind: ClusterConfiguration
-    patch: |
-      - op: add
-        path: /apiServer/certSANs/-
-        value: docker
-  - |
-    kind: ClusterConfiguration
-    metadata:
-      name: config
-    etcd:
-      local:
-        extraArgs:
-          "listen-metrics-urls": "http://0.0.0.0:2378"
-    apiServer:
-      extraArgs:
-        "enable-admission-plugins": "NamespaceLifecycle,LimitRanger,PodNodeSelector,ServiceAccount,DefaultStorageClass,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota"
-    controllerManager:
-      extraArgs:
-        "bind-address": "0.0.0.0"
-    scheduler:
-      extraArgs:
-        "bind-address": "0.0.0.0"
+  - role: control-plane
+    kubeadmConfigPatches:
+      - |
+        group: kubeadm.k8s.io
+        version: v1beta1
+        kind: ClusterConfiguration
+        patch: |
+          - op: add
+            path: /apiServer/certSANs/-
+            value: docker
+      - |
+        kind: ClusterConfiguration
+        metadata:
+          name: config
+        etcd:
+          local:
+            extraArgs:
+              "listen-metrics-urls": "http://0.0.0.0:2378"
+        apiServer:
+          extraArgs:
+            "enable-admission-plugins": "NamespaceLifecycle,LimitRanger,PodNodeSelector,ServiceAccount,DefaultStorageClass,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota"
+        controllerManager:
+          extraArgs:
+            "bind-address": "0.0.0.0"
+        scheduler:
+          extraArgs:
+            "bind-address": "0.0.0.0"
 
-- role: worker
-  extraPortMappings:
-  - containerPort: 31080 # nginx ingress controller external http
-    hostPort: 1080
-  - containerPort: 32080 # nginx ingress controller internal http
-    hostPort: 2080
+  - role: worker
+    extraPortMappings:
+      - containerPort: 31080 # nginx ingress controller external http
+        hostPort: 1080
+      - containerPort: 32080 # nginx ingress controller internal http
+        hostPort: 2080
 
 containerdConfigPatches:
-- |-
+  - |-
     [debug]
       level = "debug"
     [plugins."io.containerd.grpc.v1.cri".registry]
