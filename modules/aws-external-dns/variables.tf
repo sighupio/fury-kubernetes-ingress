@@ -20,6 +20,12 @@ variable "private_zone_id" {
   default     = ""
 }
 
+variable "enable_private" {
+  description = "Enable private IAM creation"
+  type        = bool
+  default     = false
+}
+
 variable "tags" {
   description = "Additional tags for the created resources"
   type        = map(string)
