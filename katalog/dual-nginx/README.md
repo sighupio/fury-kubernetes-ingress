@@ -1,4 +1,4 @@
-# Ingress Dual NGINX
+# Ingress NGINX Dual
 
 <!-- <KFD-DOCS> -->
 
