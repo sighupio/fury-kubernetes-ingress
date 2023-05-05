@@ -11,6 +11,8 @@ namespace: ingress-nginx
 generatorOptions:
   labels:
     grafana-sighup-dashboard: default
+  annotations:
+    grafana-folder: "Ingress"
   disableNameSuffixHash: true
 
 configMapGenerator:
