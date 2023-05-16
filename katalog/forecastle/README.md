@@ -42,7 +42,8 @@ kubectl annotate ingress <YOUR_INGRESS> "forecastle.stakater.com/expose=true" --
 #### ForecastleApp CRD
 
 You can now create custom resources to add apps to forecastle dynamically. This decouples the application configuration from Ingresses as well as forecastle config. You can create the custom resource `ForecastleApp` like the following:
-### example CR:
+
+#### example CR:
 
 ```yaml
 apiVersion: forecastle.stakater.com/v1alpha1
