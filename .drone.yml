@@ -308,7 +308,7 @@ trigger:
 
 steps:
   - name: init
-    image: quay.io/sighup/e2e-testing-drone-plugin:v1.26.3
+    image: quay.io/sighup/e2e-testing-drone-plugin:v1.26.4
     pull: always
     volumes:
       - name: shared
@@ -318,7 +318,7 @@ steps:
       action: custom-cluster-126
       pipeline_id: cluster-126
       local_kind_config_path: katalog/tests/kind/config.yml
-      cluster_version: "1.26.3"
+      cluster_version: "1.26.4"
       instance_path: /shared
       aws_default_region:
         from_secret: aws_region
@@ -354,7 +354,7 @@ steps:
       - bats -t katalog/tests/tests.bats
 
   - name: destroy
-    image: quay.io/sighup/e2e-testing-drone-plugin:v1.26.3
+    image: quay.io/sighup/e2e-testing-drone-plugin:v1.26.4
     pull: always
     depends_on: [e2e]
     settings:
@@ -406,16 +406,6 @@ trigger:
       - refs/tags/**
 
 steps:
-  - name: prepare-canonical-json
-    image: registry.sighup.io/poc/fury-repo-automations:v0.0.3
-    pull: always
-    depends_on: [clone]
-    commands:
-      - spock module-json -m=fury-kubernetes-ingress -r=False -v=${DRONE_TAG}
-    when:
-      ref:
-        include:
-          - refs/tags/**
 
   - name: prepare-tar-gz
     image: alpine:latest
@@ -443,7 +433,6 @@ steps:
     image: plugins/github-release
     pull: always
     depends_on:
-      - prepare-canonical-json
       - prepare-tar-gz
       - prepare-release-notes
     settings:
@@ -452,7 +441,6 @@ steps:
       file_exists: overwrite
       files:
         - fury-kubernetes-ingress-${DRONE_TAG}.tar.gz
-        - fury-kubernetes-ingress-canonical-definition-${DRONE_TAG}.json
       prerelease: true
       overwrite: true
       title: "Preview ${DRONE_TAG}"
@@ -469,7 +457,6 @@ steps:
     image: plugins/github-release
     pull: always
     depends_on:
-      - prepare-canonical-json
       - prepare-tar-gz
       - prepare-release-notes
     settings:
@@ -478,7 +465,6 @@ steps:
       file_exists: overwrite
       files:
         - fury-kubernetes-ingress-${DRONE_TAG}.tar.gz
-        - fury-kubernetes-ingress-canonical-definition-${DRONE_TAG}.json
       prerelease: false
       overwrite: true
       title: "Release ${DRONE_TAG}"
