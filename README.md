@@ -39,7 +39,7 @@ Kubernetes Fury Ingress provides the following packages:
 | Package                                       | Version    | Description                                                                                                                   |
 | --------------------------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | [nginx](katalog/nginx)                        | `v1.7.1`   | The NGINX Ingress Controller for Kubernetes provides delivery services for Kubernetes applications.                           |
-| [dual-nginx](katalog/dual-nginx)              | `v1.5.1`   | It deploys two identical NGINX ingress controllers but with two different scopes: public/external and private/internal.       |
+| [dual-nginx](katalog/dual-nginx)              | `v1.7.1`   | It deploys two identical NGINX ingress controllers but with two different scopes: public/external and private/internal.       |
 | [cert-manager](katalog/cert-manager)          | `v1.11.1`  | cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources. |
 | [external-dns](katalog/external-dns)          | `v0.13.4`  | external-dns allows you to manage DNS records natively from Kubernetes.                                                       |
 | [forecastle](katalog/forecastle)              | `v1.0.125` | Forecastle gives you access to a control panel where you can see your ingresses and access them on Kubernetes.                |
@@ -62,7 +62,7 @@ Check the [compatibility matrix][compatibility-matrix] for additional informatio
 
 | Tool                        | Version   | Description                                                                                                                                                    |
 | --------------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [furyctl][furyctl-repo]     | `>=0.6.0` | The recommended tool to download and manage KFD modules and their packages. To learn more about `furyctl` read the [official documentation][furyctl-repo].     |
+| [furyctl][furyctl-repo]     | `>=0.25.0` | The recommended tool to download and manage KFD modules and their packages. To learn more about `furyctl` read the [official documentation][furyctl-repo].     |
 | [kustomize][kustomize-repo] | `>=3.5.3` | Packages are customized using `kustomize`. To learn how to create your customization layer with `kustomize`, please refer to the [repository][kustomize-repo]. |
 
 ### Single vs Dual Controller
@@ -194,7 +194,7 @@ bases:
 
 > See `furyctl` [documentation][furyctl-repo] for additional details about `Furyfile.yml` format.
 
-2. Execute `furyctl vendor -H` to download the packages
+2. Execute `furyctl legacy vendor -H` to download the packages
 
 3. Inspect the download packages under `./vendor/katalog/ingress/`.
 
@@ -268,7 +268,7 @@ bases:
     version: "v2.1.0"
 ```
 
-2. Execute `furyctl vendor -H` to download the packages
+2. Execute `furyctl legacy vendor -H` to download the packages
 
 3. Inspect the download packages under `./vendor/katalog/ingress/forecastle`.
 
