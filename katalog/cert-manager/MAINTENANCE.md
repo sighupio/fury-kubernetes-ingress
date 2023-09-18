@@ -34,7 +34,7 @@ References:
 1. Download upstream manifests:
 
 ```bash
-export CERT_MANAGER_VERSION=1.11.0
+export CERT_MANAGER_VERSION=1.11.1
 curl --location --remote-name https://github.com/cert-manager/cert-manager/releases/download/v${CERT_MANAGER_VERSION}/cert-manager.yaml
 ```
 
@@ -55,7 +55,7 @@ For example for to compare the CA Injector RBAC manifests:
 # Assuming PWD == the folder with the splitted yamls
 # You might need to twek the order of the files concatenated.
 mkdir cainjector
-mv cert-manager-cainjector-* cainjector
+mv cert-manager-cainjector* cainjector
 cd cainjector
 mkdir done
 
@@ -83,7 +83,7 @@ For the Webhook
 ```bash
 # Assuming PWD == the folder with the splitted yamls
 mkdir webhook
-mv cert-manager-webhook-* webhook
+mv cert-manager-webhook* webhook
 cd webhook
 mkdir done
 
@@ -102,7 +102,7 @@ mv cert-manager-webhook-sa.yaml \
 
 cat cert-manager-webhook-mutatingwebhookconfiguration.yaml \
     cert-manager-webhook-validatingwebhookconfiguration.yaml \
-    > webhookconfig.yaml
+    > webhookvalidatingconfig.yml
 mv cert-manager-webhook-mutatingwebhookconfiguration.yaml \
     cert-manager-webhook-validatingwebhookconfiguration.yaml \
     done
@@ -124,7 +124,9 @@ For the cert-manager-controller:
 ```bash
 # Assuming PWD == the folder with the splitted yamls
 mkdir cert-manager-controller
-mv cert-manager-controller-* cert-manager-controller
+mv cert-manager-controller* cert-manager-controller
+mv *-crd.yaml cert-manager-controller
+mv cert-manager* cert-manager-controller
 cd cert-manager-controller
 mkdir done
 
@@ -146,7 +148,7 @@ mv certificaterequests.cert-manager.io-crd.yaml \
 cat cert-manager-deployment.yaml \
     cert-manager-svc.yaml \
     > \
-    deployment.yaml
+    deploy.yml
 mv cert-manager-deployment.yaml \
     cert-manager-svc.yaml \
     done
@@ -172,7 +174,7 @@ cat cert-manager-sa.yaml \
     cert-manager-controller-approve:cert-manager-io-crb.yaml \
     cert-manager:leaderelection-role.yaml \
     cert-manager:leaderelection-rb.yaml \
-    > rbac.yaml
+    > rbac.yml
 mv cert-manager-sa.yaml \
     cert-manager-controller-issuers-cr.yaml \
     cert-manager-controller-clusterissuers-cr.yaml \

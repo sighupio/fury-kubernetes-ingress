@@ -13,7 +13,7 @@ This package deploys cert-manager to be used with [Let's Encrypt](https://letsen
 
 ## Image repository and tag
 
-- Cert Manager image: `quay.io/jetstack/cert-manager-controller:v1.10.0`
+- Cert Manager image: `quay.io/jetstack/cert-manager-controller:v1.11.1`
 - Cert Manager repo: [https://github.com/jetstack/cert-manager](https://github.com/jetstack/cert-manager)
 - Cert Manager documentation: [https://cert-manager.io/docs/](https://cert-manager.io/docs/)
 
@@ -33,12 +33,12 @@ To deploy the `cert-manager` package:
 ```yaml
 resources:
   - name: ingress/dual-nginx
-    version: "v1.13.1"
+    version: "v2.1.0"
   - name: ingress/cert-manager
-    version: "v1.13.1"
+    version: "v2.1.0"
 ```
 
-2. Execute `furyctl vendor -H` to download the packages
+2. Execute `furyctl legacy vendor -H` to download the packages
 
 3. Inspect the download packages under `./vendor/katalog/ingress/cert-manager`.
 
