@@ -12,7 +12,7 @@ metadata:
     app.kubernetes.io/name: cert-manager
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/component: "controller"
-    app.kubernetes.io/version: "v1.11.1"
+    app.kubernetes.io/version: "v1.13.1"
 spec:
   replicas: 1
   selector:
@@ -27,36 +27,40 @@ spec:
         app.kubernetes.io/name: cert-manager
         app.kubernetes.io/instance: cert-manager
         app.kubernetes.io/component: "controller"
-        app.kubernetes.io/version: "v1.11.1"
+        app.kubernetes.io/version: "v1.13.1"
       annotations:
         prometheus.io/path: "/metrics"
         prometheus.io/scrape: "true"
         prometheus.io/port: "9402"
     spec:
       serviceAccountName: cert-manager
+      enableServiceLinks: false
       securityContext:
         runAsNonRoot: true
         seccompProfile:
           type: RuntimeDefault
       containers:
         - name: cert-manager-controller
-          image: "quay.io/jetstack/cert-manager-controller:v1.11.1"
+          image: "quay.io/jetstack/cert-manager-controller:v1.13.1"
           imagePullPolicy: IfNotPresent
           args:
-            - --v=2
-            - --cluster-resource-namespace=$(POD_NAMESPACE)
-            - --leader-election-namespace=$(POD_NAMESPACE)
-            - --default-issuer-kind=ClusterIssuer
-            - --default-issuer-name=letsencrypt-prod
+          - --v=2
+          - --cluster-resource-namespace=$(POD_NAMESPACE)
+          - --leader-election-namespace=$(POD_NAMESPACE)
+          - --default-issuer-kind=ClusterIssuer
+          - --default-issuer-name=letsencrypt-prod
           ports:
-            - containerPort: 9402
-              name: http-metrics
-              protocol: TCP
+          - containerPort: 9402
+            name: http-metrics
+            protocol: TCP
+          - containerPort: 9403
+            name: http-healthz
+            protocol: TCP
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
               drop:
-                - ALL
+              - ALL
           env:
             - name: POD_NAMESPACE
               valueFrom:
@@ -78,14 +82,14 @@ metadata:
     app.kubernetes.io/name: cert-manager
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/component: "controller"
-    app.kubernetes.io/version: "v1.11.1"
+    app.kubernetes.io/version: "v1.13.1"
 spec:
   type: ClusterIP
   ports:
-    - protocol: TCP
-      port: 9402
-      name: tcp-prometheus-servicemonitor
-      targetPort: 9402
+  - protocol: TCP
+    port: 9402
+    name: tcp-prometheus-servicemonitor
+    targetPort: 9402
   selector:
     app.kubernetes.io/name: cert-manager
     app.kubernetes.io/instance: cert-manager
