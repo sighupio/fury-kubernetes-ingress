@@ -6,12 +6,12 @@ ExternalDNS synchronizes exposed Kubernetes Services and Ingresses with DNS prov
 
 ## Requirements
 
-- Kubernetes >= `1.19.0`
+- Kubernetes >= `1.22.0`
 - Kustomize = `v3.5.3`
 
 ## Image repository and tag
 
-- ExternalDNS image: `k8s.gcr.io/external-dns/external-dns:v0.13.4`
+- ExternalDNS image: `k8s.gcr.io/external-dns/external-dns:v0.13.6`
 - ExternalDNS repo: [https://github.com/kubernetes-sigs/external-dns](https://github.com/kubernetes-sigs/external-dns)
 
 ## Deployment
