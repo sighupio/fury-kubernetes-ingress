@@ -54,7 +54,7 @@ This terraform module provides an easy way to generate external-dns (public and 
 ## Usage
 
 ```hcl
-module "cert_manager_iam_role" {
+module "external_dns_iam_role" {
   source             = "../vendor/modules/ingress/aws-external-dns"
   cluster_name       = "myekscluster"
   public_zone_id     = "Z1BM4RA99PG48O"
