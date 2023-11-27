@@ -31,6 +31,7 @@ webhooks:
     # this webhook (after the resources have been converted to v1).
     matchPolicy: Equivalent
     failurePolicy: Fail
+    # Only include 'sideEffects' field in Kubernetes 1.12+
     sideEffects: None
     clientConfig:
       service:

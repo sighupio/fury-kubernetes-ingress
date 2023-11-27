@@ -10,6 +10,8 @@ From the latest release download the zip file and extract it.
 
 Check the folder `charts`, there should be a `ingress-nginx` folder.
 
+Edit the value.yaml file and replace "Deployment" with "Daemonset"
+
 Helm template the content using the following command:
 
 ```bash
