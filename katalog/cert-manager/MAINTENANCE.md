@@ -34,7 +34,7 @@ References:
 1. Download upstream manifests:
 
 ```bash
-export CERT_MANAGER_VERSION=1.11.1
+export CERT_MANAGER_VERSION=1.13.1
 curl --location --remote-name https://github.com/cert-manager/cert-manager/releases/download/v${CERT_MANAGER_VERSION}/cert-manager.yaml
 ```
 
