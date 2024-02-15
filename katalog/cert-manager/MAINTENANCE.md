@@ -34,8 +34,8 @@ References:
 1. Download upstream manifests:
 
 ```bash
-export CERT_MANAGER_VERSION=1.13.1
-curl --location --remote-name https://github.com/cert-manager/cert-manager/releases/download/v${CERT_MANAGER_VERSION}/cert-manager.yaml
+export CERT_MANAGER_VERSION=1.14.2
+curl --location --remote-name https://github.com/cert-manager/cert-manager/releases/download/v"${CERT_MANAGER_VERSION}"/cert-manager.yaml
 ```
 
 2. Split the absurdily large YAML into smaller pieces with the [kubernetes-split-yaml](github.com/mogensen/kubernetes-split-yaml) tool:
@@ -44,15 +44,20 @@ curl --location --remote-name https://github.com/cert-manager/cert-manager/relea
 # Install the tool if you don't have it in your system
 go install github.com/mogensen/kubernetes-split-yaml@v0.4.0
 # split the file, the generated files will be found in the `generated` folder
-kubernetes-split-yaml cert-manager.yaml
+kubernetes-split-yaml --outdir generated cert-manager.yaml
+# clean manifest files and add separator to avoid problems when going to be merged
+for file in generated/*.yaml; do sed -i '1i ---' "$file"; done
+for file in generated/*.yaml; do sed -i '/^# Source:/d' "$file"; done
+cd generated/
+
 ```
 
-3. Compare the downloaded file with our module manifests:
+3. Compare the donwnaded and splited files with the current one:
 
 For example for to compare the CA Injector RBAC manifests:
 
 ```bash
-# Assuming PWD == the folder with the splitted yamls
+# Assuming PWD == the folder with the splitted yamls (generated)
 # You might need to twek the order of the files concatenated.
 mkdir cainjector
 mv cert-manager-cainjector* cainjector
@@ -65,7 +70,9 @@ cat cert-manager-cainjector-sa.yaml \
     cert-manager-cainjector:leaderelection-role.yaml \
     cert-manager-cainjector:leaderelection-rb.yaml \
     > cert-manager-cainjector-rbac.yaml
+
 # move the files to a "done" folder to know that you've checked them.
+
 mv cert-manager-cainjector-sa.yaml \
     cert-manager-cainjector-cr.yaml \
     cert-manager-cainjector-crb.yaml \
@@ -73,8 +80,7 @@ mv cert-manager-cainjector-sa.yaml \
     cert-manager-cainjector:leaderelection-rb.yaml \
     done
 
-
-diff cert-manager-cainjector-rbac.yaml ../katalog/cert-manager/cainjector/rbac.yaml  # or the tool of your choice.
+# Diff the files with the ones in katalog/cert-manager/cainjector/rbac.yaml
 # do the same for the rest of the files.
 ```
 
@@ -124,7 +130,7 @@ For the cert-manager-controller:
 ```bash
 # Assuming PWD == the folder with the splitted yamls
 mkdir cert-manager-controller
-mv cert-manager-controller* cert-manager-controller
+mv cert-manager-controller*.yaml cert-manager-controller
 mv *-crd.yaml cert-manager-controller
 mv cert-manager* cert-manager-controller
 cd cert-manager-controller
@@ -201,7 +207,29 @@ mv cert-manager-sa.yaml \
 
 4. Port the needed changes to the module's manifests.
 
-5. Remember to sync the new images to SIGHUP's registry.
+5. Remember to sync the new images to SIGHUP's registry. Images related in this projet are:
+
+ - jetstack/cert-manager-cainjector
+ - jetstack/cert-manager-acmesolver
+ - jetstack/cert-manager-controller
+ - jetstack/cert-manager-webhook
+
+
+6. as part of the updating process it importan to update the argument on the cert-manager-controller describeed on the path for the kustomization file in: katalog/cert-manager/cert-manager-controller/kustomization.yaml
+
+```yaml
+patchesJson6902:
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: cert-manager
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/args/6
+        value: --acme-http01-solver-image=registry.sighup.io/fury/cert-manager-acmesolver:v1.14.2
+
+```
 
 ## Dashboards
 
