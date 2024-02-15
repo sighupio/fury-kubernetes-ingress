@@ -31,205 +31,203 @@ References:
 
 ## Update guide
 
-1. Download upstream manifests:
+01. Download upstream manifests:
 
-```bash
-export CERT_MANAGER_VERSION=1.14.2
-curl --location --remote-name https://github.com/cert-manager/cert-manager/releases/download/v"${CERT_MANAGER_VERSION}"/cert-manager.yaml
-```
+    ```bash
+    export CERT_MANAGER_VERSION=1.14.2
+    curl --location --remote-name https://github.com/cert-manager/cert-manager/releases/download/v"${CERT_MANAGER_VERSION}"/cert-manager.yaml
+    ```
 
-2. Split the absurdily large YAML into smaller pieces with the [kubernetes-split-yaml](github.com/mogensen/kubernetes-split-yaml) tool:
+02. Split the absurdily large YAML into smaller pieces with the [kubernetes-split-yaml](github.com/mogensen/kubernetes-split-yaml) tool:
 
-```bash
-# Install the tool if you don't have it in your system
-go install github.com/mogensen/kubernetes-split-yaml@v0.4.0
-# split the file, the generated files will be found in the `generated` folder
-kubernetes-split-yaml --outdir generated cert-manager.yaml
-# clean manifest files and add separator to avoid problems when going to be merged
-for file in generated/*.yaml; do sed -i '1i ---' "$file"; done
-for file in generated/*.yaml; do sed -i '/^# Source:/d' "$file"; done
-cd generated/
+    ```bash
+    # Install the tool if you don't have it in your system
+    go install github.com/mogensen/kubernetes-split-yaml@v0.4.0
+    # split the file, the generated files will be found in the `generated` folder
+    kubernetes-split-yaml --outdir generated cert-manager.yaml
+    # clean manifest files and add separator to avoid problems when going to be merged
+    for file in generated/*.yaml; do sed -i '1i ---' "$file"; done
+    for file in generated/*.yaml; do sed -i '/^# Source:/d' "$file"; done
+    cd generated/
 
-```
+    ```
 
-3. Compare the donwnaded and splited files with the current one:
+    - Compare the downloaded and split files with the current one:
 
-For example for to compare the CA Injector RBAC manifests:
+    For example for to compare the CA Injector RBAC manifests:
 
-```bash
-# Assuming PWD == the folder with the splitted yamls (generated)
-# You might need to twek the order of the files concatenated.
-mkdir cainjector
-mv cert-manager-cainjector* cainjector
-cd cainjector
-mkdir done
+    ```bash
+    # Assuming PWD == the folder with the splitted yamls (generated)
+    # You might need to twek the order of the files concatenated.
+    mkdir cainjector
+    mv cert-manager-cainjector* cainjector
+    cd cainjector
+    mkdir done
 
-cat cert-manager-cainjector-sa.yaml \
-    cert-manager-cainjector-cr.yaml \
-    cert-manager-cainjector-crb.yaml \
-    cert-manager-cainjector:leaderelection-role.yaml \
-    cert-manager-cainjector:leaderelection-rb.yaml \
-    > cert-manager-cainjector-rbac.yaml
+    cat cert-manager-cainjector-sa.yaml \
+        cert-manager-cainjector-cr.yaml \
+        cert-manager-cainjector-crb.yaml \
+        cert-manager-cainjector:leaderelection-role.yaml \
+        cert-manager-cainjector:leaderelection-rb.yaml \
+        > cert-manager-cainjector-rbac.yaml
 
-# move the files to a "done" folder to know that you've checked them.
+    # move the files to a "done" folder to know that you've checked them.
 
-mv cert-manager-cainjector-sa.yaml \
-    cert-manager-cainjector-cr.yaml \
-    cert-manager-cainjector-crb.yaml \
-    cert-manager-cainjector:leaderelection-role.yaml \
-    cert-manager-cainjector:leaderelection-rb.yaml \
-    done
+    mv cert-manager-cainjector-sa.yaml \
+        cert-manager-cainjector-cr.yaml \
+        cert-manager-cainjector-crb.yaml \
+        cert-manager-cainjector:leaderelection-role.yaml \
+        cert-manager-cainjector:leaderelection-rb.yaml \
+        done
 
-# Diff the files with the ones in katalog/cert-manager/cainjector/rbac.yaml
-# do the same for the rest of the files.
-```
+    # Diff the files with the ones in katalog/cert-manager/cainjector/rbac.yaml
+    # do the same for the rest of the files.
+    ```
 
-For the Webhook
+    For the Webhook
 
-```bash
-# Assuming PWD == the folder with the splitted yamls
-mkdir webhook
-mv cert-manager-webhook* webhook
-cd webhook
-mkdir done
+    ```bash
+    # Assuming PWD == the folder with the splitted yamls
+    mkdir webhook
+    mv cert-manager-webhook* webhook
+    cd webhook
+    mkdir done
 
-cat cert-manager-webhook-sa.yaml \
-    cert-manager-webhook:subjectaccessreviews-cr.yaml \
-    cert-manager-webhook:subjectaccessreviews-crb.yaml \
-    cert-manager-webhook:dynamic-serving-role.yaml \
-    cert-manager-webhook:dynamic-serving-rb.yaml \
-    > rbac.yaml
-mv cert-manager-webhook-sa.yaml \
-    cert-manager-webhook:subjectaccessreviews-cr.yaml \
-    cert-manager-webhook:subjectaccessreviews-crb.yaml \
-    cert-manager-webhook:dynamic-serving-role.yaml \
-    cert-manager-webhook:dynamic-serving-rb.yaml \
-    done
+    cat cert-manager-webhook-sa.yaml \
+        cert-manager-webhook:subjectaccessreviews-cr.yaml \
+        cert-manager-webhook:subjectaccessreviews-crb.yaml \
+        cert-manager-webhook:dynamic-serving-role.yaml \
+        cert-manager-webhook:dynamic-serving-rb.yaml \
+        > rbac.yaml
+    mv cert-manager-webhook-sa.yaml \
+        cert-manager-webhook:subjectaccessreviews-cr.yaml \
+        cert-manager-webhook:subjectaccessreviews-crb.yaml \
+        cert-manager-webhook:dynamic-serving-role.yaml \
+        cert-manager-webhook:dynamic-serving-rb.yaml \
+        done
 
-cat cert-manager-webhook-mutatingwebhookconfiguration.yaml \
-    cert-manager-webhook-validatingwebhookconfiguration.yaml \
-    > webhookvalidatingconfig.yml
-mv cert-manager-webhook-mutatingwebhookconfiguration.yaml \
-    cert-manager-webhook-validatingwebhookconfiguration.yaml \
-    done
+    cat cert-manager-webhook-mutatingwebhookconfiguration.yaml \
+        cert-manager-webhook-validatingwebhookconfiguration.yaml \
+        > webhookvalidatingconfig.yml
+    mv cert-manager-webhook-mutatingwebhookconfiguration.yaml \
+        cert-manager-webhook-validatingwebhookconfiguration.yaml \
+        done
 
-cat cert-manager-webhook-deployment.yaml \
-    cert-manager-webhook-svc.yaml \
-    cert-manager-webhook-cm.yaml \
-    > deployment.yaml
-mv cert-manager-webhook-deployment.yaml \
-    cert-manager-webhook-svc.yaml \
-    cert-manager-webhook-cm.yaml \
-    done
+    cat cert-manager-webhook-deployment.yaml \
+        cert-manager-webhook-svc.yaml \
+        cert-manager-webhook-cm.yaml \
+        > deployment.yaml
+    mv cert-manager-webhook-deployment.yaml \
+        cert-manager-webhook-svc.yaml \
+        cert-manager-webhook-cm.yaml \
+        done
 
-# Diff the files with the ones in katalog/cert-manamger/webhook
-```
+    # Diff the files with the ones in katalog/cert-manamger/webhook
+    ```
 
-For the cert-manager-controller:
+    For the cert-manager-controller:
 
-```bash
-# Assuming PWD == the folder with the splitted yamls
-mkdir cert-manager-controller
-mv cert-manager-controller*.yaml cert-manager-controller
-mv *-crd.yaml cert-manager-controller
-mv cert-manager* cert-manager-controller
-cd cert-manager-controller
-mkdir done
+    ```bash
+    # Assuming PWD == the folder with the splitted yamls
+    mkdir cert-manager-controller
+    mv cert-manager-controller*.yaml cert-manager-controller
+    mv *-crd.yaml cert-manager-controller
+    mv cert-manager* cert-manager-controller
+    cd cert-manager-controller
+    mkdir done
 
-cat certificaterequests.cert-manager.io-crd.yaml \
-    certificates.cert-manager.io-crd.yaml \
-    challenges.acme.cert-manager.io-crd.yaml \
-    clusterissuers.cert-manager.io-crd.yaml \
-    issuers.cert-manager.io-crd.yaml \
-    orders.acme.cert-manager.io-crd.yaml \
-    > crds.yaml
-mv certificaterequests.cert-manager.io-crd.yaml \
-    certificates.cert-manager.io-crd.yaml \
-    challenges.acme.cert-manager.io-crd.yaml \
-    clusterissuers.cert-manager.io-crd.yaml \
-    issuers.cert-manager.io-crd.yaml \
-    orders.acme.cert-manager.io-crd.yaml \
-    done
+    cat certificaterequests.cert-manager.io-crd.yaml \
+        certificates.cert-manager.io-crd.yaml \
+        challenges.acme.cert-manager.io-crd.yaml \
+        clusterissuers.cert-manager.io-crd.yaml \
+        issuers.cert-manager.io-crd.yaml \
+        orders.acme.cert-manager.io-crd.yaml \
+        > crds.yaml
+    mv certificaterequests.cert-manager.io-crd.yaml \
+        certificates.cert-manager.io-crd.yaml \
+        challenges.acme.cert-manager.io-crd.yaml \
+        clusterissuers.cert-manager.io-crd.yaml \
+        issuers.cert-manager.io-crd.yaml \
+        orders.acme.cert-manager.io-crd.yaml \
+        done
 
-cat cert-manager-deployment.yaml \
-    cert-manager-svc.yaml \
-    > \
-    deploy.yml
-mv cert-manager-deployment.yaml \
-    cert-manager-svc.yaml \
-    done
+    cat cert-manager-deployment.yaml \
+        cert-manager-svc.yaml \
+        > \
+        deploy.yml
+    mv cert-manager-deployment.yaml \
+        cert-manager-svc.yaml \
+        done
 
-cat cert-manager-sa.yaml \
-    cert-manager-controller-issuers-cr.yaml \
-    cert-manager-controller-clusterissuers-cr.yaml \
-    cert-manager-controller-certificates-cr.yaml \
-    cert-manager-controller-orders-cr.yaml \
-    cert-manager-controller-challenges-cr.yaml \
-    cert-manager-controller-certificatesigningrequests-cr.yaml \
-    cert-manager-controller-ingress-shim-cr.yaml \
-    cert-manager-view-cr.yaml \
-    cert-manager-edit-cr.yaml \
-    cert-manager-controller-approve:cert-manager-io-cr.yaml \
-    cert-manager-controller-issuers-crb.yaml \
-    cert-manager-controller-clusterissuers-crb.yaml \
-    cert-manager-controller-certificates-crb.yaml \
-    cert-manager-controller-orders-crb.yaml \
-    cert-manager-controller-challenges-crb.yaml \
-    cert-manager-controller-certificatesigningrequests-crb.yaml \
-    cert-manager-controller-ingress-shim-crb.yaml \
-    cert-manager-controller-approve:cert-manager-io-crb.yaml \
-    cert-manager:leaderelection-role.yaml \
-    cert-manager:leaderelection-rb.yaml \
-    > rbac.yml
-mv cert-manager-sa.yaml \
-    cert-manager-controller-issuers-cr.yaml \
-    cert-manager-controller-clusterissuers-cr.yaml \
-    cert-manager-controller-certificates-cr.yaml \
-    cert-manager-controller-orders-cr.yaml \
-    cert-manager-controller-challenges-cr.yaml \
-    cert-manager-controller-certificatesigningrequests-cr.yaml \
-    cert-manager-controller-ingress-shim-cr.yaml \
-    cert-manager-view-cr.yaml \
-    cert-manager-edit-cr.yaml \
-    cert-manager-controller-approve:cert-manager-io-cr.yaml \
-    cert-manager-controller-issuers-crb.yaml \
-    cert-manager-controller-clusterissuers-crb.yaml \
-    cert-manager-controller-certificates-crb.yaml \
-    cert-manager-controller-orders-crb.yaml \
-    cert-manager-controller-challenges-crb.yaml \
-    cert-manager-controller-certificatesigningrequests-crb.yaml \
-    cert-manager-controller-ingress-shim-crb.yaml \
-    cert-manager-controller-approve:cert-manager-io-crb.yaml \
-    cert-manager:leaderelection-role.yaml \
-    cert-manager:leaderelection-rb.yaml \
-    done
-```
+    cat cert-manager-sa.yaml \
+        cert-manager-controller-issuers-cr.yaml \
+        cert-manager-controller-clusterissuers-cr.yaml \
+        cert-manager-controller-certificates-cr.yaml \
+        cert-manager-controller-orders-cr.yaml \
+        cert-manager-controller-challenges-cr.yaml \
+        cert-manager-controller-certificatesigningrequests-cr.yaml \
+        cert-manager-controller-ingress-shim-cr.yaml \
+        cert-manager-view-cr.yaml \
+        cert-manager-edit-cr.yaml \
+        cert-manager-controller-approve:cert-manager-io-cr.yaml \
+        cert-manager-controller-issuers-crb.yaml \
+        cert-manager-controller-clusterissuers-crb.yaml \
+        cert-manager-controller-certificates-crb.yaml \
+        cert-manager-controller-orders-crb.yaml \
+        cert-manager-controller-challenges-crb.yaml \
+        cert-manager-controller-certificatesigningrequests-crb.yaml \
+        cert-manager-controller-ingress-shim-crb.yaml \
+        cert-manager-controller-approve:cert-manager-io-crb.yaml \
+        cert-manager:leaderelection-role.yaml \
+        cert-manager:leaderelection-rb.yaml \
+        > rbac.yml
+    mv cert-manager-sa.yaml \
+        cert-manager-controller-issuers-cr.yaml \
+        cert-manager-controller-clusterissuers-cr.yaml \
+        cert-manager-controller-certificates-cr.yaml \
+        cert-manager-controller-orders-cr.yaml \
+        cert-manager-controller-challenges-cr.yaml \
+        cert-manager-controller-certificatesigningrequests-cr.yaml \
+        cert-manager-controller-ingress-shim-cr.yaml \
+        cert-manager-view-cr.yaml \
+        cert-manager-edit-cr.yaml \
+        cert-manager-controller-approve:cert-manager-io-cr.yaml \
+        cert-manager-controller-issuers-crb.yaml \
+        cert-manager-controller-clusterissuers-crb.yaml \
+        cert-manager-controller-certificates-crb.yaml \
+        cert-manager-controller-orders-crb.yaml \
+        cert-manager-controller-challenges-crb.yaml \
+        cert-manager-controller-certificatesigningrequests-crb.yaml \
+        cert-manager-controller-ingress-shim-crb.yaml \
+        cert-manager-controller-approve:cert-manager-io-crb.yaml \
+        cert-manager:leaderelection-role.yaml \
+        cert-manager:leaderelection-rb.yaml \
+        done
+    ```
 
-4. Port the needed changes to the module's manifests.
+03. Port the needed changes to the module's manifests.
 
-5. Remember to sync the new images to SIGHUP's registry. Images related in this projet are:
+    - Remember to sync the new images to SIGHUP's registry. Images related in this projet are:
+      - jetstack/cert-manager-cainjector
+      - jetstack/cert-manager-acmesolver
+      - jetstack/cert-manager-controller
+      - jetstack/cert-manager-webhook
 
- - jetstack/cert-manager-cainjector
- - jetstack/cert-manager-acmesolver
- - jetstack/cert-manager-controller
- - jetstack/cert-manager-webhook
+04. As part of the updating process it is important to update the argument on the cert-manager-controller described in the path for the kustomization file in: katalog/cert-manager/cert-manager-controller/kustomization.yaml
 
+    ```yaml
+    patchesJson6902:
+    - target:
+        group: apps
+        version: v1
+        kind: Deployment
+        name: cert-manager
+        patch: |-
+        - op: replace
+            path: /spec/template/spec/containers/0/args/6
+            value: --acme-http01-solver-image=registry.sighup.io/fury/cert-manager-acmesolver:v1.14.2
 
-6. as part of the updating process it importan to update the argument on the cert-manager-controller describeed on the path for the kustomization file in: katalog/cert-manager/cert-manager-controller/kustomization.yaml
-
-```yaml
-patchesJson6902:
-  - target:
-      group: apps
-      version: v1
-      kind: Deployment
-      name: cert-manager
-    patch: |-
-      - op: replace
-        path: /spec/template/spec/containers/0/args/6
-        value: --acme-http01-solver-image=registry.sighup.io/fury/cert-manager-acmesolver:v1.14.2
-
-```
+    ```
 
 ## Dashboards
 
