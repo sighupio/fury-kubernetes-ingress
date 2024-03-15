@@ -19,3 +19,14 @@ resources:
   - ns.yml
   - rbac.yml
   - sm.yml
+
+patchesJson6902:
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: cert-manager
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/args/6
+        value: --acme-http01-solver-image=registry.sighup.io/fury/cert-manager-acmesolver:v1.14.2
