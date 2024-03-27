@@ -78,7 +78,7 @@ wait_for_settlement (){
 @test "Check that internal ingress controller is working" {
   info
   test() {
-    http_code=$(curl "http://${INSTANCE_IP}:2080/internal" -s -o /dev/null -w "%{http_code}")
+    http_code=$(curl "http://localhost:${INTERNAL_PORT}/internal" -s -o /dev/null -w "%{http_code}")
     if [ "${http_code}" -ne "503" ]; then return 1; fi
   }
   loop_it test 30 2
@@ -89,7 +89,7 @@ wait_for_settlement (){
 @test "Check that internal ingress is not working on external ingress controller" {
   info
   test() {
-    http_code=$(curl "http://${INSTANCE_IP}:1080/internal" -s -o /dev/null -w "%{http_code}")
+    http_code=$(curl "http://localhost:${EXTERNAL_PORT}/internal" -s -o /dev/null -w "%{http_code}")
     if [ "${http_code}" -ne "404" ]; then return 1; fi
   }
   loop_it test 30 2
@@ -100,7 +100,7 @@ wait_for_settlement (){
 @test "Check that external ingress controller is working" {
   info
   test() {
-    http_code=$(curl "http://${INSTANCE_IP}:1080/external" -s -o /dev/null -w "%{http_code}")
+    http_code=$(curl "http://localhost:${EXTERNAL_PORT}/external" -s -o /dev/null -w "%{http_code}")
     if [ "${http_code}" -ne "503" ]; then return 1; fi
   }
   loop_it test 30 2
@@ -111,7 +111,7 @@ wait_for_settlement (){
 @test "Check that external ingress is not working on internal ingress controller" {
   info
   test() {
-    http_code=$(curl "http://${INSTANCE_IP}:2080/external" -s -o /dev/null -w "%{http_code}")
+    http_code=$(curl "http://localhost:${INTERNAL_PORT}/external" -s -o /dev/null -w "%{http_code}")
     if [ "${http_code}" -ne "404" ]; then return 1; fi
   }
   loop_it test 30 2
