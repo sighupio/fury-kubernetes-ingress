@@ -443,7 +443,7 @@ steps:
         from_secret: github_token
       file_exists: overwrite
       files:
-        - fury-kubernetes-ingress-${DRONE_TAG}.tar.gz'
+        - "fury-kubernetes-ingress-${DRONE_TAG}.tar.gz"
       prerelease: false
       overwrite: true
       title: Release ${DRONE_TAG}
