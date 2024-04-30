@@ -93,7 +93,6 @@ clone:
 trigger:
   ref:
     include:
-      - refs/heads/main
       - refs/tags/**
 volumes:
   - name: dockersock
@@ -165,7 +164,6 @@ clone:
 trigger:
   ref:
     include:
-      - refs/heads/main
       - refs/tags/**
 volumes:
   - name: dockersock
@@ -237,7 +235,6 @@ clone:
 trigger:
   ref:
     include:
-      - refs/heads/main
       - refs/tags/**
 volumes:
   - name: dockersock
@@ -309,7 +306,6 @@ clone:
 trigger:
   ref:
     include:
-      - refs/heads/main
       - refs/tags/**
 volumes:
   - name: dockersock
