@@ -39,6 +39,8 @@ steps:
       VALIDATE_DOCKERFILE: "false"
       # Disable natural language checks
       VALIDATE_NATURAL_LANGUAGE: "false"
+      # Disable linter on helper files in the test folder
+      FILTER_REGEX_EXCLUDE: (katalog/tests/helper)
     depends_on:
       - clone
 
@@ -120,7 +122,7 @@ steps:
       - Generate Kind Config file
 
   - name: End-to-End Tests
-    image: quay.io/sighup/e2e-testing:1.1.0_0.11.0_3.1.1_1.9.4_1.26.3_3.5.3_4.33.3
+    image: quay.io/sighup/e2e-testing:1.1.0_0.11.0_3.12.0_1.9.4_1.29.1_3.5.3_4.33.3
     pull: always
     network_mode: host
     environment:
@@ -191,7 +193,7 @@ steps:
       - Generate Kind Config file
 
   - name: End-to-End Tests
-    image: quay.io/sighup/e2e-testing:1.1.0_0.11.0_3.1.1_1.9.4_1.26.3_3.5.3_4.33.3
+    image: quay.io/sighup/e2e-testing:1.1.0_0.11.0_3.12.0_1.9.4_1.29.1_3.5.3_4.33.3
     pull: always
     network_mode: host
     environment:
@@ -262,7 +264,7 @@ steps:
       - Generate Kind Config file
 
   - name: End-to-End Tests
-    image: quay.io/sighup/e2e-testing:1.1.0_0.11.0_3.1.1_1.9.4_1.26.3_3.5.3_4.33.3
+    image: quay.io/sighup/e2e-testing:1.1.0_0.11.0_3.12.0_1.9.4_1.29.1_3.5.3_4.33.3
     pull: always
     network_mode: host
     environment:
@@ -333,7 +335,7 @@ steps:
       - Generate Kind Config file
 
   - name: End-to-End Tests
-    image: quay.io/sighup/e2e-testing:1.1.0_0.11.0_3.1.1_1.9.4_1.26.3_3.5.3_4.33.3
+    image: quay.io/sighup/e2e-testing:1.1.0_0.11.0_3.12.0_1.9.4_1.29.1_3.5.3_4.33.3
     pull: always
     network_mode: host
     environment:

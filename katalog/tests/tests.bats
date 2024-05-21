@@ -201,17 +201,17 @@ EOF
   assert_success
 }
 
-# Ensure Docker is installed and verify the ACME HTTP01 solver image
-@test "Verify ACME HTTP01 solver image and Docker installation" {
-  if ! command -v docker &>/dev/null; then
-    echo "Docker is not installed."
+# Ensure skopeo is installed and verify the ACME HTTP01 solver image
+@test "Verify ACME HTTP01 solver image and skopeo installation" {
+  if ! command -v skopeo &>/dev/null; then
+    echo "skopeo is not installed."
     exit 1
   fi
-  echo "Docker is installed."
+  echo "skopeo is installed."
 
   solver_image=$(kubectl get deployment cert-manager -n cert-manager -o jsonpath='{.spec.template.spec.containers[0].args}' | grep -oP '(?<=--acme-http01-solver-image=)[^"]+')
 
-  if docker manifest inspect "$solver_image" &>/dev/null; then
+  if skopeo inspect "docker://$solver_image" &>/dev/null; then
     echo "Image manifest for $solver_image found."
   else
     echo "Image manifest for $solver_image not found."
