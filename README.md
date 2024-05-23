@@ -5,7 +5,7 @@
 </h1>
 <!-- markdownlint-enable MD033 -->
 
-![Release](https://img.shields.io/badge/Latest%20Release-v2.3.0-blue)
+![Release](https://img.shields.io/badge/Latest%20Release-v2.3.1-blue)
 ![License](https://img.shields.io/github/license/sighupio/fury-kubernetes-ingress?label=License)
 ![Slack](https://img.shields.io/badge/slack-@kubernetes/fury-yellow.svg?logo=slack&label=Slack)
 
@@ -118,9 +118,9 @@ To deploy the `cert-manager` package:
 ```yaml
 bases:
   - name: ingress/dual-nginx
-    version: "v2.3.0"
+    version: "v2.3.1"
   - name: ingress/cert-manager
-    version: "v2.3.0"
+    version: "v2.3.1"
 ```
 
 2. Execute `furyctl vendor -H` to download the packages
@@ -179,7 +179,7 @@ Single Ingress:
 ```yaml
 bases:
   - name: ingress/nginx
-    version: "v2.3.0"
+    version: "v2.3.1"
 ```
 
 Dual Ingress:
@@ -189,9 +189,9 @@ Dual Ingress:
 ```yaml
 bases:
   - name: ingress/nginx
-    version: "v2.3.0"
+    version: "v2.3.1"
   - name: ingress/dual-nginx
-    version: "v2.3.0"
+    version: "v2.3.1"
 ```
 
 > See `furyctl` [documentation][furyctl-repo] for additional details about `Furyfile.yml` format.
@@ -263,11 +263,11 @@ To deploy the `forecastle` package:
 ```yaml
 bases:
   - name: ingress/dual-nginx
-    version: "v2.3.0"
+    version: "v2.3.1"
   - name: ingress/cert-manager
-    version: "v2.3.0"
+    version: "v2.3.1"
   - name: ingress/forecastle
-    version: "v2.3.0"
+    version: "v2.3.1"
 ```
 
 2. Execute `furyctl legacy vendor -H` to download the packages
@@ -316,7 +316,7 @@ Add the following annotations to your ingresses to be discovered by Forecastle:
 [kubernetes-ingress]: https://kubernetes.io/docs/concepts/services-networking/ingress/
 [forecastle-repo]: https://github.com/stakater/Forecastle
 [forecastle-icons]: https://github.com/stakater/ForecastleIcons
-[forecastle-repository]: https://github.com/stakater/Forecastle/blob/v1.0.61/README.md
+[forecastle-repository]: https://github.com/stakater/Forecastle/blob/v1.0.136/README.md
 [ingress-nginx-docs]: https://github.com/kubernetes/ingress-nginx
 [prometheus-alerts-page]: https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/
 <!-- </KFD-DOCS> -->
