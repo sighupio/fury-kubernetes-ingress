@@ -79,8 +79,7 @@ spec:
         doc: "This alert fires if the certificate for a given host is expiring
           in less than 7 days."
       expr: |
-        (avg by (host)
-          (nginx_ingress_controller_ssl_expire_time_seconds{job="ingress-nginx-metrics"})) < 604800
+        (avg(nginx_ingress_controller_ssl_expire_time_seconds{job="ingress-nginx-metrics"}) by (host) - time()) < 604800
       labels:
         severity: warning
     - alert: NginxIngressCertificateExpiration
@@ -90,7 +89,6 @@ spec:
         doc: "This alert fires if the certificate for a given host is expiring
           in less than 1 days."
       expr: |
-        (avg by (host)
-          (nginx_ingress_controller_ssl_expire_time_seconds{job="ingress-nginx-metrics"})) < 86400
+        (avg(nginx_ingress_controller_ssl_expire_time_seconds{job="ingress-nginx-metrics"}) by (host) - time()) < 86400
       labels:
         severity: critical
