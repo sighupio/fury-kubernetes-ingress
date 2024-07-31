@@ -5,7 +5,7 @@
 </h1>
 <!-- markdownlint-enable MD033 -->
 
-![Release](https://img.shields.io/badge/Latest%20Release-v2.3.1-blue)
+![Release](https://img.shields.io/badge/Latest%20Release-v2.3.2-blue)
 ![License](https://img.shields.io/github/license/sighupio/fury-kubernetes-ingress?label=License)
 ![Slack](https://img.shields.io/badge/slack-@kubernetes/fury-yellow.svg?logo=slack&label=Slack)
 
@@ -118,9 +118,9 @@ To deploy the `cert-manager` package:
 ```yaml
 bases:
   - name: ingress/dual-nginx
-    version: "v2.3.1"
+    version: "v2.3.2"
   - name: ingress/cert-manager
-    version: "v2.3.1"
+    version: "v2.3.2"
 ```
 
 2. Execute `furyctl vendor -H` to download the packages
@@ -179,7 +179,7 @@ Single Ingress:
 ```yaml
 bases:
   - name: ingress/nginx
-    version: "v2.3.1"
+    version: "v2.3.2"
 ```
 
 Dual Ingress:
@@ -189,9 +189,9 @@ Dual Ingress:
 ```yaml
 bases:
   - name: ingress/nginx
-    version: "v2.3.1"
+    version: "v2.3.2"
   - name: ingress/dual-nginx
-    version: "v2.3.1"
+    version: "v2.3.2"
 ```
 
 > See `furyctl` [documentation][furyctl-repo] for additional details about `Furyfile.yml` format.
@@ -263,11 +263,11 @@ To deploy the `forecastle` package:
 ```yaml
 bases:
   - name: ingress/dual-nginx
-    version: "v2.3.1"
+    version: "v2.3.2"
   - name: ingress/cert-manager
-    version: "v2.3.1"
+    version: "v2.3.2"
   - name: ingress/forecastle
-    version: "v2.3.1"
+    version: "v2.3.2"
 ```
 
 2. Execute `furyctl legacy vendor -H` to download the packages
