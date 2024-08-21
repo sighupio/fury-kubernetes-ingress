@@ -66,7 +66,7 @@ Search for the version of the chart that installs your desired version of the co
 
 > ❗️ change the `--version` flag with the right verison.
 >
-> You can check the version of the controller in the Chart.yaml file inside the chart.
+> You can check the version of the controller in Ingress NGINX Controller's [Supported Versions Table](https://github.com/ralgozino/ingress-nginx?tab=readme-ov-file#supported-versions-table).
 
 ```bash
 helm template ingress-nginx ingress-nginx \
