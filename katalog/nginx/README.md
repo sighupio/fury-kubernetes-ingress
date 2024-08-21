@@ -12,7 +12,7 @@ Ingress NGINX is an Ingress Controller for [NGINX][nginx-page] web server and re
 
 ## Image repository and tag
 
-- Ingress NGINX image: `k8s.gcr.io/ingress-nginx/controller:v1.9.6`
+- Ingress NGINX image: `k8s.gcr.io/ingress-nginx/controller:v1.11.2`
 - Ingress NGINX repo: [https://github.com/kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
 
 ## Configuration
@@ -46,7 +46,7 @@ bases:
 
 ```yaml
 resources:
-- ./vendor/katalog/ingress/nginx
+  - ./vendor/katalog/ingress/nginx
 ```
 
 5. Apply the necessary patches. You can find a list of common customization [here](#common-customizations).
@@ -99,6 +99,7 @@ Followings Prometheus [alerts][prometheus-alerts] are already defined for this p
 | `NginxIngressCertificateExpiration` | This alert fires if the certificate for a given host is expiring in less than 1 day.                                                                | critical |          |
 
 <!-- Links -->
+
 [furyctl-repo]: https://github.com/sighupio/furyctl
 [nginx-page]: https://nginx.org
 [prometheus-alerts]: https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/

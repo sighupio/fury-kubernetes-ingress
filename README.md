@@ -5,11 +5,12 @@
 </h1>
 <!-- markdownlint-enable MD033 -->
 
-![Release](https://img.shields.io/badge/Latest%20Release-v2.3.2-blue)
+![Release](https://img.shields.io/badge/Latest%20Release-v2.3.3-blue)
 ![License](https://img.shields.io/github/license/sighupio/fury-kubernetes-ingress?label=License)
 ![Slack](https://img.shields.io/badge/slack-@kubernetes/fury-yellow.svg?logo=slack&label=Slack)
 
 <!-- <KFD-DOCS> -->
+
 **Kubernetes Fury Ingress** provides Ingress Controllers to expose services and TLS certificate management solutions for the [Kubernetes Fury Distribution (KFD)][kfd-repo].
 
 If you are new to KFD please refer to the [official documentation][kfd-docs] on how to get started with KFD.
@@ -38,8 +39,8 @@ Kubernetes Fury Ingress provides the following packages:
 
 | Package                                       | Version    | Description                                                                                                                   |
 | --------------------------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| [nginx](katalog/nginx)                        | `v1.9.6`   | The NGINX Ingress Controller for Kubernetes provides delivery services for Kubernetes applications.                           |
-| [dual-nginx](katalog/dual-nginx)              | `v1.9.6`   | It deploys two identical NGINX ingress controllers but with two different scopes: public/external and private/internal.       |
+| [nginx](katalog/nginx)                        | `v1.11.2`  | The NGINX Ingress Controller for Kubernetes provides delivery services for Kubernetes applications.                           |
+| [dual-nginx](katalog/dual-nginx)              | `v1.11.2`  | It deploys two identical NGINX ingress controllers but with two different scopes: public/external and private/internal.       |
 | [cert-manager](katalog/cert-manager)          | `v1.14.2`  | cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources. |
 | [external-dns](katalog/external-dns)          | `v0.14.0`  | external-dns allows you to manage DNS records natively from Kubernetes.                                                       |
 | [forecastle](katalog/forecastle)              | `v1.0.136` | Forecastle gives you access to a control panel where you can see your ingresses and access them on Kubernetes.                |
@@ -55,17 +56,16 @@ Kubernetes Fury Ingress provides the following packages:
 | `1.28.x`           | :white_check_mark: | No known issues |
 | `1.29.x`           | :white_check_mark: | No known issues |
 
-
 Check the [compatibility matrix][compatibility-matrix] for additional information on previous releases of the module.
 
 ## Usage
 
 ### Prerequisites
 
-| Tool                        | Version   | Description                                                                                                                                                    |
-| --------------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Tool                        | Version    | Description                                                                                                                                                    |
+| --------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [furyctl][furyctl-repo]     | `>=0.25.0` | The recommended tool to download and manage KFD modules and their packages. To learn more about `furyctl` read the [official documentation][furyctl-repo].     |
-| [kustomize][kustomize-repo] | `>=3.5.3` | Packages are customized using `kustomize`. To learn how to create your customization layer with `kustomize`, please refer to the [repository][kustomize-repo]. |
+| [kustomize][kustomize-repo] | `>=3.10.0` | Packages are customized using `kustomize`. To learn how to create your customization layer with `kustomize`, please refer to the [repository][kustomize-repo]. |
 
 ### Single vs Dual Controller
 
@@ -88,7 +88,7 @@ For both Single and Dual NGINX the Kubernetes Fury Ingress module has the follow
 - Metrics are scraped by Prometheus every `10s`
 - Validating Admission webhook that validates an ingress definition does not break NGINX configuration.
 
-Additionally, the following Prometheus [alerts][prometheus-alerts-page] are set up by default:
+Additionally, the following Prometheus Rules for [alerts][prometheus-alerts-page] are set up by default:
 
 | Parameter                           | Description                                                                                                                                         | Severity | Interval |
 | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | :------: |
@@ -118,9 +118,9 @@ To deploy the `cert-manager` package:
 ```yaml
 bases:
   - name: ingress/dual-nginx
-    version: "v2.3.2"
+    version: "v2.3.3"
   - name: ingress/cert-manager
-    version: "v2.3.2"
+    version: "v2.3.3"
 ```
 
 2. Execute `furyctl vendor -H` to download the packages
@@ -131,7 +131,7 @@ bases:
 
 ```yaml
 resources:
-- ./vendor/katalog/ingress/cert-manager
+  - ./vendor/katalog/ingress/cert-manager
 ```
 
 For the `dual-nginx` you will need to patch the `ClusterIssuer` resource with the right ingress class:
@@ -139,18 +139,18 @@ For the `dual-nginx` you will need to patch the `ClusterIssuer` resource with th
 ```yml
 ---
 patchesJson6902:
-    - target:
-          group: cert-manager.io
-          version: v1
-          kind: ClusterIssuer
-          name: letsencrypt-staging
-      path: patches/dual-nginx.yml
-    - target:
-          group: cert-manager.io
-          version: v1
-          kind: ClusterIssuer
-          name: letsencrypt-prod
-      path: patches/dual-nginx.yml
+  - target:
+      group: cert-manager.io
+      version: v1
+      kind: ClusterIssuer
+      name: letsencrypt-staging
+    path: patches/dual-nginx.yml
+  - target:
+      group: cert-manager.io
+      version: v1
+      kind: ClusterIssuer
+      name: letsencrypt-prod
+    path: patches/dual-nginx.yml
 ```
 
 and in the `patches/dual-nginx.yml`:
@@ -179,7 +179,7 @@ Single Ingress:
 ```yaml
 bases:
   - name: ingress/nginx
-    version: "v2.3.2"
+    version: "v2.3.3"
 ```
 
 Dual Ingress:
@@ -189,9 +189,9 @@ Dual Ingress:
 ```yaml
 bases:
   - name: ingress/nginx
-    version: "v2.3.2"
+    version: "v2.3.3"
   - name: ingress/dual-nginx
-    version: "v2.3.2"
+    version: "v2.3.3"
 ```
 
 > See `furyctl` [documentation][furyctl-repo] for additional details about `Furyfile.yml` format.
@@ -204,7 +204,7 @@ bases:
 
 ```yaml
 resources:
-- ./vendor/katalog/ingress
+  - ./vendor/katalog/ingress
 ```
 
 5. Apply the necessary patches. You can find a list of common customization [here](#common-customizations).
@@ -263,11 +263,11 @@ To deploy the `forecastle` package:
 ```yaml
 bases:
   - name: ingress/dual-nginx
-    version: "v2.3.2"
+    version: "v2.3.3"
   - name: ingress/cert-manager
-    version: "v2.3.2"
+    version: "v2.3.3"
   - name: ingress/forecastle
-    version: "v2.3.2"
+    version: "v2.3.3"
 ```
 
 2. Execute `furyctl legacy vendor -H` to download the packages
@@ -278,7 +278,7 @@ bases:
 
 ```yaml
 resources:
-- ./vendor/katalog/ingress/forecastle
+  - ./vendor/katalog/ingress/forecastle
 ```
 
 5. Finally, execute the following command to deploy the package:
@@ -300,13 +300,14 @@ Add the following annotations to your ingresses to be discovered by Forecastle:
 | `forecastle.stakater.com/appName`            | A custom name for your application. Default is the name of the ingress                                                                                    | `false`  |
 | `forecastle.stakater.com/group`              | A custom group name. Use if you want the application to show in a different group than the namespace it belongs to                                        | `false`  |
 | `forecastle.stakater.com/instance`           | A comma-separated list of name/s of the forecastle instance/s where you want this application to appear. Use when you have multiple forecastle dashboards | `false`  |
-| `forecastle.stakater.com/url`                | A URL for the forecastle app (This will override the ingress URL). It *must* begin with a scheme i.e. `http://` or `https://`                             | `false`  |
+| `forecastle.stakater.com/url`                | A URL for the forecastle app (This will override the ingress URL). It _must_ begin with a scheme i.e. `http://` or `https://`                             | `false`  |
 | `forecastle.stakater.com/properties`         | A comma separate list of key-value pairs for the properties. This will appear as an expandable list for the app                                           | `false`  |
 | `forecastle.stakater.com/network-restricted` | Specify whether the application is network restricted or not (true or false)                                                                              | `false`  |
 
 > See Forecastle [official repository][forecastle-repository] for more details.
 
 <!-- Links -->
+
 [furyctl-repo]: https://github.com/sighupio/furyctl
 [sighup-page]: https://sighup.io
 [kfd-repo]: https://github.com/sighupio/fury-distribution
@@ -319,9 +320,11 @@ Add the following annotations to your ingresses to be discovered by Forecastle:
 [forecastle-repository]: https://github.com/stakater/Forecastle/blob/v1.0.136/README.md
 [ingress-nginx-docs]: https://github.com/kubernetes/ingress-nginx
 [prometheus-alerts-page]: https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/
+
 <!-- </KFD-DOCS> -->
 
 <!-- <FOOTER> -->
+
 ## Contributing
 
 Before contributing, please read first the [Contributing Guidelines](docs/CONTRIBUTING.md).
@@ -333,4 +336,5 @@ In case you experience any problems with the module, please [open a new issue](h
 ## License
 
 This module is open-source and it's released under the following [LICENSE](LICENSE)
+
 <!-- </FOOTER> -->
