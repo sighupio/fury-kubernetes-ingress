@@ -12,7 +12,7 @@ Ingress NGINX is an Ingress Controller for [NGINX][nginx-page] webserver and rev
 
 ## Image repository and tag
 
-- Ingress NGINX image: `k8s.gcr.io/ingress-nginx/controller:v1.9.6`
+- Ingress NGINX image: `k8s.gcr.io/ingress-nginx/controller:v1.11.2`
 - Ingress NGINX repo: [https://github.com/kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
 
 ## Configuration
@@ -48,7 +48,7 @@ bases:
 
 ```yaml
 resources:
-- ./vendor/katalog/ingress/dual-nginx
+  - ./vendor/katalog/ingress/dual-nginx
 ```
 
 5. Apply the necessary patches. You can find a list of common customization [here](#common-customizations).
@@ -101,7 +101,7 @@ Followings Prometheus [alerts][prometheus-alerts] are already defined for this p
 ### ingress-nginx.rules
 
 | Parameter                           | Description                                                                                                                                         | Severity | Interval |
-|-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|----------|:--------:|
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | :------: |
 | `NginxIngressDown`                  | This alert fires if Prometheus target discovery was not able to reach ingress-nginx-metrics in the last 15 minutes.                                 | critical |   15m    |
 | `NginxIngressFailureRate`           | This alert fires if the failure rate (the rate of 5xx responses) measured on a time window of 2 minutes was higher than 10% in the last 10 minutes. | critical |   10m    |
 | `NginxIngressFailedReload`          | This alert fires if the ingress' configuration reload failed in the last 10 minutes.                                                                | warning  |   10m    |
@@ -111,6 +111,7 @@ Followings Prometheus [alerts][prometheus-alerts] are already defined for this p
 | `NginxIngressCertificateExpiration` | This alert fires if the certificate for a given host is expiring in less than 1 day.                                                                | critical |          |
 
 <!-- Links -->
+
 [furyctl-repo]: https://github.com/sighupio/furyctl
 [nginx-page]: https://nginx.org
 [prometheus-alerts]: https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/
