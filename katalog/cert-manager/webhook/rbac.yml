@@ -8,13 +8,23 @@ automountServiceAccountToken: true
 kind: ServiceAccount
 metadata:
   name: cert-manager-webhook
-  labels: {}
+  labels:
+    app: webhook
+    app.kubernetes.io/name: webhook
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/component: "webhook"
+    app.kubernetes.io/version: "v1.16.1"
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: cert-manager-webhook:subjectaccessreviews
-  labels: {}
+  labels:
+    app: webhook
+    app.kubernetes.io/name: webhook
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/component: "webhook"
+    app.kubernetes.io/version: "v1.16.1"
 rules:
 - apiGroups: ["authorization.k8s.io"]
   resources: ["subjectaccessreviews"]
@@ -24,7 +34,12 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: cert-manager-webhook:subjectaccessreviews
-  labels: {}
+  labels:
+    app: webhook
+    app.kubernetes.io/name: webhook
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/component: "webhook"
+    app.kubernetes.io/version: "v1.16.1"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -38,7 +53,13 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: cert-manager-webhook:dynamic-serving
-  labels: {}
+  namespace: cert-manager
+  labels:
+    app: webhook
+    app.kubernetes.io/name: webhook
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/component: "webhook"
+    app.kubernetes.io/version: "v1.16.1"
 rules:
 - apiGroups: [""]
   resources: ["secrets"]
@@ -54,7 +75,13 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: cert-manager-webhook:dynamic-serving
-  labels: {}
+  namespace: cert-manager
+  labels:
+    app: webhook
+    app.kubernetes.io/name: webhook
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/component: "webhook"
+    app.kubernetes.io/version: "v1.16.1"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
