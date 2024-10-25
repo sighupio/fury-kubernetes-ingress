@@ -11,7 +11,7 @@
 
 ## Image repository and tag
 
-- Forecastle image: `docker.io/stakater/forecastle:v1.0.136`
+- Forecastle image: `docker.io/stakater/forecastle:v1.0.145`
 - Forecastle repo: [https://github.com/stakater/Forecastle](https://github.com/stakater/Forecastle)
 
 ## Configuration
