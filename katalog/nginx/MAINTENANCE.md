@@ -62,7 +62,7 @@ helm template ingress-nginx ./charts/ingress-nginx \
 
 ## Getting upstream files - option 2
 
-Search for the version of the chart that installs your desired version of the controller (for example, chart v4.11.2 installs the controller v1.11.2) and run the following command:
+Search for the version of the chart that installs your desired version of the controller (for example, chart v4.11.3 installs the controller v1.11.3) and run the following command:
 
 > ❗️ change the `--version` flag with the right verison.
 >
@@ -71,7 +71,7 @@ Search for the version of the chart that installs your desired version of the co
 ```bash
 helm template ingress-nginx ingress-nginx \
   --repo https://kubernetes.github.io/ingress-nginx \
-  --version 4.11.2 \
+  --version 4.11.3 \
   --namespace ingress-nginx \
   --set fullNameOverride=ingress-nginx \
   --set controller.kind=DaemonSet \

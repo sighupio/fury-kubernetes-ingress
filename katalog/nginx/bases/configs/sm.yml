@@ -34,4 +34,5 @@ spec:
   ports:
     - name: metrics
       port: 10254
+      protocol: TCP
       targetPort: metrics

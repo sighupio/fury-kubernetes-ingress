@@ -23,9 +23,13 @@ spec:
       labels:
         app: ingress-nginx
     spec:
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        kubernetes.io/os: linux
       serviceAccountName: ingress-nginx
       securityContext:
         fsGroup: 101
+      terminationGracePeriodSeconds: 300
       containers:
         - name: nginx-ingress-controller
           image: k8s.gcr.io/ingress-nginx/controller
@@ -71,12 +75,15 @@ spec:
               value: /usr/local/lib/libmimalloc.so
           ports:
             - name: http
+              protocol: TCP
               containerPort: 8080
             - name: https
+              protocol: TCP
               containerPort: 8443
             - name: metrics
               containerPort: 10254
             - name: webhook
+              protocol: TCP
               containerPort: 9443
           livenessProbe:
             failureThreshold: 5
