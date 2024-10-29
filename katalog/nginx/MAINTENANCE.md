@@ -85,3 +85,15 @@ diff current-release.yaml new-release.yaml
 
 - The main Service has been renamed from `ingress-nginx-controller` to `ingress-nginx` to avoid breaking compatibility with the old releases. Reference [here](./bases/controller/kustomization.yaml#24) and [here](./MAINTENANCE.values.yml#17).
 
+## Add license to all files
+
+```bash
+go install github.com/B1NARY-GR0UP/nwa@latest
+cat <<EOF > license.txt
+# Copyright (c) 2017-present SIGHUP s.r.l All rights reserved.
+# Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
+EOF
+nwa add --rawtmpl license.txt katalog/nginx/bases/configs/*.yml
+nwa add --rawtmpl license.txt katalog/nginx/bases/controller/*.yml
+```
