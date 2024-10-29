@@ -11,7 +11,14 @@ namespace: ingress-nginx
 resources:
   - dashboards
   - ns.yml
-  - rbac
-  - sm.yml
-  - rules.yml
-  - tls.yml
+  - Certificate-ingress-nginx-root-cert.yml
+  - ClusterRole-ingress-nginx.yml
+  - ClusterRoleBinding-ingress-nginx.yml
+  - Issuer-ingress-nginx-root-issuer.yml
+  - Issuer-ingress-nginx-self-signed-issuer.yml
+  - PrometheusRule-ingress-nginx-controller.yml
+  - Role-ingress-nginx.yml
+  - RoleBinding-ingress-nginx.yml
+  - Service-ingress-nginx-controller-metrics.yml
+  - ServiceAccount-ingress-nginx.yml
+  - ServiceMonitor-ingress-nginx-controller.yml
