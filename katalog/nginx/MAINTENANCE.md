@@ -85,7 +85,7 @@ diff current-release.yaml new-release.yaml
 
 - The main Service has been renamed from `ingress-nginx-controller` to `ingress-nginx` to avoid breaking compatibility with the old releases. Reference [here](./bases/controller/kustomization.yaml#24) and [here](./MAINTENANCE.values.yml#17).
 
-## Add license to all files
+## Add license to all files
 
 ```bash
 go install github.com/B1NARY-GR0UP/nwa@latest
