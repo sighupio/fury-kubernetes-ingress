@@ -8,4 +8,4 @@
 
 - op: "replace"
   path: "/webhooks/0/clientConfig/service/name"
-  value: "ingress-nginx-admission-external"
+  value: "ingress-nginx-controller-admission-external"

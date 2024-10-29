@@ -4,7 +4,7 @@
 
 - op: "replace"
   path: "/spec/template/spec/containers/0/args/1"
-  value: "--configmap=$(POD_NAMESPACE)/nginx-configuration-external"
+  value: "--configmap=$(POD_NAMESPACE)/ingress-nginx-controller-external"
 
 - op: "replace"
   path: "/spec/template/spec/containers/0/args/2"
@@ -24,4 +24,4 @@
 
 - op: "replace"
   path: "/spec/template/spec/volumes/0/secret/secretName"
-  value: "ingress-nginx-tls-external"
+  value: "ingress-nginx-admission-external"
