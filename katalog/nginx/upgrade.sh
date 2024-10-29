@@ -34,3 +34,6 @@ mv Service-ingress-nginx-controller-admission.yml bases/controller
 mv Service-ingress-nginx-controller.yml bases/controller
 mv ValidatingWebhookConfiguration-ingress-nginx-admission.yml bases/controller
 
+go install github.com/google/addlicense@v1.1.1
+addlicense -c "SIGHUP s.r.l" -y "2017-present" -v -l bsd .
+

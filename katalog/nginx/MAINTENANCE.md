@@ -88,12 +88,6 @@ diff current-release.yaml new-release.yaml
 ## Add license to all files
 
 ```bash
-go install github.com/B1NARY-GR0UP/nwa@latest
-cat <<EOF > license.txt
-# Copyright (c) 2017-present SIGHUP s.r.l All rights reserved.
-# Use of this source code is governed by a BSD-style
-# license that can be found in the LICENSE file.
-EOF
-nwa add --rawtmpl license.txt katalog/nginx/bases/configs/*.yml
-nwa add --rawtmpl license.txt katalog/nginx/bases/controller/*.yml
+go install github.com/google/addlicense@v1.1.1
+addlicense -c "SIGHUP s.r.l" -y "2017-present" -v -l bsd .
 ```
