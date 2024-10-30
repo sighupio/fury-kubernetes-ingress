@@ -26,7 +26,7 @@ kustomize build . > current-release.yaml
 ```bash
 helm template ingress-nginx ingress-nginx \
   --repo https://kubernetes.github.io/ingress-nginx \
-  --namespace ingress-nginx --create-namespace --version $VERSION --values MAINTENANCE.values.yml | yq -s '.kind + "-" + .metadata.name'
+  --namespace ingress-nginx --create-namespace --version $VERSION --values MAINTENANCE.values.yml | yq --split-exp '.kind + "-" + .metadata.name'
 ```
 
 3. Sometimes, you might get an empty file called ".yml" from the template, you can safely delete it.
