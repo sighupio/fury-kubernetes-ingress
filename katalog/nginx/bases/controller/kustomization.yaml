@@ -20,6 +20,7 @@ resources:
   - Service-ingress-nginx-controller.yml
   - ValidatingWebhookConfiguration-ingress-nginx-admission.yml
 
+# We patch the service name for backwards compatibility with previous releases and to be able to upgrade without downtime.
 patches:
 - target:
     kind: Service
