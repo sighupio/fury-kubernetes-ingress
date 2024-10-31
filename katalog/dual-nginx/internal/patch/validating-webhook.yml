@@ -9,3 +9,10 @@
 - op: "replace"
   path: "/webhooks/0/clientConfig/service/name"
   value: "ingress-nginx-controller-admission-internal"
+
+- op: "replace"
+  path: "/metadata/annotations/certmanager.k8s.io~1inject-ca-from"
+  vallue: "ingress-nginx/ingress-nginx-admission-internal"
+- op: "replace"
+  path: "/metadata/annotations/cert-manager.io~1inject-ca-from"
+  value: "ingress-nginx/ingress-nginx-admission-internal"
