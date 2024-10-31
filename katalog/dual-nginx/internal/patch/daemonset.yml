@@ -4,25 +4,24 @@
 
 - op: "replace"
   path: "/spec/template/spec/containers/0/args/1"
-  value: "--configmap=$(POD_NAMESPACE)/ingress-nginx-controller-internal"
-
-- op: "replace"
-  path: "/spec/template/spec/containers/0/args/2"
   value: "--publish-service=$(POD_NAMESPACE)/ingress-nginx-internal"
 
 - op: "replace"
-  path: "/spec/template/spec/containers/0/args/6"
-  value: "--ingress-class=internal"
-
-- op: "replace"
-  path: "/spec/template/spec/containers/0/args/7"
+  path: "/spec/template/spec/containers/0/args/2"
   value: "--election-id=ingress-controller-leader-internal"
 
 - op: "replace"
-  path: "/spec/template/spec/containers/0/args/8"
+  path: "/spec/template/spec/containers/0/args/3"
   value: "--controller-class=k8s.io/internal"
+
+- op: "replace"
+  path: "/spec/template/spec/containers/0/args/4"
+  value: "--ingress-class=internal"
+
+- op: "replace"
+  path: "/spec/template/spec/containers/0/args/5"
+  value: "--configmap=$(POD_NAMESPACE)/ingress-nginx-controller-internal"
 
 - op: "replace"
   path: "/spec/template/spec/volumes/0/secret/secretName"
   value: "ingress-nginx-admission-internal"
-
