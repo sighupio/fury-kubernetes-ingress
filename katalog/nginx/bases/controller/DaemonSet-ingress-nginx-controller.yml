@@ -63,6 +63,8 @@ spec:
             - --validating-webhook=:9443
             - --validating-webhook-certificate=/usr/local/certificates/cert
             - --validating-webhook-key=/usr/local/certificates/key
+            - --http-port=8080
+            - --https-port=8443
           securityContext:
             runAsNonRoot: true
             runAsUser: 101
