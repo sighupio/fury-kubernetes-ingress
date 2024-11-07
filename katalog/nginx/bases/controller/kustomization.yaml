@@ -8,15 +8,25 @@ kind: Kustomization
 
 namespace: ingress-nginx
 
-images:
-  - name: k8s.gcr.io/ingress-nginx/controller
-    newName: registry.sighup.io/fury/ingress-nginx/controller
-    newTag: v1.11.2
+commonLabels:
+  app: ingress-nginx
 
 resources:
-  - daemonset.yml
-  - cm.yml
-  - service.yml
-  - ingress-class.yml
-  - tls-cert.yml
-  - validating-webhook.yml
+  - Certificate-ingress-nginx-admission.yml
+  - ConfigMap-ingress-nginx-controller.yml
+  - DaemonSet-ingress-nginx-controller.yml
+  - IngressClass-nginx.yml
+  - Service-ingress-nginx-controller-admission.yml
+  - Service-ingress-nginx-controller.yml
+  - ValidatingWebhookConfiguration-ingress-nginx-admission.yml
+
+# We patch the service name for backwards compatibility with previous releases and to be able to upgrade without downtime.
+patches:
+- target:
+    kind: Service
+    name: ingress-nginx-controller
+    version: v1
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: ingress-nginx
