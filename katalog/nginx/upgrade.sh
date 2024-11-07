@@ -7,7 +7,7 @@
 kustomize build . > current-release.yaml
 
 # Remember to change this version accordingly
-VERSION=4.11.2
+VERSION=4.11.3
 
 helm template ingress-nginx ingress-nginx \
   --repo https://kubernetes.github.io/ingress-nginx \

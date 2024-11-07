@@ -13,10 +13,10 @@ metadata:
     certmanager.k8s.io/inject-ca-from: "ingress-nginx/ingress-nginx-admission"
     cert-manager.io/inject-ca-from: "ingress-nginx/ingress-nginx-admission"
   labels:
-    helm.sh/chart: ingress-nginx-4.11.2
+    helm.sh/chart: ingress-nginx-4.11.3
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/instance: ingress-nginx
-    app.kubernetes.io/version: "1.11.2"
+    app.kubernetes.io/version: "1.11.3"
     app.kubernetes.io/part-of: ingress-nginx
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: admission-webhook
@@ -42,4 +42,5 @@ webhooks:
       service:
         name: ingress-nginx-controller-admission
         namespace: ingress-nginx
+        port: 9443
         path: /networking/v1/ingresses
