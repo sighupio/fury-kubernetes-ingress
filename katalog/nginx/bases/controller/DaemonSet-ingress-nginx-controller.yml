@@ -8,10 +8,10 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   labels:
-    helm.sh/chart: ingress-nginx-4.11.2
+    helm.sh/chart: ingress-nginx-4.11.3
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/instance: ingress-nginx
-    app.kubernetes.io/version: "1.11.2"
+    app.kubernetes.io/version: "1.11.3"
     app.kubernetes.io/part-of: ingress-nginx
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: controller
@@ -33,10 +33,10 @@ spec:
   template:
     metadata:
       labels:
-        helm.sh/chart: ingress-nginx-4.11.2
+        helm.sh/chart: ingress-nginx-4.11.3
         app.kubernetes.io/name: ingress-nginx
         app.kubernetes.io/instance: ingress-nginx
-        app.kubernetes.io/version: "1.11.2"
+        app.kubernetes.io/version: "1.11.3"
         app.kubernetes.io/part-of: ingress-nginx
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/component: controller
@@ -44,10 +44,9 @@ spec:
       dnsPolicy: ClusterFirst
       securityContext:
         fsGroup: 101
-      terminationGracePeriodSeconds: 300
       containers:
         - name: controller
-          image: registry.sighup.io/fury/ingress-nginx/controller:v1.11.2
+          image: registry.sighup.io/fury/ingress-nginx/controller:v1.11.3
           imagePullPolicy: Always
           lifecycle:
             preStop:
