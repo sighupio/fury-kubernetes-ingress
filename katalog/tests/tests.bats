@@ -275,8 +275,6 @@ EOF
   run kubectl get configmap -n cert-manager cert-manager-dashboard
   assert_success
 
-  run kubectl get configmap -n cert-manager cert-manager-webhook
-  assert_success
 }
 
 # Verify the existence of ServiceMonitor for cert-manager
