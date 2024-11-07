@@ -16,6 +16,10 @@ spec:
     - http01:
         ingress:
           class: nginx
+          podTemplate:
+            metadata:
+              labels:
+                app: cert-manager
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
@@ -31,3 +35,7 @@ spec:
     - http01:
         ingress:
           class: nginx
+          podTemplate:
+            metadata:
+              labels:
+                app: cert-manager
