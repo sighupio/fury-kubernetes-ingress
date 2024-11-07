@@ -10,6 +10,11 @@ namespace: ingress-nginx
 
 commonLabels:
   app: ingress-nginx
+  
+images:
+  - name: k8s.gcr.io/ingress-nginx/controller
+    newName: registry.sighup.io/fury/ingress-nginx/controller
+    newTag: v1.11.3
 
 resources:
   - Certificate-ingress-nginx-admission.yml

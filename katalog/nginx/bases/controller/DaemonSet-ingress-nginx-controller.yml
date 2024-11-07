@@ -44,6 +44,7 @@ spec:
       dnsPolicy: ClusterFirst
       securityContext:
         fsGroup: 101
+      terminationGracePeriodSeconds: 300
       containers:
         - name: controller
           image: registry.sighup.io/fury/ingress-nginx/controller:v1.11.2

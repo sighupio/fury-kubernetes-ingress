@@ -38,7 +38,7 @@ The reference architecture used to deploy the Fury Kubernetes Ingress Module is 
 Kubernetes Fury Ingress provides the following packages:
 
 | Package                                       | Version    | Description                                                                                                                   |
-| --------------------------------------------- |------------| ----------------------------------------------------------------------------------------------------------------------------- |
+| --------------------------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | [nginx](katalog/nginx)                        | `v1.11.2`  | The NGINX Ingress Controller for Kubernetes provides delivery services for Kubernetes applications.                           |
 | [dual-nginx](katalog/dual-nginx)              | `v1.11.2`  | It deploys two identical NGINX ingress controllers but with two different scopes: public/external and private/internal.       |
 | [cert-manager](katalog/cert-manager)          | `v1.14.2`  | cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources. |

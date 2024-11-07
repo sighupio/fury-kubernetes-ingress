@@ -12,7 +12,7 @@ Ingress NGINX is an Ingress Controller for [NGINX][nginx-page] webserver and rev
 
 ## Image repository and tag
 
-- Ingress NGINX image: `k8s.gcr.io/ingress-nginx/controller:v1.11.2`
+- Ingress NGINX image: `k8s.gcr.io/ingress-nginx/controller:v1.11.3`
 - Ingress NGINX repo: [https://github.com/kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
 
 ## Configuration
@@ -33,9 +33,9 @@ Ingress NGINX Double is deployed with the following default configuration:
 ```yaml
 bases:
   - name: ingress/nginx
-    version: "v2.2.0"
+    version: "v2.3.3"
   - name: ingress/dual-nginx
-    version: "v2.2.0"
+    version: "v2.3.3"
 ```
 
 > See `furyctl` [documentation][furyctl-repo] for additional details about `Furyfile.yml` format.
