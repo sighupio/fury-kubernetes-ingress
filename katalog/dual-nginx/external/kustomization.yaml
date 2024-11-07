@@ -20,7 +20,7 @@ patchesJson6902:
       group: apps
       version: v1
       kind: DaemonSet
-      name: nginx-ingress-controller
+      name: ingress-nginx-controller
     path: patch/daemonset.yml
   - target:
       group: ""
@@ -32,13 +32,13 @@ patchesJson6902:
       group: ""
       version: v1
       kind: ConfigMap
-      name: nginx-configuration
+      name: ingress-nginx-controller
     path: patch/cm.yml
   - target:
       group: cert-manager.io
       version: v1
       kind: Certificate
-      name: ingress-nginx-tls
+      name: ingress-nginx-admission
     path: patch/tls-cert.yml
   - target:
       group: admissionregistration.k8s.io
