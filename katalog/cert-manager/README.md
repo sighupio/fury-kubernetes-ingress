@@ -13,7 +13,7 @@ This package deploys cert-manager to be used with [Let's Encrypt](https://letsen
 
 ## Image repository and tag
 
-- Cert Manager image: `quay.io/jetstack/cert-manager-controller:v1.14.2`
+- Cert Manager image: `quay.io/jetstack/cert-manager-controller:v1.16.1`
 - Cert Manager repo: [https://github.com/jetstack/cert-manager](https://github.com/jetstack/cert-manager)
 - Cert Manager documentation: [https://cert-manager.io/docs/](https://cert-manager.io/docs/)
 

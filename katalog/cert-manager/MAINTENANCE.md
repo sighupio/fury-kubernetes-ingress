@@ -31,12 +31,19 @@ References:
 
 ## Update guide
 
-01. Download upstream manifests:
+01. Download upstream manifests from specific version or from latest:
 
-    ```bash
-    export CERT_MANAGER_VERSION=1.14.2
-    curl --location --remote-name https://github.com/cert-manager/cert-manager/releases/download/v"${CERT_MANAGER_VERSION}"/cert-manager.yaml
-    ```
+- Specific version
+
+  ```bash
+  curl --location --remote-name https://github.com/cert-manager/cert-manager/releases/download/v1.16.1/cert-manager.yaml
+  ```
+
+- Latest version
+
+  ```bash
+  curl --location --remote-name https://github.com/cert-manager/cert-manager/releases/latest/download/cert-manager.yaml
+  ```
 
 02. Split the absurdily large YAML into smaller pieces with the [kubernetes-split-yaml](github.com/mogensen/kubernetes-split-yaml) tool:
 
@@ -46,10 +53,12 @@ References:
     # split the file, the generated files will be found in the `generated` folder
     kubernetes-split-yaml --outdir generated cert-manager.yaml
     # clean manifest files and add separator to avoid problems when going to be merged
-    for file in generated/*.yaml; do sed -i '1i ---' "$file"; done
-    for file in generated/*.yaml; do sed -i '/^# Source:/d' "$file"; done
-    cd generated/
+    for file in generated/*.yaml; do sed -i '' '1i\             
+    ---
+    ' "$file"; done
 
+    for file in generated/*.yaml; do sed -i "" "/^# Source:/d" "$file"; done
+    cd generated/
     ```
 
     - Compare the downloaded and split files with the current one:
@@ -69,7 +78,7 @@ References:
         cert-manager-cainjector-crb.yaml \
         cert-manager-cainjector:leaderelection-role.yaml \
         cert-manager-cainjector:leaderelection-rb.yaml \
-        > cert-manager-cainjector-rbac.yaml
+        > rbac.yml
 
     # move the files to a "done" folder to know that you've checked them.
 
@@ -79,9 +88,20 @@ References:
         cert-manager-cainjector:leaderelection-role.yaml \
         cert-manager-cainjector:leaderelection-rb.yaml \
         done
-
+    
     # Diff the files with the ones in katalog/cert-manager/cainjector/rbac.yaml
-    # do the same for the rest of the files.
+    
+    cat cert-manager-cainjector-deployment.yaml \
+        cert-manager-cainjector-svc.yaml \
+        > deploy.yml
+
+    # move the files to a "done" folder to know that you've checked them.
+
+    mv cert-manager-cainjector-deployment.yaml \
+        cert-manager-cainjector-svc.yaml \
+        done
+
+    # Diff the files with the ones in katalog/cert-manager/cainjector/deploy.yaml
     ```
 
     For the Webhook
@@ -98,7 +118,7 @@ References:
         cert-manager-webhook:subjectaccessreviews-crb.yaml \
         cert-manager-webhook:dynamic-serving-role.yaml \
         cert-manager-webhook:dynamic-serving-rb.yaml \
-        > rbac.yaml
+        > rbac.yml
     mv cert-manager-webhook-sa.yaml \
         cert-manager-webhook:subjectaccessreviews-cr.yaml \
         cert-manager-webhook:subjectaccessreviews-crb.yaml \
@@ -115,11 +135,9 @@ References:
 
     cat cert-manager-webhook-deployment.yaml \
         cert-manager-webhook-svc.yaml \
-        cert-manager-webhook-cm.yaml \
-        > deployment.yaml
+        > deploy.yml
     mv cert-manager-webhook-deployment.yaml \
         cert-manager-webhook-svc.yaml \
-        cert-manager-webhook-cm.yaml \
         done
 
     # Diff the files with the ones in katalog/cert-manamger/webhook
@@ -132,7 +150,7 @@ References:
     mkdir cert-manager-controller
     mv cert-manager-controller*.yaml cert-manager-controller
     mv *-crd.yaml cert-manager-controller
-    mv cert-manager* cert-manager-controller
+    find . -name "cert-manager*" -type f -maxdepth 1 -exec mv {} cert-manager-controller \;
     cd cert-manager-controller
     mkdir done
 
@@ -142,7 +160,7 @@ References:
         clusterissuers.cert-manager.io-crd.yaml \
         issuers.cert-manager.io-crd.yaml \
         orders.acme.cert-manager.io-crd.yaml \
-        > crds.yaml
+        > crd.yml
     mv certificaterequests.cert-manager.io-crd.yaml \
         certificates.cert-manager.io-crd.yaml \
         challenges.acme.cert-manager.io-crd.yaml \
@@ -167,6 +185,7 @@ References:
         cert-manager-controller-challenges-cr.yaml \
         cert-manager-controller-certificatesigningrequests-cr.yaml \
         cert-manager-controller-ingress-shim-cr.yaml \
+        cert-manager-cluster-view-cr.yaml \
         cert-manager-view-cr.yaml \
         cert-manager-edit-cr.yaml \
         cert-manager-controller-approve:cert-manager-io-cr.yaml \
@@ -178,7 +197,9 @@ References:
         cert-manager-controller-certificatesigningrequests-crb.yaml \
         cert-manager-controller-ingress-shim-crb.yaml \
         cert-manager-controller-approve:cert-manager-io-crb.yaml \
+        cert-manager-tokenrequest-role.yaml \
         cert-manager:leaderelection-role.yaml \
+        cert-manager-cert-manager-tokenrequest-rb.yaml \
         cert-manager:leaderelection-rb.yaml \
         > rbac.yml
     mv cert-manager-sa.yaml \
@@ -189,6 +210,7 @@ References:
         cert-manager-controller-challenges-cr.yaml \
         cert-manager-controller-certificatesigningrequests-cr.yaml \
         cert-manager-controller-ingress-shim-cr.yaml \
+        cert-manager-cluster-view-cr.yaml \
         cert-manager-view-cr.yaml \
         cert-manager-edit-cr.yaml \
         cert-manager-controller-approve:cert-manager-io-cr.yaml \
@@ -200,7 +222,9 @@ References:
         cert-manager-controller-certificatesigningrequests-crb.yaml \
         cert-manager-controller-ingress-shim-crb.yaml \
         cert-manager-controller-approve:cert-manager-io-crb.yaml \
+        cert-manager-tokenrequest-role.yaml \
         cert-manager:leaderelection-role.yaml \
+        cert-manager-cert-manager-tokenrequest-rb.yaml \
         cert-manager:leaderelection-rb.yaml \
         done
     ```
@@ -225,7 +249,7 @@ References:
         patch: |-
         - op: replace
             path: /spec/template/spec/containers/0/args/6
-            value: --acme-http01-solver-image=registry.sighup.io/fury/cert-manager-acmesolver:v1.14.2
+            value: --acme-http01-solver-image=registry.sighup.io/fury/cert-manager-acmesolver:v1.16.1
 
     ```
 
