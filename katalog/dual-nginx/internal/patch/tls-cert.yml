@@ -9,16 +9,16 @@
 
 - op: "replace"
   path: "/spec/secretName"
-  value: "ingress-nginx-tls-internal"
-
-- op: "replace"
-  path: "/spec/dnsNames/0"
   value: "ingress-nginx-admission-internal"
 
 - op: "replace"
+  path: "/spec/dnsNames/0"
+  value: "ingress-nginx-controller-admission-internal"
+
+- op: "replace"
   path: "/spec/dnsNames/1"
-  value: "ingress-nginx-admission-internal.ingress-nginx"
+  value: "ingress-nginx-controller-admission-internal.ingress-nginx"
 
 - op: "replace"
   path: "/spec/dnsNames/2"
-  value: "ingress-nginx-admission-internal.ingress-nginx.svc"
+  value: "ingress-nginx-controller-admission-internal.ingress-nginx.svc"

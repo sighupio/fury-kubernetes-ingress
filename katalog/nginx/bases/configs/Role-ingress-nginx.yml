@@ -3,10 +3,20 @@
 # license that can be found in the LICENSE file.
 
 ---
+# Source: ingress-nginx/templates/controller-role.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
+  labels:
+    helm.sh/chart: ingress-nginx-4.11.2
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/instance: ingress-nginx
+    app.kubernetes.io/version: "1.11.2"
+    app.kubernetes.io/part-of: ingress-nginx
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: controller
   name: ingress-nginx
+  namespace: ingress-nginx
 rules:
   - apiGroups:
       - ""
@@ -41,6 +51,7 @@ rules:
       - get
       - list
       - watch
+  # Omit Ingress status permissions if `--update-status` is disabled.
   - apiGroups:
       - networking.k8s.io
     resources:
@@ -57,10 +68,10 @@ rules:
       - watch
   - apiGroups:
       - coordination.k8s.io
-    resourceNames:
-      - ingress-controller-leader
     resources:
       - leases
+    resourceNames:
+      - ingress-controller-leader
     verbs:
       - get
       - update

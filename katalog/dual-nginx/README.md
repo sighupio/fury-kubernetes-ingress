@@ -74,7 +74,7 @@ If your cluster has `infra` nodes you should patch the daemonset adding the `Nod
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: nginx-ingress-controller-external
+  name: ingress-nginx-controller-external
 spec:
   template:
     spec:
@@ -84,7 +84,7 @@ spec:
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: nginx-ingress-controller-internal
+  name: ingress-nginx-controller-internal
 spec:
   template:
     spec:
