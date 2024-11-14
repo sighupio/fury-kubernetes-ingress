@@ -1,6 +1,6 @@
 # Forecastle Package Maintenance Guide
 
-To update Forecaste, follow the next steps:
+To update Forecastle, follow the next steps:
 
 1. Compare the manifests with upstream and port the required modifications.
 
@@ -12,8 +12,9 @@ To update Forecaste, follow the next steps:
 ## Customizations
 
 - Forecastle deployment has been tweaked to include some security features like:
-  - changing the user that the image runs as
-  - setting the UIDs
+  - changed the user that the image runs as
+  - set the UID
   - liveness and readiness probes
+  - added seccompProfile directive to securityContext
 - Deleted Helm labels from all resources
 - The configuration file `config.yaml` has been personalized with Fury branding
