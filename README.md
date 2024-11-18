@@ -5,7 +5,7 @@
 </h1>
 <!-- markdownlint-enable MD033 -->
 
-![Release](https://img.shields.io/badge/Latest%20Release-v2.3.3-blue)
+![Release](https://img.shields.io/badge/Latest%20Release-v3.0.1-blue)
 ![License](https://img.shields.io/github/license/sighupio/fury-kubernetes-ingress?label=License)
 ![Slack](https://img.shields.io/badge/slack-@kubernetes/fury-yellow.svg?logo=slack&label=Slack)
 
@@ -51,14 +51,19 @@ Kubernetes Fury Ingress provides the following packages:
 
 | Kubernetes Version |   Compatibility    | Notes           |
 | ------------------ | :----------------: | --------------- |
-| `1.26.x`           | :white_check_mark: | No known issues |
-| `1.27.x`           | :white_check_mark: | No known issues |
 | `1.28.x`           | :white_check_mark: | No known issues |
 | `1.29.x`           | :white_check_mark: | No known issues |
+| `1.30.x`           | :white_check_mark: | No known issues |
+| `1.31.x`           | :white_check_mark: | No known issues |
 
 Check the [compatibility matrix][compatibility-matrix] for additional information on previous releases of the module.
 
 ## Usage
+
+> [!NOTE]
+> Instructions below are for deploying the module using furyctl legacy, that required manual intervention.
+>
+> Latest versions of furyctl automate the whole process and it is recommended to use the latest version of furyctl instead.
 
 ### Prerequisites
 
@@ -118,9 +123,9 @@ To deploy the `cert-manager` package:
 ```yaml
 bases:
   - name: ingress/dual-nginx
-    version: "v2.3.3"
+    version: "v3.0.1"
   - name: ingress/cert-manager
-    version: "v2.3.3"
+    version: "v3.0.1"
 ```
 
 2. Execute `furyctl vendor -H` to download the packages
@@ -179,7 +184,7 @@ Single Ingress:
 ```yaml
 bases:
   - name: ingress/nginx
-    version: "v2.3.3"
+    version: "v3.0.1"
 ```
 
 Dual Ingress:
@@ -189,9 +194,9 @@ Dual Ingress:
 ```yaml
 bases:
   - name: ingress/nginx
-    version: "v2.3.3"
+    version: "v3.0.1"
   - name: ingress/dual-nginx
-    version: "v2.3.3"
+    version: "v3.0.1"
 ```
 
 > See `furyctl` [documentation][furyctl-repo] for additional details about `Furyfile.yml` format.
@@ -263,11 +268,11 @@ To deploy the `forecastle` package:
 ```yaml
 bases:
   - name: ingress/dual-nginx
-    version: "v2.3.3"
+    version: "v3.0.1"
   - name: ingress/cert-manager
-    version: "v2.3.3"
+    version: "v3.0.1"
   - name: ingress/forecastle
-    version: "v2.3.3"
+    version: "v3.0.1"
 ```
 
 2. Execute `furyctl legacy vendor -H` to download the packages
