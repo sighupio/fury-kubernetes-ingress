@@ -55,9 +55,9 @@ controller:
           description: 'NGINX Ingress Controller has disapperead from Prometheus
             target discovery.'
           doc: "This alert fires if Promethes target discovery was not able to
-            reach ingress-nginx-metrics in the last 15 minutes."
+            reach ingress-nginx-controller-metrics in the last 15 minutes."
         expr: |
-          absent(up{job="ingress-nginx-metrics"} == 1)
+          absent(up{job="ingress-nginx-controller-metrics"} == 1)
         for: 15m
         labels:
           severity: critical
@@ -82,7 +82,7 @@ controller:
           doc: "This alert fires if the ingress' configuration reload failed in
             the last 10 minutes."
         expr: |
-          nginx_ingress_controller_config_last_reload_successful{job="ingress-nginx-metrics"} == 0
+          nginx_ingress_controller_config_last_reload_successful{job="ingress-nginx-controller-metrics"} == 0
         for: 10m
         labels:
           severity: warning
@@ -115,7 +115,7 @@ controller:
           doc: "This alert fires if the certificate for a given host is expiring
             in less than 7 days."
         expr: |
-          (avg(nginx_ingress_controller_ssl_expire_time_seconds{job="ingress-nginx-metrics"}) by (host) - time()) < 604800
+          (avg(nginx_ingress_controller_ssl_expire_time_seconds{job="ingress-nginx-controller-metrics"}) by (host) - time()) < 604800
         labels:
           severity: warning
       - alert: NginxIngressCertificateExpiration
@@ -125,7 +125,7 @@ controller:
           doc: "This alert fires if the certificate for a given host is expiring
             in less than 1 days."
         expr: |
-          (avg(nginx_ingress_controller_ssl_expire_time_seconds{job="ingress-nginx-metrics"}) by (host) - time()) < 86400
+          (avg(nginx_ingress_controller_ssl_expire_time_seconds{job="ingress-nginx-controller-metrics"}) by (host) - time()) < 86400
         labels:
           severity: critical        
   config:

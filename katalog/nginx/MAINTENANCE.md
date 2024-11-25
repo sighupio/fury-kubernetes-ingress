@@ -91,3 +91,8 @@ diff current-release.yaml new-release.yaml
 go install github.com/google/addlicense@v1.1.1
 addlicense -c "SIGHUP s.r.l" -y "2017-present" -v -l bsd .
 ```
+
+## Updata Grafana Dashboards
+
+check the grafana dashboard in this path: `deploy/grafana/dashboards/nginx.json` of the upstream repository
+compare the upstream with the current one, and update it if is needed.
