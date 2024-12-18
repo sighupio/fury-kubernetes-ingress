@@ -40,7 +40,7 @@ steps:
       # Disable natural language checks
       VALIDATE_NATURAL_LANGUAGE: "false"
       # Disable linter on helper files in the test folder
-      FILTER_REGEX_EXCLUDE: (katalog/tests/helper)
+      FILTER_REGEX_EXCLUDE: (katalog/tests/helper|\.github)
     depends_on:
       - clone
 
