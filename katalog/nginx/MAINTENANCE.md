@@ -1,6 +1,6 @@
-# NGINX ingress controller package maintenance guide
+# Ingress NGINX controller package maintenance guide
 
-To update NGINX ingress controller, follow the next steps (or use the [upgrade.sh](./upgrade.sh) script to automate it):
+To update Ingress NGINX controller, follow the next steps (or update and use the [upgrade.sh](./upgrade.sh) script to automate it):
 
 ## Local build
 
@@ -11,17 +11,19 @@ kustomize build . > current-release.yaml
 ```
 
 > 💡 TIP
-> Comment out the grafana dashboard resource from the katalog/nginx/kustomization.yaml file.
+> Comment out the Grafana dashboard resource from the `katalog/nginx/kustomization.yaml` file.
 > It adds 5000 lines from the JSON that are not needed in the diff and may break your editor.
-
 
 ## Upgrade files
 
-1. Go to the [NGINX ingress controller repository](https://github.com/kubernetes/ingress-nginx/) and check the latest release.
+1. Go to the [ingress NGINX controller repository](https://github.com/kubernetes/ingress-nginx/) and check the latest release.
 
-> Controller releases are published as `controller-vX.Y.Z` tags.
+> 💡 TIP
+> Controller releases are published as `controller-vX.Y.Z` tags and chart releases with `helm-chart-X.Y.Z`.
+>
+> You can also find a compatibility table in the project's [main README file](https://github.com/kubernetes/ingress-nginx?tab=readme-ov-file#supported-versions-table).
 
-2. Helm template the content using the following command:
+1. Helm template the content using the following command:
 
 ```bash
 helm template ingress-nginx ingress-nginx \
@@ -66,13 +68,15 @@ kustomize build . > new-release.yaml
 ```
 
 > 💡 TIP
-> Comment out the grafana dashboard resource from the katalog/nginx/kustomization.yaml file.
+> Comment out the Grafana dashboard resource from the katalog/nginx/kustomization.yaml file.
 > It adds 5000 lines from the JSON that are not needed in the diff and may break your editor.
 
 2. Compare the two releases
 
 ```bash
 bcompare current-release.yaml new-release.yaml
+# OR
+dyff between current-release.yaml new-release.yaml
 # OR
 diff current-release.yaml new-release.yaml
 ```
@@ -92,7 +96,6 @@ go install github.com/google/addlicense@v1.1.1
 addlicense -c "SIGHUP s.r.l" -y "2017-present" -v -l bsd .
 ```
 
-## Updata Grafana Dashboards
+## Update Grafana Dashboards
 
-check the grafana dashboard in this path: `deploy/grafana/dashboards/nginx.json` of the upstream repository
-compare the upstream with the current one, and update it if is needed.
+Check the Grafana dashboard in the [`deploy/Grafana/dashboards/`](https://github.com/kubernetes/ingress-nginx/tree/main/deploy/grafana/dashboards) path of the upstream repository, compare the upstream with the current one and update it if is needed.
