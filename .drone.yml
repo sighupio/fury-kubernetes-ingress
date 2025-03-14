@@ -384,7 +384,7 @@ trigger:
     include:
       - refs/tags/**
     exclude:
-      - refs/tags/e2e-
+      - refs/tags/e2e-**
 steps:
   - name: prepare-tar-gz
     image: alpine:latest
