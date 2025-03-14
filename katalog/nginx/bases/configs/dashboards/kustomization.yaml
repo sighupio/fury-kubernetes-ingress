@@ -19,3 +19,4 @@ configMapGenerator:
   - name: ingress-grafana-dashboard
     files:
       - nginx-ingress.json
+      - request-handling-performance.json

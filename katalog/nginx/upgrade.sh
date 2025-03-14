@@ -7,13 +7,13 @@
 kustomize build . > current-release.yaml
 
 # Remember to change this version accordingly
-VERSION=4.11.3
+VERSION=4.12.0
 
 helm template ingress-nginx ingress-nginx \
   --repo https://kubernetes.github.io/ingress-nginx \
   --namespace ingress-nginx --create-namespace --version $VERSION --values MAINTENANCE.values.yml | yq -s '.kind + "-" + .metadata.name'
 
-rm .yml
+rm .yml # sometimes we get an empty file called like this
 mv Certificate-ingress-nginx-root-cert.yml bases/configs
 mv ClusterRole-ingress-nginx.yml bases/configs
 mv ClusterRoleBinding-ingress-nginx.yml bases/configs

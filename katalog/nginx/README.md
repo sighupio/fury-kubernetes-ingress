@@ -6,13 +6,13 @@ Ingress NGINX is an Ingress Controller for [NGINX][nginx-page] web server and re
 
 ## Requirements
 
-- Kubernetes >= `1.25.0`
-- Kustomize >= `v3`
+- Kubernetes >= `1.28.0`
+- Kustomize >= `v5.6.0`
 - `cert-manager`
 
 ## Image repository and tag
 
-- Ingress NGINX image: `k8s.gcr.io/ingress-nginx/controller:v1.11.3`
+- Ingress NGINX image: `k8s.gcr.io/ingress-nginx/controller:v1.12.0`
 - Ingress NGINX repo: [https://github.com/kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
 
 ## Configuration
