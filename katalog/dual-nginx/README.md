@@ -6,13 +6,13 @@ Ingress NGINX is an Ingress Controller for [NGINX][nginx-page] webserver and rev
 
 ## Requirements
 
-- Kubernetes >= `1.25.0`
-- Kustomize >= `v3`
+- Kubernetes >= `1.28.0`
+- Kustomize >= `v5.6.0`
 - [`cert-manager`](../cert-manager)
 
 ## Image repository and tag
 
-- Ingress NGINX image: `k8s.gcr.io/ingress-nginx/controller:v1.11.3`
+- Ingress NGINX image: `k8s.gcr.io/ingress-nginx/controller:v1.12.0`
 - Ingress NGINX repo: [https://github.com/kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx)
 
 ## Configuration
@@ -67,7 +67,7 @@ Your are now ready to expose your applications using Kubernetes `Ingress` object
 
 This is probably NOT what you want, standard Fury clusters have at least 1 `infra` node (nodes that are dedicated to run Fury infrastructural components, like Prometheus, elasticsearch, and the ingress controllers).
 
-If your cluster has `infra` nodes you should patch the daemonset adding the `NodeSelector` for the `infra` nodes to the Ingress `DaemonSet`. You can do this usiing the following kustomize patch:
+If your cluster has `infra` nodes you should patch the daemonset adding the `NodeSelector` for the `infra` nodes to the Ingress `DaemonSet`. You can do this using the following kustomize patch:
 
 ```yaml
 ---
