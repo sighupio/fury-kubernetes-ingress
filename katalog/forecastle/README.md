@@ -7,11 +7,11 @@
 ## Requirements
 
 - Kubernetes >= `1.20.0`
-- Kustomize >= `v3.5.3`
+- Kustomize >= `v5.6.0`
 
 ## Image repository and tag
 
-- Forecastle image: `docker.io/stakater/forecastle:v1.0.145`
+- Forecastle image: `docker.io/stakater/forecastle:v1.0.156`
 - Forecastle repo: [https://github.com/stakater/Forecastle](https://github.com/stakater/Forecastle)
 
 ## Configuration
@@ -39,7 +39,8 @@ Once deployed, to have an ingress show up in the dashboard provided by Forecastl
 ```shell
 kubectl annotate ingress <YOUR_INGRESS> "forecastle.stakater.com/expose=true" --overwrite
 ```
-#### ForecastleApp CRD
+
+#### `ForecastleApp` CRD
 
 You can now create custom resources to add apps to forecastle dynamically. This decouples the application configuration from Ingresses as well as forecastle config. You can create the custom resource `ForecastleApp` like the following:
 
@@ -66,6 +67,7 @@ spec:
 ##### Automatically discover URL's from Kubernetes Resources
 
 Forecastle supports discovering URL's ForecastleApp CRD from the following resources:
+
 - Ingress
 
 ## Important notes

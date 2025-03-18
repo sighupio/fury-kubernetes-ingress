@@ -8,6 +8,6 @@ namespaceSelector:
 crdEnabled: true
 customApps: {}
 instanceName: null
-title: "Kubernetes Fury Distribution - Applications Directory"
+title: "SIGHUP Kubernetes Distribution - Infrastructure Applications Directory"
 headerBackground: "#421959"
 headerForeground: "#ffffff"
