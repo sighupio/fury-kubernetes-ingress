@@ -20,7 +20,7 @@ resources:
   - rbac.yml
   - sm.yml
 
-patchesJson6902:
+patches:
   - target:
       group: apps
       version: v1
@@ -28,5 +28,20 @@ patchesJson6902:
       name: cert-manager
     patch: |-
       - op: replace
-        path: /spec/template/spec/containers/0/args/6
-        value: --acme-http01-solver-image=registry.sighup.io/fury/jetstack/cert-manager-acmesolver:v1.16.1
+        path: /spec/template/spec/containers/0/args/2
+        value: --leader-election-namespace=$(POD_NAMESPACE)
+      - op: replace
+        path: /spec/template/spec/containers/0/args/4
+        value: --acme-http01-solver-image=registry.sighup.io/fury/jetstack/cert-manager-acmesolver:v1.17.1
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --default-issuer-kind=ClusterIssuer
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --default-issuer-name=letsencrypt-prod
+      - op: add
+        path: /spec/template/spec/containers/0/resources
+        value:
+            requests:
+              cpu: 50m
+              memory: 50Mi

@@ -12,7 +12,7 @@ metadata:
     app.kubernetes.io/name: cert-manager
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/component: "controller"
-    app.kubernetes.io/version: "v1.16.1"
+    app.kubernetes.io/version: "v1.17.1"
 spec:
   replicas: 1
   selector:
@@ -27,7 +27,7 @@ spec:
         app.kubernetes.io/name: cert-manager
         app.kubernetes.io/instance: cert-manager
         app.kubernetes.io/component: "controller"
-        app.kubernetes.io/version: "v1.16.1"
+        app.kubernetes.io/version: "v1.17.1"
       annotations:
         prometheus.io/path: "/metrics"
         prometheus.io/scrape: 'true'
@@ -41,16 +41,15 @@ spec:
           type: RuntimeDefault
       containers:
         - name: cert-manager-controller
-          image: "quay.io/jetstack/cert-manager-controller:v1.16.1"
+          image: "quay.io/jetstack/cert-manager-controller:v1.17.1"
           imagePullPolicy: IfNotPresent
+          # Maintainers: notice that we patch these args via kustomize
           args:
           - --v=2
           - --cluster-resource-namespace=$(POD_NAMESPACE)
-          - --leader-election-namespace=$(POD_NAMESPACE)
-          - --default-issuer-kind=ClusterIssuer
-          - --default-issuer-name=letsencrypt-prod
+          - --leader-election-namespace=kube-system
           - --max-concurrent-challenges=60
-          - --acme-http01-solver-image=quay.io/jetstack/cert-manager-acmesolver:v1.16.1
+          - --acme-http01-solver-image=quay.io/jetstack/cert-manager-acmesolver:v1.17.1
           ports:
           - containerPort: 9402
             name: http-metrics
@@ -69,10 +68,6 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: metadata.namespace
-          resources:
-            requests:
-              cpu: 50m
-              memory: 50Mi
           # LivenessProbe settings are based on those used for the Kubernetes
           # controller-manager. See:
           # https://github.com/kubernetes/kubernetes/blob/806b30170c61a38fedd54cc9ede4cd6275a1ad3b/cmd/kubeadm/app/util/staticpod/utils.go#L241-L245
@@ -98,7 +93,7 @@ metadata:
     app.kubernetes.io/name: cert-manager
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/component: "controller"
-    app.kubernetes.io/version: "v1.16.1"
+    app.kubernetes.io/version: "v1.17.1"
 spec:
   type: ClusterIP
   ports:

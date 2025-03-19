@@ -36,7 +36,7 @@ References:
 - Specific version
 
   ```bash
-  curl --location --remote-name https://github.com/cert-manager/cert-manager/releases/download/v1.16.1/cert-manager.yaml
+  curl --location --remote-name https://github.com/cert-manager/cert-manager/releases/download/v1.17.1/cert-manager.yaml
   ```
 
 - Latest version
@@ -45,7 +45,7 @@ References:
   curl --location --remote-name https://github.com/cert-manager/cert-manager/releases/latest/download/cert-manager.yaml
   ```
 
-02. Split the absurdily large YAML into smaller pieces with the [kubernetes-split-yaml](github.com/mogensen/kubernetes-split-yaml) tool:
+02. Split the absurdly large YAML into smaller pieces with the [kubernetes-split-yaml](github.com/mogensen/kubernetes-split-yaml) tool:
 
     ```bash
     # Install the tool if you don't have it in your system
@@ -67,7 +67,7 @@ References:
 
     ```bash
     # Assuming PWD == the folder with the splitted yamls (generated)
-    # You might need to twek the order of the files concatenated.
+    # You might need to tweak the order of the files concatenated.
     mkdir cainjector
     mv cert-manager-cainjector* cainjector
     cd cainjector
@@ -227,11 +227,15 @@ References:
         cert-manager-cert-manager-tokenrequest-rb.yaml \
         cert-manager:leaderelection-rb.yaml \
         done
+
+        # WARNING: there are some patches in the kustomization.yaml file that
+        # rely on the arguments position in the array. Double-check that the args
+        # position does not need to be adjusted.
     ```
 
 03. Port the needed changes to the module's manifests.
 
-    - Remember to sync the new images to SIGHUP's registry. Images related in this projet are:
+    - Remember to sync the new images to SIGHUP's registry. Images related in this project are:
       - jetstack/cert-manager-cainjector
       - jetstack/cert-manager-acmesolver
       - jetstack/cert-manager-controller
@@ -249,10 +253,10 @@ References:
         patch: |-
         - op: replace
             path: /spec/template/spec/containers/0/args/6
-            value: --acme-http01-solver-image=registry.sighup.io/fury/cert-manager-acmesolver:v1.16.1
+            value: --acme-http01-solver-image=registry.sighup.io/fury/cert-manager-acmesolver:v1.17.1
 
     ```
 
 ## Dashboards
 
-The included Grafana dashbaord seems to be taken from here: <https://grafana.com/grafana/dashboards/11001-cert-manager/>. It has not been updated in a while.
+The included Grafana dashboard seems to be taken from here: <https://grafana.com/grafana/dashboards/11001-cert-manager/>. It has not been updated in a while.
