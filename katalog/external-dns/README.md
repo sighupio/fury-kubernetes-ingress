@@ -7,11 +7,11 @@ ExternalDNS synchronizes exposed Kubernetes Services and Ingresses with DNS prov
 ## Requirements
 
 - Kubernetes >= `1.22.0`
-- Kustomize = `v3.5.3`
+- Kustomize >= `v5.6.0`
 
 ## Image repository and tag
 
-- ExternalDNS image: `k8s.gcr.io/external-dns/external-dns:v0.15.0`
+- ExternalDNS image: `k8s.gcr.io/external-dns/external-dns:v0.16.1`
 - ExternalDNS repo: [https://github.com/kubernetes-sigs/external-dns](https://github.com/kubernetes-sigs/external-dns)
 
 ## Deployment
@@ -35,9 +35,9 @@ resources:
 ```
 
 Refer to the Terraform module [aws-eternal-dns](../../modules/aws-external-dns) to create the
-IAM role and the required kustomize patches automatically. For now the only supported cloud provider is AWS with Route53.
+IAM role and the required Kustomize patches automatically. For now the only supported cloud provider is AWS with Route53.
 
-If still you want to create everything manually without using our Terraform Module, you need to patch the service accountas follows:
+If you want to still create everything manually without using our Terraform Module, you need to patch the service accounts follows:
 
 `sa-patch.yaml`
 ```yaml

@@ -11,7 +11,7 @@ This release updates several packages to the latest versions available for new f
 | `aws-cert-manager` | N.A.                                                                                     |   `No update`    |
 | `aws-external-dns` | N.A.                                                                                     |   `No update`    |
 | `cert-manager`     | [`v1.16.1`](https://github.com/jetstack/cert-manager/releases/tag/v1.16.1)               |     `1.16.1`     |
-| `external-dns`     | [`v0.15.0`](https://github.com/kubernetes-sigs/external-dns/releases/tag/v0.15.0)        |     `0.15.0`     |
+| `external-dns`     | [`v0.16.1`](https://github.com/kubernetes-sigs/external-dns/releases/tag/v0.16.1)        |     `0.15.0`     |
 | `forecastle`       | [`v1.0.156`](https://github.com/stakater/Forecastle/releases/tag/v1.0.156)               |    `1.0.156`     |
 | `nginx`            | [`v1.12.0`](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.12.0) |     `1.11.3`     |
 
@@ -44,6 +44,10 @@ Upstream Ingress NGINX Controller has introduced some breaking changes in versio
   - `plugins`
 
   It also removes support for user provided Lua plugins in the `/etc/nginx/lua/plugins` directory.
+
+## external-dns
+
+A breaking change has been introduced in v0.16.0 for the Cloudflare provider, please see [this link](https://github.com/kubernetes-sigs/external-dns/issues/5166) for more details.
 
 ## Upgrade Guide 🦮
 
