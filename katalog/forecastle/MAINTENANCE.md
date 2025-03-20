@@ -18,3 +18,4 @@ To update Forecastle, follow the next steps:
   - added seccompProfile directive to securityContext
 - Deleted Helm labels from all resources
 - The configuration file `config.yaml` has been personalized with Fury branding
+- We did not port the RBAC for traefik ingressoutes objects, we don't use it.
