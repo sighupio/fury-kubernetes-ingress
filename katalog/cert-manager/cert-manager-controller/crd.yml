@@ -17,7 +17,7 @@ metadata:
     app.kubernetes.io/name: 'cert-manager'
     app.kubernetes.io/instance: 'cert-manager'
     # Generated labels
-    app.kubernetes.io/version: "v1.16.1"
+    app.kubernetes.io/version: "v1.17.1"
 spec:
   group: cert-manager.io
   names:
@@ -337,7 +337,7 @@ metadata:
     app.kubernetes.io/name: 'cert-manager'
     app.kubernetes.io/instance: 'cert-manager'
     # Generated labels
-    app.kubernetes.io/version: "v1.16.1"
+    app.kubernetes.io/version: "v1.17.1"
 spec:
   group: cert-manager.io
   names:
@@ -519,7 +519,6 @@ spec:
                       type: object
                       required:
                         - create
-                        - passwordSecretRef
                       properties:
                         alias:
                           description: |-
@@ -531,17 +530,25 @@ spec:
                             Create enables JKS keystore creation for the Certificate.
                             If true, a file named `keystore.jks` will be created in the target
                             Secret resource, encrypted using the password stored in
-                            `passwordSecretRef`.
+                            `passwordSecretRef` or `password`.
                             The keystore file will be updated immediately.
                             If the issuer provided a CA certificate, a file named `truststore.jks`
                             will also be created in the target Secret resource, encrypted using the
                             password stored in `passwordSecretRef`
                             containing the issuing Certificate Authority
                           type: boolean
+                        password:
+                          description: |-
+                            Password provides a literal password used to encrypt the JKS keystore.
+                            Mutually exclusive with passwordSecretRef.
+                            One of password or passwordSecretRef must provide a password with a non-zero length.
+                          type: string
                         passwordSecretRef:
                           description: |-
-                            PasswordSecretRef is a reference to a key in a Secret resource
+                            PasswordSecretRef is a reference to a non-empty key in a Secret resource
                             containing the password used to encrypt the JKS keystore.
+                            Mutually exclusive with password.
+                            One of password or passwordSecretRef must provide a password with a non-zero length.
                           type: object
                           required:
                             - name
@@ -564,24 +571,31 @@ spec:
                       type: object
                       required:
                         - create
-                        - passwordSecretRef
                       properties:
                         create:
                           description: |-
                             Create enables PKCS12 keystore creation for the Certificate.
                             If true, a file named `keystore.p12` will be created in the target
                             Secret resource, encrypted using the password stored in
-                            `passwordSecretRef`.
+                            `passwordSecretRef` or in `password`.
                             The keystore file will be updated immediately.
                             If the issuer provided a CA certificate, a file named `truststore.p12` will
                             also be created in the target Secret resource, encrypted using the
                             password stored in `passwordSecretRef` containing the issuing Certificate
                             Authority
                           type: boolean
+                        password:
+                          description: |-
+                            Password provides a literal password used to encrypt the PKCS#12 keystore.
+                            Mutually exclusive with passwordSecretRef.
+                            One of password or passwordSecretRef must provide a password with a non-zero length.
+                          type: string
                         passwordSecretRef:
                           description: |-
-                            PasswordSecretRef is a reference to a key in a Secret resource
-                            containing the password used to encrypt the PKCS12 keystore.
+                            PasswordSecretRef is a reference to a non-empty key in a Secret resource
+                            containing the password used to encrypt the PKCS#12 keystore.
+                            Mutually exclusive with password.
+                            One of password or passwordSecretRef must provide a password with a non-zero length.
                           type: object
                           required:
                             - name
@@ -1105,7 +1119,7 @@ metadata:
     app.kubernetes.io/name: 'cert-manager'
     app.kubernetes.io/instance: 'cert-manager'
     # Generated labels
-    app.kubernetes.io/version: "v1.16.1"
+    app.kubernetes.io/version: "v1.17.1"
 spec:
   group: acme.cert-manager.io
   names:
@@ -1380,6 +1394,9 @@ spec:
                                   description: |-
                                     resource ID of the managed identity, can not be used at the same time as clientID
                                     Cannot be used for Azure Managed Service Identity
+                                  type: string
+                                tenantID:
+                                  description: tenant ID of the managed identity, can not be used at the same time as resourceID
                                   type: string
                             resourceGroupName:
                               description: resource group the DNS zone is located in
@@ -4311,7 +4328,7 @@ metadata:
     app.kubernetes.io/name: 'cert-manager'
     app.kubernetes.io/instance: 'cert-manager'
     # Generated labels
-    app.kubernetes.io/version: "v1.16.1"
+    app.kubernetes.io/version: "v1.17.1"
 spec:
   group: cert-manager.io
   names:
@@ -4693,6 +4710,9 @@ spec:
                                         description: |-
                                           resource ID of the managed identity, can not be used at the same time as clientID
                                           Cannot be used for Azure Managed Service Identity
+                                        type: string
+                                      tenantID:
+                                        description: tenant ID of the managed identity, can not be used at the same time as resourceID
                                         type: string
                                   resourceGroupName:
                                     description: resource group the DNS zone is located in
@@ -8038,7 +8058,7 @@ metadata:
     app.kubernetes.io/instance: 'cert-manager'
     app.kubernetes.io/component: "crds"
     # Generated labels
-    app.kubernetes.io/version: "v1.16.1"
+    app.kubernetes.io/version: "v1.17.1"
 spec:
   group: cert-manager.io
   names:
@@ -8419,6 +8439,9 @@ spec:
                                         description: |-
                                           resource ID of the managed identity, can not be used at the same time as clientID
                                           Cannot be used for Azure Managed Service Identity
+                                        type: string
+                                      tenantID:
+                                        description: tenant ID of the managed identity, can not be used at the same time as resourceID
                                         type: string
                                   resourceGroupName:
                                     description: resource group the DNS zone is located in
@@ -11764,7 +11787,7 @@ metadata:
     app.kubernetes.io/instance: 'cert-manager'
     app.kubernetes.io/component: "crds"
     # Generated labels
-    app.kubernetes.io/version: "v1.16.1"
+    app.kubernetes.io/version: "v1.17.1"
 spec:
   group: acme.cert-manager.io
   names:
