@@ -9,13 +9,17 @@ metadata:
   name: externalSuffix
 suffix: "-external"
 fieldSpecs:
-- kind: ConfigMap
-  path: metadata/name
-- kind: Service
-  path: metadata/name
-- kind: DaemonSet
-  path: metadata/name
-- kind: Certificate
-  path: metadata/name
-- kind: ValidatingWebhookConfiguration
-  path: metadata/name
+  - kind: ConfigMap
+    path: metadata/name
+  - kind: ConfigMap
+    path: metadata/labels/app
+  - kind: Service
+    path: metadata/name
+  - kind: DaemonSet
+    path: metadata/name
+  - kind: Certificate
+    path: metadata/name
+  - kind: Certificate
+    path: metadata/labels/app
+  - kind: ValidatingWebhookConfiguration
+    path: metadata/name

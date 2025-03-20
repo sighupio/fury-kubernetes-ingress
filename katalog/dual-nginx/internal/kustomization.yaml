@@ -11,11 +11,13 @@ transformers:
 resources:
   - ../../nginx/bases/controller
 
-commonLabels:
-  app: ingress
-  type: internal
+labels:
+  - includeSelectors: true
+    pairs:
+      app: ingress
+      type: internal
 
-patchesJson6902:
+patches:
   - target:
       group: apps
       version: v1
@@ -23,13 +25,11 @@ patchesJson6902:
       name: ingress-nginx-controller
     path: patch/daemonset.yml
   - target:
-      group: ""
       version: v1
       kind: Service
       name: ingress-nginx
     path: patch/service.yml
   - target:
-      group: ""
       version: v1
       kind: ConfigMap
       name: ingress-nginx-controller
@@ -46,21 +46,19 @@ patchesJson6902:
       kind: ValidatingWebhookConfiguration
       name: ingress-nginx-admission
     path: patch/validating-webhook.yml
-
-patches:
-- target:
-    kind: IngressClass
-    name: nginx
-    version: v1
-  patch: |-
-    - op: replace
-      path: /metadata/name
-      value: internal
-    - op: remove
-      path: /metadata/annotations
-    - op: replace
-      path: "/apiVersion"
-      value: networking.k8s.io/v1
-    - op: replace
-      path: /spec/controller
-      value: k8s.io/internal
+  - target:
+      kind: IngressClass
+      name: nginx
+      version: v1
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: internal
+      - op: remove
+        path: /metadata/annotations
+      - op: replace
+        path: "/apiVersion"
+        value: networking.k8s.io/v1
+      - op: replace
+        path: /spec/controller
+        value: k8s.io/internal

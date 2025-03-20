@@ -38,9 +38,9 @@ The reference architecture used to deploy the Fury Kubernetes Ingress Module is 
 Kubernetes Fury Ingress provides the following packages:
 
 | Package                                       | Version    | Description                                                                                                                   |
-| --------------------------------------------- |------------| ----------------------------------------------------------------------------------------------------------------------------- |
-| [nginx](katalog/nginx)                        | `v1.11.3`  | The NGINX Ingress Controller for Kubernetes provides delivery services for Kubernetes applications.                           |
-| [dual-nginx](katalog/dual-nginx)              | `v1.11.3`  | It deploys two identical NGINX ingress controllers but with two different scopes: public/external and private/internal.       |
+| --------------------------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| [nginx](katalog/nginx)                        | `v1.12.0`  | The NGINX Ingress Controller for Kubernetes provides delivery services for Kubernetes applications.                           |
+| [dual-nginx](katalog/dual-nginx)              | `v1.12.0`  | It deploys two identical NGINX ingress controllers but with two different scopes: public/external and private/internal.       |
 | [cert-manager](katalog/cert-manager)          | `v1.16.1`  | cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources. |
 | [external-dns](katalog/external-dns)          | `v0.15.0`  | external-dns allows you to manage DNS records natively from Kubernetes.                                                       |
 | [forecastle](katalog/forecastle)              | `v1.0.145` | Forecastle gives you access to a control panel where you can see your ingresses and access them on Kubernetes.                |
@@ -70,7 +70,7 @@ Check the [compatibility matrix][compatibility-matrix] for additional informatio
 | Tool                        | Version    | Description                                                                                                                                                    |
 | --------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [furyctl][furyctl-repo]     | `>=0.25.0` | The recommended tool to download and manage KFD modules and their packages. To learn more about `furyctl` read the [official documentation][furyctl-repo].     |
-| [kustomize][kustomize-repo] | `>=3.10.0` | Packages are customized using `kustomize`. To learn how to create your customization layer with `kustomize`, please refer to the [repository][kustomize-repo]. |
+| [kustomize][kustomize-repo] | `>=5.6.0`  | Packages are customized using `kustomize`. To learn how to create your customization layer with `kustomize`, please refer to the [repository][kustomize-repo]. |
 
 ### Single vs Dual Controller
 
@@ -257,7 +257,7 @@ If you don't have infra nodes and you don't want to run ingress-controllers on a
 
 #### Applications directory with Forecastle
 
-Forecastle list all the annotated ingress (applications) that exists in your cluster with an icon grouped by namesapce, in a nice web UI. It lets you search, personalize the header for the landing page (title and colors), it lets you list custom ingress and add more details to each entry.
+Forecastle list all the annotated ingress (applications) that exists in your cluster with an icon grouped by namespace, in a nice web UI. It lets you search, personalize the header for the landing page (title and colors), it lets you list custom ingress and add more details to each entry.
 
 Use Forecastle as your cluster entry point to discover the running applications easily.
 
@@ -314,7 +314,6 @@ Add the following annotations to your ingresses to be discovered by Forecastle:
 <!-- Links -->
 
 [furyctl-repo]: https://github.com/sighupio/furyctl
-[sighup-page]: https://sighup.io
 [kfd-repo]: https://github.com/sighupio/fury-distribution
 [kustomize-repo]: https://github.com/kubernetes-sigs/kustomize
 [kfd-docs]: https://docs.kubernetesfury.com/docs/distribution/
