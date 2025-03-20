@@ -33,9 +33,9 @@ Ingress NGINX Double is deployed with the following default configuration:
 ```yaml
 bases:
   - name: ingress/nginx
-    version: "v3.0.1"
+    version: "v4.0.0
   - name: ingress/dual-nginx
-    version: "v3.0.1"
+    version: "v4.0.0
 ```
 
 > See `furyctl` [documentation][furyctl-repo] for additional details about `Furyfile.yml` format.
